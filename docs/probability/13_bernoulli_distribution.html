@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>Bernoulli Distribution</title>
+    <script type="module" crossorigin src="./assets/index-DyRdaW9o.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-TXkS1QI3.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-A78R3nYl.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-d_A4rA-x.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-LvLJmgfZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-Bj1aDYRI.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-B3qBwwSJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-CP2fAiZX.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-CNBv2dAU.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-CjXriKgk.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-BmOH9agK.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-CSu739Rf.js">
+    <link rel="modulepreload" crossorigin href="./assets/Combination-tjZP3FH6.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-Bs2e3wuf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CIU0Lack.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-BvP5LBIs.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-BnZGcuDh.js">
+    <link rel="modulepreload" crossorigin href="./assets/x-yqLqiq5Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DygbgNTD.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-DOQlecCr.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BhMe50aT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-BGESiCQL.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BU8KB_Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-WUlsM6MC.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-awXiPaF0.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-BkJc8lDE.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-DnJbrtRQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-H_cgTO0M.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-CORJ8yYa.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-D2igisxY.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-ImXS-885.js">
+    <link rel="modulepreload" crossorigin href="./assets/DeferredRequestRegistry-CMZsNx4R.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-CdR60lKM.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-DnMOyddG.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-D9X9QKiL.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-DZy_SQ_v.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-BGkTcW3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-DlRqgfqz.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-39dTX4Wi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-QS_pSfjY.js">
+    <link rel="modulepreload" crossorigin href="./assets/assertNever-Dw9aFN4h.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-BKEr35uH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-BDXC6oVR.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-BY4jV7Yb.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-CwdqVOYu.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-DRC4SgqY.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-CeYo4YI0.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-BcTiTw8T.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-bMgYkaP2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DUY6xZX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D89dID68.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CU-Ty5ht.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BjtLy-VA.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-odxAaH5Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Dq_iQ08e.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DfBASypd.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-51xFOPFs.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CEQIJ2pn.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-FMMSUPAS.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-DDAiY7kz.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-CPplrWRQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-CVt8hZ5L.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-DuoFhI7N.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-GB_lFVaq.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-DIo_1hTm.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-D8CkpJG7.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Cl1doThW.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-B3efE3T2.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-Cmx6WhDY.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-CCtxWKxf.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-DCSoZZhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-_z3dkNFy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-CKhrfxsx.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CVbqSkT8.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-BJEd-iA7.js">
+    <link rel="modulepreload" crossorigin href="./assets/multi-map-kCmlVJ-5.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-0YTlkh9P.js">
+    <link rel="modulepreload" crossorigin href="./assets/card-WPBELA1S.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DsNfSYaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-BXzvlof-.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BTEPE6IB.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-DmqkEXI4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BUC67G8E.js">
+    <link rel="modulepreload" crossorigin href="./assets/azure-Ddr1pZpW.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-44Cj1Me-.js">
+    <link rel="modulepreload" crossorigin href="./assets/SSRProvider-DC7ElCZZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-B1_BdDTF.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-DMA_kIIZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/usePress-DsLftN-x.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-BPldEXfy.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-BKV6zi_7.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-Cvl9xY6R.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-tdkZNn4k.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-FXVKPW36.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-DVm0BCFt.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-Bfogio62.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-R2OkQKR0.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-DMCkK2TI.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-BCOZVFBt.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-6uJrSKbw.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-irHJCpFh.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CAR4dOiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-B-s-VRHt.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-DeCFDX1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-DtQaB9NM.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-n1-FF7zs.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-C3Y44M85.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-OkOxlkkM.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BOmLQIKI.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DK1MWd7f.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-CZV6_g2i.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-D_HRHf_c.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-dVj6GVNE.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-jGxNsOWc.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-CRNJOvqT.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-B59Kn5nL.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-B2Fl6iYU.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-D2jTOQOG.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-B0ZtYqUC.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-6RnnFDPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/html-to-image-b9BimK8l.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-ShrwcKIv.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-BdX_Y5NA.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5FQGJX7Z-BJDu6jwt.js">
+    <link rel="modulepreload" crossorigin href="./assets/katex-rvFxOCU-.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-renderer-B6a5ZAwT.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-DQqqP-WF.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-BTm4CTKr.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-qh-NzTWO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-T3alJPda.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-C3K3rlAZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-DBqDb4Nb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-D3F4nmET.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-CzBDvj6R.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-8VTEe-0T.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-aq1t6BkR.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-D7FeWASw.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-CmtFqjqu.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BGa3qZre.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CeILsq6V.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BSyDxU0G.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-BAfiIxKf.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-B9sHgc9n.js">
+    <link rel="modulepreload" crossorigin href="./assets/process-output-4yip1nZE.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-CObhN-9g.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-Dxmp_Bd_.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-BQUzYly2.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-DVwc11C3.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-D4Tdvkms.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai--4VOMvH8.js">
+    <link rel="modulepreload" crossorigin href="./assets/isEmpty-9KlyX4nB.js">
+    <link rel="modulepreload" crossorigin href="./assets/bot-message-square-BzawfL5p.js">
+    <link rel="modulepreload" crossorigin href="./assets/chat-display-Co6iGNSx.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-F2DZENgf.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-4zY5Dv0P.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-Be-iRLAY.js">
+    <link rel="modulepreload" crossorigin href="./assets/components-CF9x5raB.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-BQP0K_pZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-BhEcsHTu.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BlB0Ba6E.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-sD4fbzpH.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-BEHvSeoM.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-resizable-panels.browser.esm-RgA6v8U3.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-aware-panel-D7ygyp92.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-BWK_nLJy.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-BRlAqdmq.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-DgTL09j7.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DmjbJYSq.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-Fa5c_iPb.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-code-D9wtWSiR.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-DFiYrN2w.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-BOzRCrXK.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-B7_NRa34.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-DGtw6Lae.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-eWwLICkT.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-D1hTncYV.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-BhvWC48z.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-DRf51_gT.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-1hBRXVlM.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-Dzwrcr75.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-C_qcB35v.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-36rMhJTw.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BeVScbIo.js">
+    <link rel="modulepreload" crossorigin href="./assets/code-xml-BMv1Dtd2.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-BG-iMGgV.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-oV8Csj8Y.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-DD8FJvQ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-_LzfhNmX.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-jmgGt1lS.css">
+    <link rel="stylesheet" crossorigin href="./assets/markdown-renderer-DdDKmWlR.css">
+    <link rel="stylesheet" crossorigin href="./assets/JsonOutput-B7vuddcd.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrPzoH7F.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">%23%20%2F%2F%2F%20script%0A%23%20requires-python%20%3D%20%22%3E%3D3.10%22%0A%23%20dependencies%20%3D%20%5B%0A%23%20%20%20%20%20%22marimo%22%2C%0A%23%20%20%20%20%20%22matplotlib%3D%3D3.10.8%22%2C%0A%23%20%20%20%20%20%22numpy%3D%3D2.4.3%22%2C%0A%23%20%20%20%20%20%22scipy%3D%3D1.17.1%22%2C%0A%23%20%5D%0A%23%20%2F%2F%2F%0A%0Aimport%20marimo%0A%0A__generated_with%20%3D%20%220.20.4%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22%2C%20app_title%3D%22Bernoulli%20Distribution%22)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20Bernoulli%20Distribution%0A%0A%20%20%20%20%3E%20_Note%3A_%20This%20notebook%20builds%20on%20concepts%20from%20%5B%22Probability%20for%20Computer%20Scientists%22%5D(https%3A%2F%2Fchrispiech.github.io%2FprobabilityForComputerScientists%2Fen%2Fpart2%2Fbernoulli%2F)%20by%20Chris%20Piech.%0A%0A%20%20%20%20%23%23%20Parametric%20Random%20Variables%0A%0A%20%20%20%20Probability%20has%20a%20bunch%20of%20classic%20random%20variable%20patterns%20that%20show%20up%20over%20and%20over.%20Let's%20explore%20some%20of%20the%20most%20important%20parametric%20discrete%20distributions.%0A%0A%20%20%20%20Bernoulli%20is%20honestly%20the%20simplest%20distribution%20you'll%20ever%20see%2C%20but%20it's%20ridiculously%20powerful%20in%20practice.%20What%20makes%20it%20fascinating%20to%20me%20is%20how%20it%20captures%20any%20yes%2Fno%20scenario%3A%20success%2Ffailure%2C%20heads%2Ftails%2C%201%2F0.%0A%0A%20%20%20%20I%20think%20of%20these%20distributions%20as%20the%20atoms%20of%20probability%20%E2%80%94%20they're%20the%20fundamental%20building%20blocks%20that%20everything%20else%20is%20made%20from.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Bernoulli%20Random%20Variables%0A%0A%20%20%20%20A%20Bernoulli%20random%20variable%20boils%20down%20to%20just%20two%20possible%20values%3A%201%20(success)%20or%200%20(failure).%20dead%20simple%2C%20but%20incredibly%20useful.%0A%0A%20%20%20%20Some%20everyday%20examples%20where%20I%20see%20these%3A%0A%0A%20%20%20%20-%20Coin%20flip%20(heads%3D1%2C%20tails%3D0)%0A%20%20%20%20-%20Whether%20that%20sketchy%20email%20is%20spam%0A%20%20%20%20-%20If%20someone%20actually%20clicks%20my%20ad%0A%20%20%20%20-%20Whether%20my%20code%20compiles%20first%20try%20(almost%20always%200%20for%20me)%0A%0A%20%20%20%20All%20you%20need%20(the%20classic%20expression)%20is%20a%20single%20parameter%20%24p%24%20-%20the%20probability%20of%20success.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Key%20Properties%20of%20a%20Bernoulli%20Random%20Variable%0A%0A%20%20%20%20If%20%24X%24%20is%20declared%20to%20be%20a%20Bernoulli%20random%20variable%20with%20parameter%20%24p%24%2C%20denoted%20%24X%20%5Csim%20%5Ctext%7BBern%7D(p)%24%2C%20it%20has%20the%20following%20properties%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(stats)%3A%0A%20%20%20%20%23%20Define%20the%20Bernoulli%20distribution%20function%0A%20%20%20%20def%20Bern(p)%3A%0A%20%20%20%20%20%20%20%20return%20stats.bernoulli(p)%0A%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Bernoulli%20Distribution%20Properties%0A%0A%20%20%20%20%24%5Cbegin%7Barray%7D%7Blll%7D%0A%20%20%20%20%5Ctext%7BNotation%3A%7D%20%26%20X%20%5Csim%20%5Ctext%7BBern%7D(p)%20%5C%5C%0A%20%20%20%20%5Ctext%7BDescription%3A%7D%20%26%20%5Ctext%7BA%20boolean%20variable%20that%20is%201%20with%20probability%20%7D%20p%20%5C%5C%0A%20%20%20%20%5Ctext%7BParameters%3A%7D%20%26%20p%2C%20%5Ctext%7B%20the%20probability%20that%20%7D%20X%20%3D%201%20%5C%5C%0A%20%20%20%20%5Ctext%7BSupport%3A%7D%20%26%20x%20%5Ctext%7B%20is%20either%200%20or%201%7D%20%5C%5C%0A%20%20%20%20%5Ctext%7BPMF%20equation%3A%7D%20%26%20P(X%20%3D%20x)%20%3D%0A%20%20%20%20%20%20%20%20%5Cbegin%7Bcases%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20p%20%26%20%5Ctext%7Bif%20%7Dx%20%3D%201%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%201-p%20%26%20%5Ctext%7Bif%20%7Dx%20%3D%200%0A%20%20%20%20%20%20%20%20%5Cend%7Bcases%7D%20%5C%5C%0A%20%20%20%20%5Ctext%7BPMF%20(smooth)%3A%7D%20%26%20P(X%20%3D%20x)%20%3D%20p%5Ex(1-p)%5E%7B1-x%7D%20%5C%5C%0A%20%20%20%20%5Ctext%7BExpectation%3A%7D%20%26%20E%5BX%5D%20%3D%20p%20%5C%5C%0A%20%20%20%20%5Ctext%7BVariance%3A%7D%20%26%20%5Ctext%7BVar%7D(X)%20%3D%20p(1-p)%20%5C%5C%0A%20%20%20%20%5Cend%7Barray%7D%24%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo%2C%20p_slider)%3A%0A%20%20%20%20%23%20Visualization%20of%20the%20Bernoulli%20PMF%0A%20%20%20%20_p%20%3D%20p_slider.value%0A%0A%20%20%20%20%23%20Values%20for%20PMF%0A%20%20%20%20values%20%3D%20%5B0%2C%201%5D%0A%20%20%20%20probabilities%20%3D%20%5B1%20-%20_p%2C%20_p%5D%0A%0A%20%20%20%20%23%20Relevant%20statistics%0A%20%20%20%20expected_value%20%3D%20_p%0A%20%20%20%20variance%20%3D%20_p%20*%20(1%20-%20_p)%0A%0A%20%20%20%20mo.md(f%22%22%22%0A%20%20%20%20%23%23%20PMF%20Graph%20for%20Bernoulli(%24p%3D%7B_p%3A.2f%7D%24)%0A%0A%20%20%20%20Parameter%20%24p%24%3A%20%7Bp_slider%7D%0A%0A%20%20%20%20Expected%20value%3A%20%24E%5BX%5D%20%3D%20%7Bexpected_value%3A.2f%7D%24%0A%0A%20%20%20%20Variance%3A%20%24%5C%5Ctext%7B%7BVar%7D%7D(X)%20%3D%20%7Bvariance%3A.2f%7D%24%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%20expected_value%2C%20probabilities%2C%20values%2C%20variance%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(expected_value%2C%20p_slider%2C%20plt%2C%20probabilities%2C%20values%2C%20variance)%3A%0A%20%20%20%20%23%20PMF%0A%20%20%20%20_p%20%3D%20p_slider.value%0A%20%20%20%20fig%2C%20ax%20%3D%20plt.subplots(figsize%3D(10%2C%206))%0A%0A%20%20%20%20%23%20Bar%20plot%20for%20PMF%0A%20%20%20%20ax.bar(values%2C%20probabilities%2C%20width%3D0.4%2C%20color%3D'blue'%2C%20alpha%3D0.7)%0A%0A%20%20%20%20ax.set_xlabel('Values%20that%20X%20can%20take%20on')%0A%20%20%20%20ax.set_ylabel('Probability')%0A%20%20%20%20ax.set_title(f'PMF%20of%20Bernoulli%20Distribution%20with%20p%20%3D%20%7B_p%3A.2f%7D')%0A%0A%20%20%20%20%23%20x-axis%20limit%0A%20%20%20%20ax.set_xticks(%5B0%2C%201%5D)%0A%20%20%20%20ax.set_xlim(-0.5%2C%201.5)%0A%0A%20%20%20%20%23%20y-axis%20w%2F%20some%20padding%0A%20%20%20%20ax.set_ylim(0%2C%20max(probabilities)%20*%201.1)%0A%0A%20%20%20%20%23%20Add%20expectation%20as%20vertical%20line%0A%20%20%20%20ax.axvline(x%3Dexpected_value%2C%20color%3D'red'%2C%20linestyle%3D'--'%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3Df'E%5BX%5D%20%3D%20%7Bexpected_value%3A.2f%7D')%0A%0A%20%20%20%20%23%20Add%20variance%20annotation%0A%20%20%20%20ax.text(0.5%2C%20max(probabilities)%20*%200.8%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20f'Var(X)%20%3D%20%7Bvariance%3A.3f%7D'%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20horizontalalignment%3D'center'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20bbox%3Ddict(facecolor%3D'white'%2C%20alpha%3D0.7))%0A%0A%20%20%20%20ax.legend()%0A%20%20%20%20plt.tight_layout()%0A%20%20%20%20plt.gca()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Expectation%20and%20Variance%20of%20a%20Bernoulli%0A%0A%20%20%20%20%3E%20_Note%3A_%20The%20following%20derivations%20are%20included%20as%20reference%20material.%20The%20credit%20for%20these%20mathematical%20formulations%20belongs%20to%20%5B%22Probability%20for%20Computer%20Scientists%22%5D(https%3A%2F%2Fchrispiech.github.io%2FprobabilityForComputerScientists%2Fen%2Fpart2%2Fbernoulli%2F)%20by%20Chris%20Piech.%0A%0A%20%20%20%20Let's%20work%20through%20why%20%24E%5BX%5D%20%3D%20p%24%20for%20a%20Bernoulli%3A%0A%0A%20%20%20%20%5Cbegin%7Balign%7D%0A%20%20%20%20E%5BX%5D%20%26%3D%20%5Csum_x%20x%20%5Ccdot%20(X%3Dx)%20%26%26%20%5Ctext%7BDefinition%20of%20expectation%7D%20%5C%5C%0A%20%20%20%20%26%3D%201%20%5Ccdot%20p%20%2B%200%20%5Ccdot%20(1-p)%20%26%26%0A%20%20%20%20X%20%5Ctext%7B%20can%20take%20on%20values%200%20and%201%7D%20%5C%5C%0A%20%20%20%20%26%3D%20p%20%26%26%20%5Ctext%7BRemove%20the%200%20term%7D%0A%20%20%20%20%5Cend%7Balign%7D%0A%0A%20%20%20%20And%20for%20variance%2C%20we%20first%20need%20%24E%5BX%5E2%5D%24%3A%0A%0A%20%20%20%20%5Cbegin%7Balign%7D%0A%20%20%20%20E%5BX%5E2%5D%0A%20%20%20%20%26%3D%20%5Csum_x%20x%5E2%20%5Ccdot%20(X%3Dx)%20%26%26%5Ctext%7BLOTUS%7D%5C%5C%0A%20%20%20%20%26%3D%200%5E2%20%5Ccdot%20(1-p)%20%2B%201%5E2%20%5Ccdot%20p%5C%5C%0A%20%20%20%20%26%3D%20p%0A%20%20%20%20%5Cend%7Balign%7D%0A%0A%20%20%20%20%5Cbegin%7Balign%7D%0A%20%20%20%20(X)%0A%20%20%20%20%26%3D%20E%5BX%5E2%5D%20-%20E%5BX%5D%5E2%26%26%20%5Ctext%7BDef%20of%20variance%7D%20%5C%5C%0A%20%20%20%20%26%3D%20p%20-%20p%5E2%20%26%26%20%5Ctext%7BSubstitute%20%7DE%5BX%5E2%5D%3Dp%2C%20E%5BX%5D%20%3D%20p%20%5C%5C%0A%20%20%20%20%26%3D%20p%20(1-p)%20%26%26%20%5Ctext%7BFactor%20out%20%7Dp%0A%20%20%20%20%5Cend%7Balign%7D%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Indicator%20Random%20Variables%0A%0A%20%20%20%20Indicator%20variables%20are%20a%20clever%20trick%20I%20like%20to%20use%20%E2%80%94%20they%20turn%20events%20into%20numbers.%20Instead%20of%20dealing%20with%20%22did%20the%20event%20happen%3F%22%20(yes%2Fno)%2C%20we%20get%20%221%22%20if%20it%20happened%20and%20%220%22%20if%20it%20didn't.%0A%0A%20%20%20%20Formally%3A%20an%20indicator%20variable%20%24I%24%20for%20event%20%24A%24%20equals%201%20when%20%24A%24%20occurs%20and%200%20otherwise.%20These%20are%20just%20bernoulli%20variables%20where%20%24p%20%3D%20P(A)%24.%20people%20often%20use%20notation%20like%20%24I_A%24%20to%20name%20them.%0A%0A%20%20%20%20Two%20key%20properties%20that%20make%20them%20super%20useful%3A%0A%0A%20%20%20%20-%20%24P(I%3D1)%3DP(A)%24%20-%20probability%20of%20getting%20a%201%20is%20just%20the%20probability%20of%20the%20event%0A%20%20%20%20-%20%24E%5BI%5D%3DP(A)%24%20-%20the%20expected%20value%20equals%20the%20probability%20(this%20one's%20a%20game-changer!)%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20%23%20Simulation%20of%20Bernoulli%20trials%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Simulation%20of%20Bernoulli%20Trials%0A%0A%20%20%20%20Let's%20simulate%20Bernoulli%20trials%20to%20see%20the%20law%20of%20large%20numbers%20in%20action.%20We'll%20flip%20a%20biased%20coin%20repeatedly%20and%20observe%20how%20the%20proportion%20of%20successes%20approaches%20the%20true%20probability%20%24p%24.%0A%20%20%20%20%22%22%22)%0A%0A%20%20%20%20%23%20UI%20element%20for%20simulation%20parameters%0A%20%20%20%20num_trials_slider%20%3D%20mo.ui.slider(10%2C%2010000%2C%20value%3D1000%2C%20step%3D10%2C%20label%3D%22Number%20of%20trials%22)%0A%20%20%20%20p_sim_slider%20%3D%20mo.ui.slider(0.01%2C%200.99%2C%20value%3D0.65%2C%20step%3D0.01%2C%20label%3D%22Success%20probability%20(p)%22)%0A%20%20%20%20return%20num_trials_slider%2C%20p_sim_slider%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Simulation%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo%2C%20num_trials_slider%2C%20p_sim_slider)%3A%0A%20%20%20%20mo.hstack(%5Bnum_trials_slider%2C%20p_sim_slider%5D%2C%20justify%3D'space-around')%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(np%2C%20num_trials_slider%2C%20p_sim_slider%2C%20plt)%3A%0A%20%20%20%20%23%20Bernoulli%20trials%0A%20%20%20%20_num_trials%20%3D%20num_trials_slider.value%0A%20%20%20%20p%20%3D%20p_sim_slider.value%0A%0A%20%20%20%20%23%20Random%20Bernoulli%20trials%0A%20%20%20%20trials%20%3D%20np.random.binomial(1%2C%20p%2C%20size%3D_num_trials)%0A%0A%20%20%20%20%23%20Cumulative%20proportion%20of%20successes%0A%20%20%20%20cumulative_mean%20%3D%20np.cumsum(trials)%20%2F%20np.arange(1%2C%20_num_trials%20%2B%201)%0A%0A%20%20%20%20%23%20Results%0A%20%20%20%20plt.figure(figsize%3D(10%2C%206))%0A%20%20%20%20plt.plot(range(1%2C%20_num_trials%20%2B%201)%2C%20cumulative_mean%2C%20label%3D'Proportion%20of%20successes')%0A%20%20%20%20plt.axhline(y%3Dp%2C%20color%3D'r'%2C%20linestyle%3D'--'%2C%20label%3Df'True%20probability%20(p%3D%7Bp%7D)')%0A%0A%20%20%20%20plt.xscale('log')%20%20%23%20Use%20log%20scale%20for%20better%20visualization%0A%20%20%20%20plt.xlabel('Number%20of%20trials')%0A%20%20%20%20plt.ylabel('Proportion%20of%20successes')%0A%20%20%20%20plt.title('Convergence%20of%20Sample%20Proportion%20to%20True%20Probability')%0A%20%20%20%20plt.legend()%0A%20%20%20%20plt.grid(True%2C%20alpha%3D0.3)%0A%0A%20%20%20%20%23%20Add%20annotation%0A%20%20%20%20plt.annotate('As%20the%20number%20of%20trials%20increases%2C%5Cnthe%20proportion%20approaches%20p'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20xy%3D(_num_trials%2C%20cumulative_mean%5B-1%5D)%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20xytext%3D(_num_trials%2F5%2C%20p%20%2B%200.1)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20arrowprops%3Ddict(facecolor%3D'black'%2C%20shrink%3D0.05%2C%20width%3D1))%0A%0A%20%20%20%20plt.tight_layout()%0A%20%20%20%20plt.gca()%0A%20%20%20%20return%20(trials%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo%2C%20np%2C%20trials)%3A%0A%20%20%20%20%23%20Calculate%20statistics%20from%20the%20simulation%0A%20%20%20%20num_successes%20%3D%20np.sum(trials)%0A%20%20%20%20num_trials%20%3D%20len(trials)%0A%20%20%20%20proportion%20%3D%20num_successes%20%2F%20num_trials%0A%0A%20%20%20%20%23%20Display%20the%20results%0A%20%20%20%20mo.md(f%22%22%22%0A%20%20%20%20%23%23%23%20Simulation%20Results%0A%0A%20%20%20%20-%20Number%20of%20trials%3A%20%7Bnum_trials%7D%0A%20%20%20%20-%20Number%20of%20successes%3A%20%7Bnum_successes%7D%0A%20%20%20%20-%20Proportion%20of%20successes%3A%20%7Bproportion%3A.4f%7D%0A%0A%20%20%20%20This%20demonstrates%20how%20the%20sample%20proportion%20approaches%20the%20true%20probability%20%24p%24%20as%20the%20number%20of%20trials%20increases.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20%F0%9F%A4%94%20Test%20Your%20Understanding%0A%0A%20%20%20%20Pick%20which%20of%20these%20statements%20about%20Bernoulli%20random%20variables%20you%20think%20are%20correct%3A%0A%0A%20%20%20%20%2F%2F%2F%20details%20%7C%20The%20variance%20of%20a%20Bernoulli%20random%20variable%20is%20always%20less%20than%20or%20equal%20to%200.25%0A%20%20%20%20%E2%9C%85%20Correct!%20The%20variance%20%24p(1-p)%24%20reaches%20its%20maximum%20value%20of%200.25%20when%20%24p%20%3D%200.5%24.%0A%20%20%20%20%2F%2F%2F%0A%0A%20%20%20%20%2F%2F%2F%20details%20%7C%20The%20expected%20value%20of%20a%20Bernoulli%20random%20variable%20must%20be%20either%200%20or%201%0A%20%20%20%20%E2%9D%8C%20Incorrect!%20The%20expected%20value%20is%20%24p%24%2C%20which%20can%20be%20any%20value%20between%200%20and%201.%0A%20%20%20%20%2F%2F%2F%0A%0A%20%20%20%20%2F%2F%2F%20details%20%7C%20If%20%24X%20%5Csim%20%5Ctext%7BBern%7D(0.3)%24%20and%20%24Y%20%5Csim%20%5Ctext%7BBern%7D(0.7)%24%2C%20then%20%24X%24%20and%20%24Y%24%20have%20the%20same%20variance%0A%20%20%20%20%E2%9C%85%20Correct!%20%24%5Ctext%7BVar%7D(X)%20%3D%200.3%20%5Ctimes%200.7%20%3D%200.21%24%20and%20%24%5Ctext%7BVar%7D(Y)%20%3D%200.7%20%5Ctimes%200.3%20%3D%200.21%24.%0A%20%20%20%20%2F%2F%2F%0A%0A%20%20%20%20%2F%2F%2F%20details%20%7C%20Two%20independent%20coin%20flips%20can%20be%20modeled%20as%20the%20sum%20of%20two%20Bernoulli%20random%20variables%0A%20%20%20%20%E2%9C%85%20Correct!%20The%20sum%20would%20follow%20a%20Binomial%20distribution%20with%20%24n%3D2%24.%0A%20%20%20%20%2F%2F%2F%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Applications%20of%20Bernoulli%20Random%20Variables%0A%0A%20%20%20%20Bernoulli%20random%20variables%20are%20used%20in%20many%20real-world%20scenarios%3A%0A%0A%20%20%20%201.%20**Quality%20Control**%3A%20Testing%20if%20a%20manufactured%20item%20is%20defective%20(1)%20or%20not%20(0)%0A%0A%20%20%20%202.%20**A%2FB%20Testing**%3A%20Determining%20if%20a%20user%20clicks%20(1)%20or%20doesn't%20click%20(0)%20on%20a%20website%20button%0A%0A%20%20%20%203.%20**Medical%20Testing**%3A%20Checking%20if%20a%20patient%20tests%20positive%20(1)%20or%20negative%20(0)%20for%20a%20disease%0A%0A%20%20%20%204.%20**Election%20Modeling**%3A%20Modeling%20if%20a%20particular%20voter%20votes%20for%20candidate%20A%20(1)%20or%20not%20(0)%0A%0A%20%20%20%205.%20**Financial%20Markets**%3A%20Modeling%20if%20a%20stock%20price%20goes%20up%20(1)%20or%20down%20(0)%20in%20a%20simplified%20model%0A%0A%20%20%20%20Because%20Bernoulli%20random%20variables%20are%20parametric%2C%20as%20soon%20as%20you%20declare%20a%20random%20variable%20to%20be%20of%20type%20Bernoulli%2C%20you%20automatically%20know%20all%20of%20its%20pre-derived%20properties!%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Summary%0A%0A%20%20%20%20And%20that's%20a%20wrap%20on%20Bernoulli%20distributions!%20We've%20learnt%20the%20simplest%20of%20all%20probability%20distributions%20%E2%80%94%20the%20one%20that%20only%20has%20two%20possible%20outcomes.%20Flip%20a%20coin%2C%20check%20if%20an%20email%20is%20spam%2C%20see%20if%20your%20blind%20date%20shows%20up%20%E2%80%94%20these%20are%20all%20Bernoulli%20trials%20with%20success%20probability%20%24p%24.%0A%0A%20%20%20%20The%20beauty%20of%20Bernoulli%20is%20in%20its%20simplicity%3A%20just%20set%20%24p%24%20(the%20probability%20of%20success)%20and%20you're%20good%20to%20go!%20The%20PMF%20gives%20us%20%24P(X%3D1)%20%3D%20p%24%20and%20%24P(X%3D0)%20%3D%201-p%24%2C%20while%20expectation%20is%20simply%20%24p%24%20and%20variance%20is%20%24p(1-p)%24.%20Oh%2C%20and%20when%20you're%20tracking%20whether%20specific%20events%20happen%20or%20not%3F%20That's%20an%20indicator%20random%20variable%20%E2%80%94%20just%20another%20Bernoulli%20in%20disguise!%0A%0A%20%20%20%20Two%20key%20things%20to%20remember%3A%0A%0A%20%20%20%20%2F%2F%2F%20note%0A%20%20%20%20%F0%9F%92%A1%20**Maximum%20Variance**%3A%20A%20Bernoulli's%20variance%20%24p(1-p)%24%20reaches%20its%20maximum%20at%20%24p%3D0.5%24%2C%20making%20a%20fair%20coin%20the%20most%20%22unpredictable%22%20Bernoulli%20random%20variable.%0A%0A%20%20%20%20%F0%9F%92%A1%20**Instant%20Properties**%3A%20When%20you%20identify%20a%20random%20variable%20as%20Bernoulli%2C%20you%20instantly%20know%20all%20its%20properties%E2%80%94expectation%2C%20variance%2C%20PMF%E2%80%94without%20additional%20calculations.%0A%20%20%20%20%2F%2F%2F%0A%0A%20%20%20%20Next%20up%3A%20Binomial%20distribution%E2%80%94where%20we'll%20see%20what%20happens%20when%20we%20let%20Bernoulli%20trials%20have%20a%20party%20and%20add%20themselves%20together!%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%23%20Appendix%20(containing%20helper%20code%20for%20the%20notebook)%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_()%3A%0A%20%20%20%20from%20marimo%20import%20Html%0A%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_()%3A%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20from%20scipy%20import%20stats%0A%20%20%20%20import%20math%0A%0A%20%20%20%20%23%20Set%20style%20for%20consistent%20visualizations%0A%20%20%20%20plt.style.use('seaborn-v0_8-whitegrid')%0A%20%20%20%20plt.rcParams%5B'figure.figsize'%5D%20%3D%20%5B10%2C%206%5D%0A%20%20%20%20plt.rcParams%5B'font.size'%5D%20%3D%2012%0A%0A%20%20%20%20%23%20Set%20random%20seed%20for%20reproducibility%0A%20%20%20%20np.random.seed(42)%0A%20%20%20%20return%20np%2C%20plt%2C%20stats%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20%23%20Create%20a%20UI%20element%20for%20the%20parameter%20p%0A%20%20%20%20p_slider%20%3D%20mo.ui.slider(0.01%2C%200.99%2C%20value%3D0.65%2C%20step%3D0.01%2C%20label%3D%22Parameter%20p%22)%0A%20%20%20%20return%20(p_slider%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "cwd": "",
+            "mode": "edit",
+            "version": "0.20.4",
+            "serverToken": "unused",
+            "config": {"ai": {"custom_providers": {}, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"app_title": "Bernoulli Distribution", "sql_output": "auto", "width": "medium"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

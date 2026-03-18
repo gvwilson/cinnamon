@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>06 dataframe transformer</title>
+    <script type="module" crossorigin src="./assets/index-0n92c_W7.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-BW0IMuFq.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-BDxNtGmi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-BoaCR37F.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-LvLJmgfZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-Bj1aDYRI.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-B3qBwwSJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-icT_Ltz2.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-hTpPIsMT.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-Dy81QR4n.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-Ej3vmCIF.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-CSu739Rf.js">
+    <link rel="modulepreload" crossorigin href="./assets/Combination-Cs9nbinQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-UxKrm8hS.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DJBpXGro.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Cm-Z7dYr.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-BE0hEwVo.js">
+    <link rel="modulepreload" crossorigin href="./assets/x-BI1M8X_v.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-CxT2Geqr.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-D9723Brr.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-Hc8CXlvz.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-C0aUZfE0.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-EYp9AUJI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-O0nX5vok.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-CQUIhlu2.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-Dx6-QZGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-CfcLlFFp.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-H_cgTO0M.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-tNbLd14P.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-BMfCOLaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-ClFZlR7U.js">
+    <link rel="modulepreload" crossorigin href="./assets/DeferredRequestRegistry-O6RDJKs0.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Rz_lD4HK.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-BrEm7qNv.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-3Aq84phF.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-Bgjtqo_1.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-CiGN2w5X.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-lmrYznmk.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-39dTX4Wi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-QS_pSfjY.js">
+    <link rel="modulepreload" crossorigin href="./assets/assertNever-DWSyoPEi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-BKEr35uH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DA9DjSPo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-BtW-rR_1.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BYXBU1of.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-CJOnx12W.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-D3x_db9Y.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-Drh7NmIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-D2lG83Oh.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B_cxg-E4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D0Vj4Kqc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtXb4bUU.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CQqv2gQL.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-8UD0A5sU.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CXLJUPFl.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNC_tnlW.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-apDpadc4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CEeVCRd_.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-0ac7Aukl.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BqKH-Jd9.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-BBn8CPhf.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-BU2qXMKx.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-OnFQK5Wu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-8AYn-wiF.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-DS_VtWMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-CO3ppIfA.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-DTWCDKdn.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-DrBRErTM.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-fq1RMGX_.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-C5JoisA7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-D0GQBpTb.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-DdPu5Kfu.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-DvKpAc6K.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-CnD1Dah5.js">
+    <link rel="modulepreload" crossorigin href="./assets/multi-map-Pp1P2DOX.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-OQZHipbB.js">
+    <link rel="modulepreload" crossorigin href="./assets/card-C-c-4jyF.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-9WfvUF7e.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-CVN1lcMF.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BhNN2V5a.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-TNNaT1M9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-B0dx2Gp0.js">
+    <link rel="modulepreload" crossorigin href="./assets/azure-BTXHztTw.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-CYnquDho.js">
+    <link rel="modulepreload" crossorigin href="./assets/SSRProvider-DC7ElCZZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-CIAP2NOh.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-DbDKSvEd.js">
+    <link rel="modulepreload" crossorigin href="./assets/usePress-BHGkpw8X.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-CUwqpKjd.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DzgPOFJ-.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-BPGG2gPG.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-CVKxYu_0.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-BhH-Mm8O.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-AcL8c6qH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-D-4ifFXh.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-Bfogio62.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-BRG6IPhC.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-YwM0Pd7v.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-Bw1ifb7c.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-DBdMgUNq.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-BfkXNxmI.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CkudG0Ej.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-dVmh0yTy.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CHAHPgkx.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-CAoNMkjq.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-qZo1ox6x.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-DPTa_EpU.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-OkOxlkkM.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BOmLQIKI.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DK1MWd7f.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-CZV6_g2i.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-CdjCA1J8.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Ba0LbbH4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-C9V-on2J.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-qEtcJ95s.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-Q_UEP94Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-F9sJtuof.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-3V5UxC3B.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-az74f3Mp.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-BgmMM9Zg.js">
+    <link rel="modulepreload" crossorigin href="./assets/html-to-image-BnSc-Wa0.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-DYwTiH9-.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-m8w66E4s.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5FQGJX7Z-CM1a_K7I.js">
+    <link rel="modulepreload" crossorigin href="./assets/katex-rvFxOCU-.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-renderer-MR9df58W.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-rfxSsiHU.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-B9_ToVd4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useRunCells-5m6jCnyo.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-DJ8khuob.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-DTN9kFDq.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-rhOJovGE.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-BO8E69bZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BGe7pJXT.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-CHaNfieI.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-OKerBHH8.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-DRbCSry7.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-D1keIaYa.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-CpE7XQLs.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-CJeRXUtp.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-BCnp9gKC.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-DKXKGKvX.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-DRUDRiy0.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-CrUXojcA.js">
+    <link rel="modulepreload" crossorigin href="./assets/process-output-CTVsT--B.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-CObhN-9g.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-DP4vAkvg.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-CBkHtTOV.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-DzHkbIdO.js">
+    <link rel="modulepreload" crossorigin href="./assets/image-DXfkah9d.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-DKSqmedg.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-DUn4LN4W.js">
+    <link rel="modulepreload" crossorigin href="./assets/isEmpty-CfmnKtgL.js">
+    <link rel="modulepreload" crossorigin href="./assets/bot-message-square-CK6eoGWy.js">
+    <link rel="modulepreload" crossorigin href="./assets/chat-display-D_Fuuy6r.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-DV8gdCvH.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B006EYFX.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-DbmSqx09.js">
+    <link rel="modulepreload" crossorigin href="./assets/ellipsis-vertical-CAB7tdza.js">
+    <link rel="modulepreload" crossorigin href="./assets/components-Bpgzv_5_.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-WsubyItX.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-RCwU-rnE.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BsV5fVR-.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-BdH_5I58.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-D5BgdrnX.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-resizable-panels.browser.esm-DDRqG5ui.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-aware-panel-CfsfBlhO.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-BvQKiC0F.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-YC7rpcmD.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-vwi9L975.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DH-1xZGq.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-headphone-B5q2Ow55.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-icons-CWLHDa1J.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-DLpfIr8v.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CrQYrsUC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-B1jGbQlH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-m1e6E3Ao.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-yyiB9aJX.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-C1RN112u.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-RrUi-pOT.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-CzkousWe.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-Bx4-SO9M.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-Be7p_si8.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-Ck7z0-tq.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BYA9UDHe.js">
+    <link rel="modulepreload" crossorigin href="./assets/code-xml-DwHPF_nL.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-DBW9RXtT.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-CxAsQQ77.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-CzQUw9rV.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-idScn0w0.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-jmgGt1lS.css">
+    <link rel="stylesheet" crossorigin href="./assets/markdown-renderer-DdDKmWlR.css">
+    <link rel="stylesheet" crossorigin href="./assets/JsonOutput-B7vuddcd.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-GjXovVsl.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">%23%20%2F%2F%2F%20script%0A%23%20requires-python%20%3D%20%22%3E%3D3.13%22%0A%23%20dependencies%20%3D%20%5B%0A%23%20%20%20%20%20%22marimo%22%2C%0A%23%20%20%20%20%20%22numpy%3D%3D2.4.3%22%2C%0A%23%20%20%20%20%20%22plotly%5Bexpress%5D%3D%3D6.3.0%22%2C%0A%23%20%20%20%20%20%22polars%3D%3D1.24.0%22%2C%0A%23%20%20%20%20%20%22requests%3D%3D2.32.3%22%2C%0A%23%20%5D%0A%23%20%5Btool.marimo.runtime%5D%0A%23%20auto_instantiate%20%3D%20false%0A%23%20%2F%2F%2F%0A%0Aimport%20marimo%0A%0A__generated_with%20%3D%20%220.21.1%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20Polars%20with%20Marimo's%20Dataframe%20Transformer%0A%0A%20%20%20%20*By%20%5Bjesshart%5D(https%3A%2F%2Fgithub.com%2Fjesshart)*%0A%0A%20%20%20%20The%20goal%20of%20this%20notebook%20is%20to%20explore%20Marimo's%20data%20explore%20capabilities%20alonside%20the%20power%20of%20polars.%20Feel%20free%20to%20reference%20the%20latest%20about%20these%20Marimo%20features%20here%3A%20https%3A%2F%2Fdocs.marimo.io%2Fguides%2Fworking_with_data%2Fdataframes%2F%3Fh%3Ddataframe%23transforming-dataframes%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(requests)%3A%0A%20%20%20%20json_data%20%3D%20requests.get(%0A%20%20%20%20%20%20%20%20%22https%3A%2F%2Fraw.githubusercontent.com%2Fjesshart%2Ffake-datasets%2Frefs%2Fheads%2Fmain%2Forders.json%22%0A%20%20%20%20)%0A%20%20%20%20return%20(json_data%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20Loading%20Data%0A%20%20%20%20Let's%20start%20by%20loading%20our%20data%20and%20getting%20into%20the%20%60.lazy()%60%20format%20so%20our%20transformations%20and%20queries%20are%20speedy.%0A%0A%20%20%20%20Read%20more%20about%20%60.lazy()%60%20here%3A%20https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Flazy%2F%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(json_data%2C%20pl)%3A%0A%20%20%20%20demand%3A%20pl.LazyFrame%20%3D%20pl.read_json(json_data.content).lazy()%0A%20%20%20%20demand%0A%20%20%20%20return%20(demand%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Above%2C%20you%20will%20notice%20that%20when%20you%20reference%20the%20object%20as%20a%20standalone%2C%20you%20get%20out-of-the-box%20convenience%20from%20%60marimo%60.%20You%20have%20the%20%60Table%60%20and%20%60Query%20Plan%60%20options%20to%20choose%20from.%0A%0A%20%20%20%20-%20%F0%9F%92%A1%20Try%20out%20the%20%60Table%60%20view!%20You%20can%20click%20the%20%60Preview%20data%60%20button%20to%20get%20a%20quick%20view%20of%20your%20data.%0A%20%20%20%20-%20%F0%9F%92%A1%20Take%20a%20look%20at%20the%20%60Query%20plan%60.%20Learn%20more%20about%20Polar's%20query%20plan%20here%3A%20https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Flazy%2Fquery-plan%2F%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20marimo's%20Native%20Dataframe%20UI%0A%0A%20%20%20%20There%20are%20a%20few%20ways%20to%20leverage%20marimo's%20native%20dataframe%20UI.%20One%20is%20by%20doing%20what%20we%20saw%20above%E2%80%94by%20referencing%20a%20%60pl.LazyFrame%60%20directly.%20You%20can%20also%20try%2C%0A%0A%20%20%20%20-%20Reference%20a%20%60pl.LazyFrame%60%20(we%20already%20did%20this!)%0A%20%20%20%20-%20Referencing%20a%20%60pl.DataFrame%60%20and%20see%20how%20it%20different%20from%20its%20corresponding%20lazy%20version%0A%20%20%20%20-%20Use%20%60mo.ui.table%60%0A%20%20%20%20-%20Use%20%60mo.ui.dataframe%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Reference%20a%20%60pl.DataFrame%60%0A%20%20%20%20Let's%20reference%20the%20same%20frame%20as%20before%2C%20but%20this%20time%20as%20a%20%60pl.DataFrame%60%20by%20calling%20%60.collect()%60%20on%20it.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(demand%3A%20%22pl.LazyFrame%22)%3A%0A%20%20%20%20demand.collect()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Note%20how%20much%20functionality%20we%20have%20right%20out-of-the-box.%20Click%20on%20column%20names%20to%20see%20rich%20features%20like%20sorting%2C%20freezing%2C%20filtering%2C%20searching%2C%20and%20more!%0A%0A%20%20%20%20Notice%20how%20%60order_quantity%60%20has%20a%20green%20bar%20chart%20under%20it%20indicating%20the%20distribution%20of%20values%20for%20the%20field!%0A%0A%20%20%20%20Don't%20miss%20the%20%60Download%60%20feature%20as%20well%20which%20supports%20downloading%20in%20CSV%2C%20json%2C%20or%20parquet%20format!%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Use%20%60mo.ui.table%60%0A%20%20%20%20The%20%60mo.ui.table%60%20allows%20you%20to%20select%20rows%20for%20use%20downstream.%20You%20can%20select%20the%20rows%20you%20want%2C%20and%20then%20use%20these%20as%20filtered%20rows%20downstream.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(demand%3A%20%22pl.LazyFrame%22%2C%20mo)%3A%0A%20%20%20%20demand_table%20%3D%20mo.ui.table(demand%2C%20label%3D%22Demand%20Table%22)%0A%20%20%20%20return%20(demand_table%2C)%0A%0A%0A%40app.cell%0Adef%20_(demand_table)%3A%0A%20%20%20%20demand_table%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20I%20like%20to%20use%20this%20feature%20to%20select%20groupings%20based%20on%20summary%20statistics%20so%20I%20can%20quickly%20explore%20subsets%20of%20categories.%20Let%20me%20show%20you%20what%20I%20mean.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(demand%3A%20%22pl.LazyFrame%22%2C%20pl)%3A%0A%20%20%20%20summary%3A%20pl.LazyFrame%20%3D%20demand.group_by(%22product_family%22).agg(%0A%20%20%20%20%20%20%20%20pl.mean(%22order_quantity%22).alias(%22mean%22)%2C%0A%20%20%20%20%20%20%20%20pl.sum(%22order_quantity%22).alias(%22sum%22)%2C%0A%20%20%20%20%20%20%20%20pl.std(%22order_quantity%22).alias(%22std%22)%2C%0A%20%20%20%20%20%20%20%20pl.min(%22order_quantity%22).alias(%22min%22)%2C%0A%20%20%20%20%20%20%20%20pl.max(%22order_quantity%22).alias(%22max%22)%2C%0A%20%20%20%20%20%20%20%20pl.col(%22order_quantity%22).null_count().alias(%22null_count%22)%2C%0A%20%20%20%20)%0A%20%20%20%20return%20(summary%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo%2C%20summary%3A%20%22pl.LazyFrame%22)%3A%0A%20%20%20%20summary_table%20%3D%20mo.ui.table(summary)%0A%20%20%20%20return%20(summary_table%2C)%0A%0A%0A%40app.cell%0Adef%20_(summary_table)%3A%0A%20%20%20%20summary_table%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Now%2C%20instead%20of%20manually%20creating%20a%20filter%20for%20what%20I%20want%20to%20take%20a%20closer%20look%20at%2C%20I%20simply%20select%20from%20the%20ui%20and%20do%20a%20simple%20join%20to%20get%20that%20aggregated%20level%20with%20more%20detail.%0A%0A%20%20%20%20The%20following%20cell%20uses%20the%20output%20of%20the%20%60mo.ui.table%60%20selection%2C%20selects%20its%20unique%20keys%2C%20and%20uses%20that%20to%20join%20for%20the%20selected%20subset%20of%20the%20original%20table.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(demand%3A%20%22pl.LazyFrame%22%2C%20pl%2C%20summary_table)%3A%0A%20%20%20%20selection_keys%3A%20pl.LazyFrame%20%3D%20(%0A%20%20%20%20%20%20%20%20summary_table.value.lazy().select(%22product_family%22).unique()%0A%20%20%20%20)%0A%20%20%20%20selection%3A%20pl.lazyframe%20%3D%20selection_keys.join(%0A%20%20%20%20%20%20%20%20demand%2C%20on%3D%22product_family%22%2C%20how%3D%22left%22%0A%20%20%20%20)%0A%20%20%20%20selection.collect()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20You%20can%20learn%20more%20about%20joins%20in%20Polars%20by%20checking%20out%20my%20other%20interactive%20notebook%20here%3A%20https%3A%2F%2Fmarimo.io%2Fp%2F%40jesshart%2Fbasic-polars-joins%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Use%20%60mo.ui.dataframe%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(demand%3A%20%22pl.LazyFrame%22%2C%20mo)%3A%0A%20%20%20%20demand_cached%20%3D%20demand.collect()%0A%20%20%20%20mo_dataframe%20%3D%20mo.ui.dataframe(demand_cached)%0A%20%20%20%20return%20demand_cached%2C%20mo_dataframe%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Below%20I%20simply%20call%20the%20object%20into%20view.%20We%20will%20play%20with%20it%20in%20the%20following%20cells.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo_dataframe)%3A%0A%20%20%20%20mo_dataframe%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20One%20way%20to%20group%20this%20data%20in%20polars%20code%20directly%20would%20be%20to%20group%20by%20product%20family%20to%20get%20the%20mean.%20This%20is%20how%20it%20is%20done%20in%20polars%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(demand_cached%2C%20pl)%3A%0A%20%20%20%20demand_agg%3A%20pl.DataFrame%20%3D%20demand_cached.group_by(%22product_family%22).agg(%0A%20%20%20%20%20%20%20%20pl.mean(%22order_quantity%22).name.suffix(%22_mean%22)%0A%20%20%20%20)%0A%20%20%20%20demand_agg%0A%20%20%20%20return%20(demand_agg%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(f%22%22%22%0A%20%20%20%20%23%23%20Try%20Before%20You%20Buy%0A%0A%20%20%20%201.%20Now%20try%20to%20do%20the%20same%20summary%20using%20Marimo's%20%60mo.ui.dataframe%60%20object%20above.%20Also%2C%20note%20how%20your%20aggregated%20column%20is%20already%20renamed!%20Nice%20touch!%0A%20%20%20%202.%20Try%20(1)%20again%20but%20use%20select%20statements%20first%20(This%20is%20actually%20better%20polars%20practice%20anyway%20since%20it%20reduces%20the%20frame%20as%20you%20move%20to%20aggregation.)%0A%0A%20%20%20%20*When%20you%20are%20ready%2C%20check%20the%20%60Python%20Code%60%20tab%20at%20the%20top%20of%20the%20table%20to%20compare%20your%20output%20to%20the%20answer%20below.*%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_()%3A%0A%20%20%20%20mean_code%20%3D%20%22%22%22%0A%20%20%20%20This%20may%20seem%20verbose%20compared%20to%20what%20I%20came%20up%20with%2C%20but%20quick%20and%20dirty%20outputs%20like%20this%20are%20really%20helpful%20for%20quickly%20exploring%20the%20data%20and%20learning%20the%20polars%20library%20at%20the%20same%20time.%0A%20%20%20%20%60%60%60python%0A%20%20%20%20df_next%20%3D%20df%0A%20%20%20%20df_next%20%3D%20df_next.group_by(%0A%20%20%20%20%20%20%20%20%5Bpl.col(%22product_family%22)%5D%2C%20maintain_order%3DTrue%0A%20%20%20%20).agg(%0A%20%20%20%20%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22order_date%22).mean().alias(%22order_date_mean%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22order_quantity%22).mean().alias(%22order_quantity_mean%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22product%22).mean().alias(%22product_mean%22)%2C%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20)%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22%0A%0A%20%20%20%20mean_again_code%20%3D%20%22%22%22%0A%20%20%20%20%60%60%60python%0A%20%20%20%20df_next%20%3D%20df%0A%20%20%20%20df_next%20%3D%20df_next.select(%5B%22product_family%22%2C%20%22order_quantity%22%5D)%0A%20%20%20%20df_next%20%3D%20df_next.group_by(%0A%20%20%20%20%20%20%20%20%5Bpl.col(%22product_family%22)%5D%2C%20maintain_order%3DTrue%0A%20%20%20%20).agg(%0A%20%20%20%20%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22order_date%22).mean().alias(%22order_date_mean%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22order_quantity%22).mean().alias(%22order_quantity_mean%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22product%22).mean().alias(%22product_mean%22)%2C%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20)%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22%0A%20%20%20%20return%20mean_again_code%2C%20mean_code%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mean_again_code%2C%20mean_code%2C%20mo)%3A%0A%20%20%20%20mo.accordion(%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Show%20Code%20(1)%22%3A%20mean_code%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Show%20Code%20(2)%22%3A%20mean_again_code%2C%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(demand_agg%3A%20%22pl.DataFrame%22%2C%20mo%2C%20px)%3A%0A%20%20%20%20bar_graph%20%3D%20px.bar(%0A%20%20%20%20%20%20%20%20demand_agg%2C%0A%20%20%20%20%20%20%20%20x%3D%22product_family%22%2C%0A%20%20%20%20%20%20%20%20y%3D%22order_quantity_mean%22%2C%0A%20%20%20%20%20%20%20%20title%3D%22Mean%20Quantity%20over%20Product%20Family%22%2C%0A%20%20%20%20)%0A%0A%20%20%20%20note%3A%20str%20%3D%20%22%22%22%0A%20%20%20%20Note%3A%20This%20graph%20will%20only%20show%20if%20the%20above%20mo_dataframe%20is%20correct!%0A%0A%20%20%20%20If%20you%20want%20more%20on%20interactive%20graphs%2C%20check%20out%20https%3A%2F%2Fgithub.com%2Fmarimo-team%2Flearn%2Fblob%2Fmain%2Fpolars%2F05_reactive_plots.py%0A%20%20%20%20%22%22%22%0A%0A%20%20%20%20mo.vstack(%0A%20%20%20%20%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md(note)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20bar_graph%2C%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20About%20this%20Notebook%0A%20%20%20%20Polars%20and%20Marimo%20are%20both%20relatively%20new%20to%20the%20data%20wrangling%20space%2C%20but%20their%20power%20(and%20the%20thrill%20of%20their%20use)%20cannot%20be%20overstated%E2%80%94well%2C%20I%20suppose%20it%20could%2C%20but%20you%20get%20the%20meaning.%20In%20this%20notebook%2C%20you%20learn%20how%20to%20leverage%20basic%20Polars%20skills%20to%20load-in%20and%20explore%20your%20data%20in%20concert%20with%20Marimo's%20powerful%20UI%20elements.%0A%0A%20%20%20%20%23%23%20%F0%9F%93%9A%20Documentation%20References%0A%0A%20%20%20%20-%20**Marimo%3A%20Dataframe%20Transformation%20Guide**%0A%20%20%20%20%20%20https%3A%2F%2Fdocs.marimo.io%2Fguides%2Fworking_with_data%2Fdataframes%2F%3Fh%3Ddataframe%23transforming-dataframes%0A%0A%20%20%20%20-%20**Polars%3A%20Lazy%20API%20Overview**%0A%20%20%20%20%20%20https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Flazy%2F%0A%0A%20%20%20%20-%20**Polars%3A%20Query%20Plan%20Explained**%0A%20%20%20%20%20%20https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Flazy%2Fquery-plan%2F%0A%0A%20%20%20%20-%20**Marimo%20Notebook%3A%20Basic%20Polars%20Joins%20(by%20jesshart)**%0A%20%20%20%20%20%20https%3A%2F%2Fmarimo.io%2Fp%2F%40jesshart%2Fbasic-polars-joins%0A%0A%20%20%20%20-%20**Marimo%20Learn%3A%20Interactive%20Graphs%20with%20Polars**%0A%20%20%20%20%20%20https%3A%2F%2Fgithub.com%2Fmarimo-team%2Flearn%2Fblob%2Fmain%2Fpolars%2F05_reactive_plots.py%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20polars%20as%20pl%0A%20%20%20%20import%20requests%0A%20%20%20%20import%20json%0A%20%20%20%20import%20plotly.express%20as%20px%0A%0A%20%20%20%20return%20pl%2C%20px%2C%20requests%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "cwd": "",
+            "mode": "edit",
+            "version": "0.21.1",
+            "serverToken": "unused",
+            "config": {"ai": {"custom_providers": {}, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "medium"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

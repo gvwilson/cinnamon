@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>08 debugging</title>
+    <script type="module" crossorigin src="./assets/index-0n92c_W7.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-BW0IMuFq.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-BDxNtGmi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-BoaCR37F.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-LvLJmgfZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-Bj1aDYRI.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-B3qBwwSJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-icT_Ltz2.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-hTpPIsMT.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-Dy81QR4n.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-Ej3vmCIF.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-CSu739Rf.js">
+    <link rel="modulepreload" crossorigin href="./assets/Combination-Cs9nbinQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-UxKrm8hS.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DJBpXGro.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Cm-Z7dYr.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-BE0hEwVo.js">
+    <link rel="modulepreload" crossorigin href="./assets/x-BI1M8X_v.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-CxT2Geqr.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-D9723Brr.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-Hc8CXlvz.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-C0aUZfE0.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-EYp9AUJI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-O0nX5vok.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-CQUIhlu2.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-Dx6-QZGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-CfcLlFFp.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-H_cgTO0M.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-tNbLd14P.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-BMfCOLaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-ClFZlR7U.js">
+    <link rel="modulepreload" crossorigin href="./assets/DeferredRequestRegistry-O6RDJKs0.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Rz_lD4HK.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-BrEm7qNv.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-3Aq84phF.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-Bgjtqo_1.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-CiGN2w5X.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-lmrYznmk.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-39dTX4Wi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-QS_pSfjY.js">
+    <link rel="modulepreload" crossorigin href="./assets/assertNever-DWSyoPEi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-BKEr35uH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DA9DjSPo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-BtW-rR_1.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BYXBU1of.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-CJOnx12W.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-D3x_db9Y.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-Drh7NmIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-D2lG83Oh.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B_cxg-E4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D0Vj4Kqc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtXb4bUU.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CQqv2gQL.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-8UD0A5sU.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CXLJUPFl.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNC_tnlW.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-apDpadc4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CEeVCRd_.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-0ac7Aukl.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BqKH-Jd9.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-BBn8CPhf.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-BU2qXMKx.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-OnFQK5Wu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-8AYn-wiF.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-DS_VtWMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-CO3ppIfA.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-DTWCDKdn.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-DrBRErTM.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-fq1RMGX_.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-C5JoisA7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-D0GQBpTb.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-DdPu5Kfu.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-DvKpAc6K.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-CnD1Dah5.js">
+    <link rel="modulepreload" crossorigin href="./assets/multi-map-Pp1P2DOX.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-OQZHipbB.js">
+    <link rel="modulepreload" crossorigin href="./assets/card-C-c-4jyF.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-9WfvUF7e.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-CVN1lcMF.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BhNN2V5a.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-TNNaT1M9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-B0dx2Gp0.js">
+    <link rel="modulepreload" crossorigin href="./assets/azure-BTXHztTw.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-CYnquDho.js">
+    <link rel="modulepreload" crossorigin href="./assets/SSRProvider-DC7ElCZZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-CIAP2NOh.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-DbDKSvEd.js">
+    <link rel="modulepreload" crossorigin href="./assets/usePress-BHGkpw8X.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-CUwqpKjd.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DzgPOFJ-.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-BPGG2gPG.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-CVKxYu_0.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-BhH-Mm8O.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-AcL8c6qH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-D-4ifFXh.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-Bfogio62.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-BRG6IPhC.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-YwM0Pd7v.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-Bw1ifb7c.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-DBdMgUNq.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-BfkXNxmI.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CkudG0Ej.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-dVmh0yTy.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CHAHPgkx.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-CAoNMkjq.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-qZo1ox6x.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-DPTa_EpU.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-OkOxlkkM.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BOmLQIKI.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DK1MWd7f.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-CZV6_g2i.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-CdjCA1J8.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Ba0LbbH4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-C9V-on2J.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-qEtcJ95s.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-Q_UEP94Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-F9sJtuof.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-3V5UxC3B.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-az74f3Mp.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-BgmMM9Zg.js">
+    <link rel="modulepreload" crossorigin href="./assets/html-to-image-BnSc-Wa0.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-DYwTiH9-.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-m8w66E4s.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5FQGJX7Z-CM1a_K7I.js">
+    <link rel="modulepreload" crossorigin href="./assets/katex-rvFxOCU-.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-renderer-MR9df58W.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-rfxSsiHU.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-B9_ToVd4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useRunCells-5m6jCnyo.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-DJ8khuob.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-DTN9kFDq.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-rhOJovGE.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-BO8E69bZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BGe7pJXT.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-CHaNfieI.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-OKerBHH8.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-DRbCSry7.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-D1keIaYa.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-CpE7XQLs.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-CJeRXUtp.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-BCnp9gKC.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-DKXKGKvX.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-DRUDRiy0.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-CrUXojcA.js">
+    <link rel="modulepreload" crossorigin href="./assets/process-output-CTVsT--B.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-CObhN-9g.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-DP4vAkvg.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-CBkHtTOV.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-DzHkbIdO.js">
+    <link rel="modulepreload" crossorigin href="./assets/image-DXfkah9d.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-DKSqmedg.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-DUn4LN4W.js">
+    <link rel="modulepreload" crossorigin href="./assets/isEmpty-CfmnKtgL.js">
+    <link rel="modulepreload" crossorigin href="./assets/bot-message-square-CK6eoGWy.js">
+    <link rel="modulepreload" crossorigin href="./assets/chat-display-D_Fuuy6r.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-DV8gdCvH.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B006EYFX.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-DbmSqx09.js">
+    <link rel="modulepreload" crossorigin href="./assets/ellipsis-vertical-CAB7tdza.js">
+    <link rel="modulepreload" crossorigin href="./assets/components-Bpgzv_5_.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-WsubyItX.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-RCwU-rnE.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BsV5fVR-.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-BdH_5I58.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-D5BgdrnX.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-resizable-panels.browser.esm-DDRqG5ui.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-aware-panel-CfsfBlhO.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-BvQKiC0F.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-YC7rpcmD.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-vwi9L975.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DH-1xZGq.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-headphone-B5q2Ow55.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-icons-CWLHDa1J.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-DLpfIr8v.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CrQYrsUC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-B1jGbQlH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-m1e6E3Ao.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-yyiB9aJX.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-C1RN112u.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-RrUi-pOT.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-CzkousWe.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-Bx4-SO9M.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-Be7p_si8.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-Ck7z0-tq.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BYA9UDHe.js">
+    <link rel="modulepreload" crossorigin href="./assets/code-xml-DwHPF_nL.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-DBW9RXtT.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-CxAsQQ77.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-CzQUw9rV.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-idScn0w0.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-jmgGt1lS.css">
+    <link rel="stylesheet" crossorigin href="./assets/markdown-renderer-DdDKmWlR.css">
+    <link rel="stylesheet" crossorigin href="./assets/JsonOutput-B7vuddcd.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-GjXovVsl.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">%23%20%2F%2F%2F%20script%0A%23%20requires-python%20%3D%20%22%3E%3D3.11%22%0A%23%20dependencies%20%3D%20%5B%0A%23%20%20%20%20%20%22altair%3D%3D6.0.0%22%2C%0A%23%20%20%20%20%20%22marimo%22%2C%0A%23%20%20%20%20%20%22pandas%3D%3D3.0.1%22%2C%0A%23%20%20%20%20%20%22vega_datasets%3D%3D0.9.0%22%2C%0A%23%20%5D%0A%23%20%2F%2F%2F%0A%0Aimport%20marimo%0A%0A__generated_with%20%3D%20%220.21.1%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20Altair%20Debugging%20Guide%0A%0A%20%20%20%20In%20this%20notebook%20we%20show%20you%20common%20debugging%20techniques%20that%20you%20can%20use%20if%20you%20run%20into%20issues%20with%20Altair.%0A%0A%20%20%20%20You%20can%20jump%20to%20the%20following%20sections%3A%0A%0A%20%20%20%20*%20%5BInstallation%20and%20Setup%5D(%23Installation)%20when%20Altair%20is%20not%20installed%20correctly%0A%20%20%20%20*%20%5BDisplay%20Issues%5D(%23Display-Troubleshooting)%20when%20you%20don't%20see%20a%20chart%0A%20%20%20%20*%20%5BInvalid%20Specifications%5D(%23Invalid-Specifications)%20when%20you%20get%20an%20error%0A%20%20%20%20*%20%5BProperties%20are%20Being%20Ignored%5D(%23Properties-are-Being-Ignored)%20when%20you%20don't%20see%20any%20errors%20or%20warnings%0A%20%20%20%20*%20%5BAsking%20for%20Help%5D(%23Asking-for-Help)%20when%20you%20get%20stuck%0A%20%20%20%20*%20%5BReporting%20Issues%5D(%23Reporting-Issues)%20when%20you%20find%20a%20bug%0A%0A%20%20%20%20In%20addition%20to%20this%20notebook%2C%20you%20might%20find%20the%20%5BFrequently%20Asked%20Questions%5D(https%3A%2F%2Faltair-viz.github.io%2Fuser_guide%2Ffaq.html)%20and%20%5BDisplay%20Troubleshooting%5D(https%3A%2F%2Faltair-viz.github.io%2Fuser_guide%2Ftroubleshooting.html)%20guides%20helpful.%0A%0A%20%20%20%20_This%20notebook%20is%20part%20of%20the%20%5Bdata%20visualization%20curriculum%5D(https%3A%2F%2Fgithub.com%2Fuwdata%2Fvisualization-curriculum)._%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Installation%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20These%20instructions%20follow%20%5Bthe%20Altair%20documentation%5D(https%3A%2F%2Faltair-viz.github.io%2Fgetting_started%2Finstallation.html)%20but%20focus%20on%20some%20specifics%20for%20this%20series%20of%20notebooks.%0A%0A%20%20%20%20In%20every%20notebook%2C%20we%20will%20import%20the%20%5BAltair%5D(https%3A%2F%2Fgithub.com%2Faltair-viz%2Faltair)%20and%20%5BVega%20Datasets%5D(https%3A%2F%2Fgithub.com%2Faltair-viz%2Fvega_datasets)%20packages.%20If%20you%20are%20running%20this%20notebook%20on%20%5BColab%5D(https%3A%2F%2Fcolab.research.google.com)%2C%20Altair%20and%20Vega%20Datasets%20should%20be%20preinstalled%20and%20ready%20to%20go.%20The%20notebooks%20in%20this%20series%20are%20designed%20for%20Colab%20but%20should%20also%20work%20in%20Jupyter%20Lab%20or%20the%20Jupyter%20Notebook%20(the%20notebook%20requires%20a%20bit%20more%20setup%20%5Bdescribed%20below%5D(%23Special-Setup-for-the-Jupyter-Notebook))%20but%20additional%20packages%20are%20required.%0A%0A%20%20%20%20If%20you%20are%20running%20in%20Jupyter%20Lab%20or%20Jupyter%20Notebooks%2C%20you%20have%20to%20install%20the%20necessary%20packages%20by%20running%20the%20following%20command%20in%20your%20terminal.%0A%0A%20%20%20%20%60%60%60bash%0A%20%20%20%20pip%20install%20altair%20vega_datasets%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20Or%20if%20you%20use%20%5BConda%5D(https%3A%2F%2Fconda.io)%0A%0A%20%20%20%20%60%60%60bash%0A%20%20%20%20conda%20install%20-c%20conda-forge%20altair%20vega_datasets%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20You%20can%20run%20command%20line%20commands%20from%20a%20code%20cell%20by%20prefixing%20it%20with%20%60!%60.%20For%20example%2C%20to%20install%20Altair%20and%20Vega%20Datasets%20with%20%5BPip%5D(https%3A%2F%2Fpip.pypa.io%2F)%2C%20you%20can%20run%20the%20following%20cell.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20packages%20added%20via%20marimo's%20package%20management%3A%20altair%20vega_datasets%20!pip%20install%20altair%20vega_datasets%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20altair%20as%20alt%0A%20%20%20%20from%20vega_datasets%20import%20data%0A%0A%20%20%20%20return%20alt%2C%20data%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Make%20sure%20you%20are%20Using%20the%20Latest%20Version%20of%20Altair%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20If%20you%20are%20running%20into%20issues%20with%20Altair%2C%20first%20make%20sure%20that%20you%20are%20running%20the%20latest%20version.%20To%20check%20the%20version%20of%20Altair%20that%20you%20have%20installed%2C%20run%20the%20cell%20below.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(alt)%3A%0A%20%20%20%20alt.__version__%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20To%20check%20what%20the%20latest%20version%20of%20altair%20is%2C%20go%20to%20%5Bthis%20page%5D(https%3A%2F%2Fpypi.org%2Fproject%2Faltair%2F)%20or%20run%20the%20cell%20below%20(requires%20Python%203).%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20urllib.request%2C%20json%20%0A%20%20%20%20with%20urllib.request.urlopen(%22https%3A%2F%2Fpypi.org%2Fpypi%2Faltair%2Fjson%22)%20as%20url%3A%0A%20%20%20%20%20%20%20%20print(json.loads(url.read().decode())%5B'info'%5D%5B'version'%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20If%20you%20are%20not%20running%20the%20latest%20version%2C%20you%20can%20update%20it%20with%20%60pip%60.%20You%20can%20update%20Altair%20and%20Vega%20Datasets%20by%20running%20this%20command%20in%20your%20terminal.%0A%0A%20%20%20%20%60%60%60%0A%20%20%20%20pip%20install%20-U%20altair%20vega_datasets%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Try%20Making%20a%20Chart%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Now%20you%20can%20create%20an%20Altair%20chart.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(alt%2C%20data)%3A%0A%20%20%20%20cars%20%3D%20data.cars()%0A%0A%20%20%20%20alt.Chart(cars).mark_point().encode(%0A%20%20%20%20%20%20%20%20x%3D'Horsepower'%2C%0A%20%20%20%20%20%20%20%20y%3D'Displacement'%2C%0A%20%20%20%20%20%20%20%20color%3D'Origin'%0A%20%20%20%20)%0A%20%20%20%20return%20(cars%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Special%20Setup%20for%20the%20Jupyter%20Notebook%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20If%20you%20are%20running%20in%20Jupyter%20Lab%2C%20Jupyter%20Notebook%2C%20or%20Colab%20(and%20have%20a%20working%20Internet%20connection)%20you%20should%20be%20seeing%20a%20chart.%20If%20you%20are%20running%20in%20another%20environment%20(or%20offline)%2C%20you%20will%20need%20to%20tell%20Altair%20to%20use%20a%20different%20renderer%3B%0A%0A%20%20%20%20To%20activate%20a%20different%20renderer%20in%20a%20notebook%20cell%3A%0A%0A%20%20%20%20%60%60%60python%0A%20%20%20%20%23%20to%20run%20in%20nteract%2C%20VSCode%2C%20or%20offline%20in%20JupyterLab%0A%20%20%20%20alt.renderers.enable('mimebundle')%0A%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20To%20run%20offline%20in%20Jupyter%20Notebook%20you%20must%20install%20an%20additional%20dependency%2C%20the%20%60vega%60%20package.%20Run%20this%20command%20in%20your%20terminal%3A%0A%0A%20%20%20%20%60%60%60bash%0A%20%20%20%20pip%20install%20vega%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20Then%20activate%20the%20notebook%20renderer%3A%0A%0A%20%20%20%20%60%60%60python%0A%20%20%20%20%23%20to%20run%20offline%20in%20Jupyter%20Notebook%0A%20%20%20%20alt.renderers.enable('notebook')%0A%0A%20%20%20%20%60%60%60%0A%0A%0A%20%20%20%20These%20instruction%20follow%20%5Bthe%20instructions%20on%20the%20Altair%20website%5D(https%3A%2F%2Faltair-viz.github.io%2Fgetting_started%2Finstallation.html%23installation-notebook).%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Display%20Troubleshooting%0A%0A%20%20%20%20If%20you%20are%20having%20issues%20with%20seeing%20a%20chart%2C%20make%20sure%20your%20setup%20is%20correct%20by%20following%20the%20%5Bdebugging%20instruction%20above%5D(%23Installation).%20If%20you%20are%20still%20having%20issues%2C%20follow%20the%20%5Binstruction%20about%20debugging%20display%20issues%20in%20the%20Altair%20documentation%5D(https%3A%2F%2Filiatimofeev.github.io%2Faltair-viz.github.io%2Fuser_guide%2Ftroubleshooting.html).%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Non%20Existent%20Fields%0A%0A%20%20%20%20A%20common%20error%20is%20%5Baccidentally%20using%20a%20field%20that%20does%20not%20exist%5D(https%3A%2F%2Filiatimofeev.github.io%2Faltair-viz.github.io%2Fuser_guide%2Ftroubleshooting.html%23plot-displays-but-the-content-is-empty).%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(alt)%3A%0A%20%20%20%20import%20pandas%20as%20pd%0A%0A%20%20%20%20df%20%3D%20pd.DataFrame(%7B'x'%3A%20%5B1%2C%202%2C%203%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20'y'%3A%20%5B3%2C%201%2C%204%5D%7D)%0A%0A%20%20%20%20alt.Chart(df).mark_point().encode(%0A%20%20%20%20%20%20%20%20x%3D'x%3AQ'%2C%0A%20%20%20%20%20%20%20%20y%3D'y%3AQ'%2C%0A%20%20%20%20%20%20%20%20color%3D'color%3AQ'%20%20%23%20%3C--%20this%20field%20does%20not%20exist%20in%20the%20data!%0A%20%20%20%20)%0A%20%20%20%20return%20(df%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Check%20the%20spelling%20of%20your%20files%20and%20print%20the%20data%20source%20to%20confirm%20that%20the%20data%20and%20fields%20exist.%20For%20instance%2C%20here%20you%20see%20that%20%60color%60%20is%20not%20a%20vaid%20field.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(df)%3A%0A%20%20%20%20df.head()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Invalid%20Specifications%0A%0A%20%20%20%20Another%20common%20issue%20is%20creating%20an%20invalid%20specification%20and%20getting%20an%20error.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Invalid%20Properties%0A%0A%20%20%20%20Altair%20might%20show%20an%20%60SchemaValidationError%60%20or%20%60ValueError%60.%20Read%20the%20error%20message%20carefully.%20Usually%20it%20will%20tell%20you%20what%20is%20going%20wrong.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20For%20example%2C%20if%20you%20forget%20the%20mark%20type%2C%20you%20will%20see%20this%20%60SchemaValidationError%60.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(alt%2C%20cars)%3A%0A%20%20%20%20alt.Chart(cars).encode(%0A%20%20%20%20%20%20%20%20y%3D'Horsepower'%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Or%20if%20you%20use%20a%20non-existent%20channel%2C%20you%20get%20a%20%60TypeError%60.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(alt%2C%20cars)%3A%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20alt.Chart(cars).mark_point().encode(%0A%20%20%20%20%20%20%20%20%20%20%20%20z%3D'Horsepower'%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20except%20TypeError%20as%20e%3A%0A%20%20%20%20%20%20%20%20print(f%22TypeError%3A%20%7Be%7D%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Properties%20are%20Being%20Ignored%0A%0A%20%20%20%20Altair%20might%20ignore%20a%20property%20that%20you%20specified.%20In%20the%20chart%20below%2C%20we%20are%20using%20a%20%60text%60%20channel%2C%20which%20is%20only%20compatible%20with%20%60mark_text%60.%20You%20do%20not%20see%20an%20error%20or%20a%20warning%20about%20this%20in%20the%20notebook.%20However%2C%20the%20underlying%20Vega-Lite%20library%20will%20show%20a%20warning%20in%20the%20browser%20console.%20%20Press%20%3Ckbd%3EAlt%3C%2Fkbd%3E%2B%3Ckbd%3ECmd%3C%2Fkbd%3E%2B%3Ckbd%3EI%3C%2Fkbd%3E%20on%20Mac%20or%20%3Ckbd%3EAlt%3C%2Fkbd%3E%2B%3Ckbd%3ECtrl%3C%2Fkbd%3E%2B%3Ckbd%3EI%3C%2Fkbd%3E%20on%20Windows%20and%20Linux%20to%20open%20the%20developer%20tools%20and%20click%20on%20the%20%60Console%60%20tab.%20When%20you%20run%20the%20example%20in%20the%20cell%20below%2C%20you%20will%20see%20a%20the%20following%20warning.%0A%0A%20%20%20%20%60%60%60%0A%20%20%20%20WARN%20text%20dropped%20as%20it%20is%20incompatible%20with%20%22bar%22.%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(alt%2C%20cars)%3A%0A%20%20%20%20alt.Chart(cars).mark_bar().encode(%0A%20%20%20%20%20%20%20%20y%3D'mean(Horsepower)'%2C%0A%20%20%20%20%20%20%20%20text%3D'mean(Acceleration)'%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20If%20you%20find%20yourself%20debugging%20issues%20related%20to%20Vega-Lite%2C%20you%20can%20open%20the%20chart%20in%20the%20%5BVega%20Editor%5D(https%3A%2F%2Fvega.github.io%2Feditor%2F)%20either%20by%20clicking%20on%20the%20%22Open%20in%20Vega%20Editor%22%20link%20at%20the%20bottom%20of%20the%20chart%20or%20in%20the%20action%20menu%20(click%20to%20open)%20at%20the%20top%20right%20of%20a%20chart.%20The%20Vega%20Editor%20provides%20additional%20debugging%20but%20you%20will%20be%20writing%20Vega-Lite%20JSON%20instead%20of%20Altair%20in%20Python.%0A%0A%20%20%20%20**Note**%3A%20The%20Vega%20Editor%20may%20be%20using%20a%20newer%20version%20of%20Vega-Lite%20and%20so%20the%20behavior%20may%20vary.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Asking%20for%20Help%0A%0A%20%20%20%20If%20you%20find%20a%20problem%20with%20Altair%20and%20get%20stuck%2C%20you%20can%20ask%20a%20question%20on%20Stack%20Overflow.%20Ask%20your%20question%20with%20the%20%60altair%60%20and%20%60vega-lite%60%20tags.%20You%20can%20find%20a%20list%20of%20questions%20people%20have%20asked%20before%20%5Bhere%5D(https%3A%2F%2Fstackoverflow.com%2Fquestions%2Ftagged%2Faltair).%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Reporting%20Issues%0A%0A%20%20%20%20If%20you%20find%20a%20problem%20with%20Altair%20and%20believe%20it%20is%20a%20bug%2C%20please%20%5Bcreate%20an%20issue%20in%20the%20Altair%20GitHub%20repo%5D(https%3A%2F%2Fgithub.com%2Faltair-viz%2Faltair%2Fissues%2Fnew)%20with%20a%20description%20of%20your%20problem.%20If%20you%20believe%20the%20issue%20is%20related%20to%20the%20underlying%20Vega-Lite%20library%2C%20please%20%5Bcreate%20an%20issue%20in%20the%20Vega-Lite%20GitHub%20repo%5D(https%3A%2F%2Fgithub.com%2Fvega%2Fvega-lite%2Fissues%2Fnew).%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "cwd": "",
+            "mode": "edit",
+            "version": "0.21.1",
+            "serverToken": "unused",
+            "config": {"ai": {"custom_providers": {}, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

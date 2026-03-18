@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>09 loading json</title>
+    <script type="module" crossorigin src="./assets/index-0n92c_W7.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-BW0IMuFq.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-BDxNtGmi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-BoaCR37F.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-LvLJmgfZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-Bj1aDYRI.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-B3qBwwSJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-icT_Ltz2.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-hTpPIsMT.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-Dy81QR4n.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-Ej3vmCIF.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-CSu739Rf.js">
+    <link rel="modulepreload" crossorigin href="./assets/Combination-Cs9nbinQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-UxKrm8hS.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DJBpXGro.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Cm-Z7dYr.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-BE0hEwVo.js">
+    <link rel="modulepreload" crossorigin href="./assets/x-BI1M8X_v.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-CxT2Geqr.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-D9723Brr.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-Hc8CXlvz.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-C0aUZfE0.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-EYp9AUJI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-O0nX5vok.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-CQUIhlu2.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-Dx6-QZGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-CfcLlFFp.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-H_cgTO0M.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-tNbLd14P.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-BMfCOLaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-ClFZlR7U.js">
+    <link rel="modulepreload" crossorigin href="./assets/DeferredRequestRegistry-O6RDJKs0.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Rz_lD4HK.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-BrEm7qNv.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-3Aq84phF.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-Bgjtqo_1.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-CiGN2w5X.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-lmrYznmk.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-39dTX4Wi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-QS_pSfjY.js">
+    <link rel="modulepreload" crossorigin href="./assets/assertNever-DWSyoPEi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-BKEr35uH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DA9DjSPo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-BtW-rR_1.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BYXBU1of.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-CJOnx12W.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-D3x_db9Y.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-Drh7NmIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-D2lG83Oh.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B_cxg-E4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D0Vj4Kqc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtXb4bUU.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CQqv2gQL.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-8UD0A5sU.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CXLJUPFl.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNC_tnlW.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-apDpadc4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CEeVCRd_.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-0ac7Aukl.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BqKH-Jd9.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-BBn8CPhf.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-BU2qXMKx.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-OnFQK5Wu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-8AYn-wiF.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-DS_VtWMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-CO3ppIfA.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-DTWCDKdn.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-DrBRErTM.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-fq1RMGX_.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-C5JoisA7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-D0GQBpTb.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-DdPu5Kfu.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-DvKpAc6K.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-CnD1Dah5.js">
+    <link rel="modulepreload" crossorigin href="./assets/multi-map-Pp1P2DOX.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-OQZHipbB.js">
+    <link rel="modulepreload" crossorigin href="./assets/card-C-c-4jyF.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-9WfvUF7e.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-CVN1lcMF.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BhNN2V5a.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-TNNaT1M9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-B0dx2Gp0.js">
+    <link rel="modulepreload" crossorigin href="./assets/azure-BTXHztTw.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-CYnquDho.js">
+    <link rel="modulepreload" crossorigin href="./assets/SSRProvider-DC7ElCZZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-CIAP2NOh.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-DbDKSvEd.js">
+    <link rel="modulepreload" crossorigin href="./assets/usePress-BHGkpw8X.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-CUwqpKjd.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DzgPOFJ-.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-BPGG2gPG.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-CVKxYu_0.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-BhH-Mm8O.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-AcL8c6qH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-D-4ifFXh.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-Bfogio62.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-BRG6IPhC.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-YwM0Pd7v.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-Bw1ifb7c.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-DBdMgUNq.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-BfkXNxmI.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CkudG0Ej.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-dVmh0yTy.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CHAHPgkx.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-CAoNMkjq.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-qZo1ox6x.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-DPTa_EpU.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-OkOxlkkM.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BOmLQIKI.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DK1MWd7f.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-CZV6_g2i.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-CdjCA1J8.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Ba0LbbH4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-C9V-on2J.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-qEtcJ95s.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-Q_UEP94Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-F9sJtuof.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-3V5UxC3B.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-az74f3Mp.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-BgmMM9Zg.js">
+    <link rel="modulepreload" crossorigin href="./assets/html-to-image-BnSc-Wa0.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-DYwTiH9-.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-m8w66E4s.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5FQGJX7Z-CM1a_K7I.js">
+    <link rel="modulepreload" crossorigin href="./assets/katex-rvFxOCU-.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-renderer-MR9df58W.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-rfxSsiHU.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-B9_ToVd4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useRunCells-5m6jCnyo.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-DJ8khuob.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-DTN9kFDq.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-rhOJovGE.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-BO8E69bZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BGe7pJXT.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-CHaNfieI.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-OKerBHH8.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-DRbCSry7.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-D1keIaYa.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-CpE7XQLs.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-CJeRXUtp.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-BCnp9gKC.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-DKXKGKvX.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-DRUDRiy0.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-CrUXojcA.js">
+    <link rel="modulepreload" crossorigin href="./assets/process-output-CTVsT--B.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-CObhN-9g.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-DP4vAkvg.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-CBkHtTOV.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-DzHkbIdO.js">
+    <link rel="modulepreload" crossorigin href="./assets/image-DXfkah9d.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-DKSqmedg.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-DUn4LN4W.js">
+    <link rel="modulepreload" crossorigin href="./assets/isEmpty-CfmnKtgL.js">
+    <link rel="modulepreload" crossorigin href="./assets/bot-message-square-CK6eoGWy.js">
+    <link rel="modulepreload" crossorigin href="./assets/chat-display-D_Fuuy6r.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-DV8gdCvH.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B006EYFX.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-DbmSqx09.js">
+    <link rel="modulepreload" crossorigin href="./assets/ellipsis-vertical-CAB7tdza.js">
+    <link rel="modulepreload" crossorigin href="./assets/components-Bpgzv_5_.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-WsubyItX.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-RCwU-rnE.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BsV5fVR-.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-BdH_5I58.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-D5BgdrnX.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-resizable-panels.browser.esm-DDRqG5ui.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-aware-panel-CfsfBlhO.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-BvQKiC0F.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-YC7rpcmD.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-vwi9L975.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DH-1xZGq.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-headphone-B5q2Ow55.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-icons-CWLHDa1J.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-DLpfIr8v.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CrQYrsUC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-B1jGbQlH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-m1e6E3Ao.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-yyiB9aJX.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-C1RN112u.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-RrUi-pOT.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-CzkousWe.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-Bx4-SO9M.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-Be7p_si8.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-Ck7z0-tq.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BYA9UDHe.js">
+    <link rel="modulepreload" crossorigin href="./assets/code-xml-DwHPF_nL.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-DBW9RXtT.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-CxAsQQ77.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-CzQUw9rV.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-idScn0w0.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-jmgGt1lS.css">
+    <link rel="stylesheet" crossorigin href="./assets/markdown-renderer-DdDKmWlR.css">
+    <link rel="stylesheet" crossorigin href="./assets/JsonOutput-B7vuddcd.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-GjXovVsl.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">%23%20%2F%2F%2F%20script%0A%23%20requires-python%20%3D%20%22%3E%3D3.11%22%0A%23%20dependencies%20%3D%20%5B%0A%23%20%20%20%20%20%22marimo%22%2C%0A%23%20%20%20%20%20%22duckdb%3D%3D1.4.4%22%2C%0A%23%20%20%20%20%20%22polars%5Bpyarrow%5D%3D%3D1.24.0%22%2C%0A%23%20%20%20%20%20%22sqlglot%3D%3D27.0.0%22%2C%0A%23%20%5D%0A%23%20%2F%2F%2F%0A%0Aimport%20marimo%0A%0A__generated_with%20%3D%20%220.21.1%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20Loading%20JSON%0A%0A%20%20%20%20DuckDB%20supports%20reading%20and%20writing%20JSON%20through%20the%20%60json%60%20extension%20that%20should%20be%20present%20in%20most%20distributions%20and%20is%20autoloaded%20on%20first-use.%20If%20it's%20not%2C%20you%20can%20%5Binstall%20and%20load%5D(https%3A%2F%2Fduckdb.org%2Fdocs%2Fstable%2Fdata%2Fjson%2Finstalling_and_loading.html)%20it%20manually%20like%20any%20other%20extension.%0A%0A%20%20%20%20In%20this%20tutorial%20we'll%20cover%204%20different%20ways%20we%20can%20transfer%20JSON%20data%20in%20and%20out%20of%20DuckDB%3A%0A%0A%20%20%20%20-%20%5B%60FROM%60%5D(https%3A%2F%2Fduckdb.org%2Fdocs%2Fstable%2Fsql%2Fquery_syntax%2Ffrom.html)%20statement.%0A%20%20%20%20-%20%5B%60read_json%60%5D(https%3A%2F%2Fduckdb.org%2Fdocs%2Fstable%2Fdata%2Fjson%2Floading_json%23the-read_json-function)%20function.%0A%20%20%20%20-%20%5B%60COPY%60%5D(https%3A%2F%2Fduckdb.org%2Fdocs%2Fstable%2Fsql%2Fstatements%2Fcopy%23copy--from)%20statement.%0A%20%20%20%20-%20%5B%60IMPORT%20DATABASE%60%5D(https%3A%2F%2Fduckdb.org%2Fdocs%2Fstable%2Fsql%2Fstatements%2Fexport.html)%20statement.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Using%20%60FROM%60%0A%0A%20%20%20%20Loading%20data%20using%20%60FROM%60%20is%20simple%20and%20straightforward.%20We%20use%20a%20path%20or%20URL%20to%20the%20file%20we%20want%20to%20load%20where%20we'd%20normally%20put%20a%20table%20name.%20When%20we%20do%20this%2C%20DuckDB%20attempts%20to%20infer%20the%20right%20way%20to%20read%20the%20file%20including%20the%20correct%20format%20and%20column%20types.%20In%20most%20cases%20this%20is%20all%20we%20need%20to%20load%20data%20into%20DuckDB.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20_df%20%3D%20mo.sql(%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20SELECT%20*%20FROM%20'https%3A%2F%2Fraw.githubusercontent.com%2Fvega%2Fvega-datasets%2Frefs%2Fheads%2Fmain%2Fdata%2Fcars.json'%3B%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Using%20%60read_json%60%0A%0A%20%20%20%20For%20greater%20control%20over%20how%20the%20JSON%20is%20read%2C%20we%20can%20directly%20call%20the%20%5B%60read_json%60%5D(https%3A%2F%2Fduckdb.org%2Fdocs%2Fstable%2Fdata%2Fjson%2Floading_json%23the-read_json-function)%20function.%20It%20supports%20a%20few%20different%20arguments%20%E2%80%94%20some%20common%20ones%20are%3A%0A%0A%20%20%20%20-%20%60format%3D'array'%60%20or%20%60format%3D'newline_delimited'%60%20-%20the%20former%20tells%20DuckDB%20that%20the%20rows%20should%20be%20read%20from%20a%20top-level%20JSON%20array%20while%20the%20latter%20means%20the%20rows%20should%20be%20read%20from%20JSON%20objects%20separated%20by%20a%20newline%20(JSONL%2FNDJSON).%0A%20%20%20%20-%20%60ignore_errors%3Dtrue%60%20-%20skips%20lines%20with%20parse%20errors%20when%20reading%20newline%20delimited%20JSON.%0A%20%20%20%20-%20%60columns%3D%7BcolumnName%3A%20type%2C%20...%7D%60%20-%20lets%20you%20set%20types%20for%20individual%20columns%20manually.%0A%20%20%20%20-%20%60dateformat%60%20and%20%60timestampformat%60%20-%20controls%20how%20DuckDB%20attempts%20to%20parse%20%5BDate%5D(https%3A%2F%2Fduckdb.org%2Fdocs%2Fstable%2Fsql%2Fdata_types%2Fdate)%20and%20%5BTimestamp%5D(https%3A%2F%2Fduckdb.org%2Fdocs%2Fstable%2Fsql%2Fdata_types%2Ftimestamp)%20types.%20Use%20the%20format%20specifiers%20specified%20in%20the%20%5Bdocs%5D(https%3A%2F%2Fduckdb.org%2Fdocs%2Fstable%2Fsql%2Ffunctions%2Fdateformat.html%23format-specifiers).%0A%0A%20%20%20%20We%20could%20rewrite%20the%20previous%20query%20more%20explicitly%20as%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20cars_df%20%3D%20mo.sql(%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20SELECT%20*%0A%20%20%20%20%20%20%20%20FROM%0A%20%20%20%20%20%20%20%20%20%20%20%20read_json(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20'https%3A%2F%2Fraw.githubusercontent.com%2Fvega%2Fvega-datasets%2Frefs%2Fheads%2Fmain%2Fdata%2Fcars.json'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20format%20%3D%20'array'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20columns%20%3D%20%7B%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Name%3A'VARCHAR'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Miles_per_Gallon%3A'FLOAT'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Cylinders%3A'FLOAT'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Displacement%3A'FLOAT'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Horsepower%3A'FLOAT'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Weight_in_lbs%3A'FLOAT'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Acceleration%3A'FLOAT'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Year%3A'DATE'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Origin%3A'VARCHAR'%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dateformat%20%3D%20'%25Y-%25m-%25d'%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%3B%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Other%20than%20singular%20files%20we%20can%20read%20%5Bmultiple%20files%5D(https%3A%2F%2Fduckdb.org%2Fdocs%2Fstable%2Fdata%2Fmultiple_files%2Foverview.html)%20at%20a%20time%20by%20either%20passing%20a%20list%20of%20files%20or%20a%20UNIX%20glob%20pattern.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Using%20%60COPY%60%0A%0A%20%20%20%20%60COPY%60%20is%20for%20useful%20both%20for%20importing%20and%20exporting%20data%20in%20a%20variety%20of%20formats%20including%20JSON.%20For%20example%2C%20we%20can%20import%20data%20into%20an%20existing%20table%20from%20a%20JSON%20file.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20_df%20%3D%20mo.sql(%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20CREATE%20OR%20REPLACE%20TABLE%20cars2%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20Name%20VARCHAR%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20Miles_per_Gallon%20VARCHAR%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20Cylinders%20VARCHAR%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20Displacement%20FLOAT%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20Horsepower%20FLOAT%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20Weight_in_lbs%20FLOAT%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20Acceleration%20FLOAT%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20Year%20DATE%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20Origin%20VARCHAR%0A%20%20%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(cars2%2C%20mo)%3A%0A%20%20%20%20_df%20%3D%20mo.sql(%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20COPY%20cars2%20FROM%20'https%3A%2F%2Fraw.githubusercontent.com%2Fvega%2Fvega-datasets%2Frefs%2Fheads%2Fmain%2Fdata%2Fcars.json'%20(FORMAT%20json%2C%20ARRAY%20true%2C%20DATEFORMAT%20'%25Y-%25m-%25d')%3B%0A%20%20%20%20%20%20%20%20SELECT%20*%20FROM%20cars2%3B%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Similarly%2C%20we%20can%20write%20data%20from%20a%20table%20or%20select%20statement%20to%20a%20JSON%20file.%20For%20example%2C%20we%20create%20a%20new%20JSONL%20file%20with%20just%20the%20car%20names%20and%20miles%20per%20gallon.%20We%20first%20create%20a%20temporary%20directory%20to%20avoid%20cluttering%20our%20project%20directory.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(Path)%3A%0A%20%20%20%20from%20tempfile%20import%20TemporaryDirectory%0A%0A%20%20%20%20TMP_DIR%20%3D%20TemporaryDirectory()%0A%20%20%20%20COPY_PATH%20%3D%20Path(TMP_DIR.name)%20%2F%20%22cars_mpg.jsonl%22%0A%20%20%20%20print(COPY_PATH)%0A%20%20%20%20return%20COPY_PATH%2C%20TMP_DIR%0A%0A%0A%40app.cell%0Adef%20_(COPY_PATH%2C%20cars2%2C%20mo)%3A%0A%20%20%20%20_df%20%3D%20mo.sql(%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20COPY%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20SELECT%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Name%20AS%20car_name%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Miles_per_Gallon%22%20AS%20mpg%20%0A%20%20%20%20%20%20%20%20%20%20%20%20FROM%20cars2%20%0A%20%20%20%20%20%20%20%20%20%20%20%20WHERE%20mpg%20IS%20NOT%20null%0A%20%20%20%20%20%20%20%20)%20TO%20'%7BCOPY_PATH%7D'%20(FORMAT%20json)%3B%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(COPY_PATH%2C%20Path)%3A%0A%20%20%20%20Path(COPY_PATH).exists()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Using%20%60IMPORT%20DATABASE%60%0A%0A%20%20%20%20The%20last%20method%20we%20can%20use%20to%20load%20JSON%20data%20is%20using%20the%20%60IMPORT%20DATABASE%60%20statement.%20It%20works%20in%20conjunction%20with%20%60EXPORT%20DATABASE%60%20to%20save%20and%20load%20an%20entire%20database%20to%20and%20from%20a%20directory.%20For%20example%20let's%20try%20and%20export%20our%20default%20in-memory%20database.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(Path%2C%20TMP_DIR)%3A%0A%20%20%20%20EXPORT_PATH%20%3D%20Path(TMP_DIR.name)%20%2F%20%22cars_export%22%0A%20%20%20%20print(EXPORT_PATH)%0A%20%20%20%20return%20(EXPORT_PATH%2C)%0A%0A%0A%40app.cell%0Adef%20_(EXPORT_PATH%2C%20mo)%3A%0A%20%20%20%20_df%20%3D%20mo.sql(%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20EXPORT%20DATABASE%20'%7BEXPORT_PATH%7D'%20(FORMAT%20json)%3B%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(EXPORT_PATH%2C%20Path)%3A%0A%20%20%20%20list(Path(EXPORT_PATH).iterdir())%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20We%20can%20then%20load%20the%20database%20back%20into%20DuckDB.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(EXPORT_PATH%2C%20mo)%3A%0A%20%20%20%20_df%20%3D%20mo.sql(%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20DROP%20TABLE%20IF%20EXISTS%20cars2%3B%0A%20%20%20%20%20%20%20%20IMPORT%20DATABASE%20'%7BEXPORT_PATH%7D'%3B%0A%20%20%20%20%20%20%20%20SELECT%20*%20FROM%20cars2%3B%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(TMP_DIR)%3A%0A%20%20%20%20TMP_DIR.cleanup()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Further%20Reading%0A%0A%20%20%20%20-%20Complete%20information%20on%20the%20JSON%20support%20in%20DuckDB%20can%20be%20found%20in%20their%20%5Bdocumentation%5D(https%3A%2F%2Fduckdb.org%2Fdocs%2Fstable%2Fdata%2Fjson%2Foverview.html).%0A%20%20%20%20-%20You%20can%20also%20learn%20more%20about%20using%20SQL%20in%20marimo%20from%20the%20%5Bexamples%5D(https%3A%2F%2Fgithub.com%2Fmarimo-team%2Fmarimo%2Ftree%2Fmain%2Fexamples%2Fsql).%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20from%20pathlib%20import%20Path%0A%0A%20%20%20%20return%20Path%2C%20mo%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "cwd": "",
+            "mode": "edit",
+            "version": "0.21.1",
+            "serverToken": "unused",
+            "config": {"ai": {"custom_providers": {}, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "medium"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

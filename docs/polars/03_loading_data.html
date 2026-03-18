@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>03 loading data</title>
+    <script type="module" crossorigin src="./assets/index-0n92c_W7.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-BW0IMuFq.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-BDxNtGmi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-BoaCR37F.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-LvLJmgfZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-Bj1aDYRI.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-B3qBwwSJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-icT_Ltz2.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-hTpPIsMT.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-Dy81QR4n.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-Ej3vmCIF.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-CSu739Rf.js">
+    <link rel="modulepreload" crossorigin href="./assets/Combination-Cs9nbinQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-UxKrm8hS.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DJBpXGro.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Cm-Z7dYr.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-BE0hEwVo.js">
+    <link rel="modulepreload" crossorigin href="./assets/x-BI1M8X_v.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-CxT2Geqr.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-D9723Brr.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-Hc8CXlvz.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-C0aUZfE0.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-EYp9AUJI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-O0nX5vok.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-CQUIhlu2.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-Dx6-QZGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-CfcLlFFp.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-H_cgTO0M.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-tNbLd14P.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-BMfCOLaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-ClFZlR7U.js">
+    <link rel="modulepreload" crossorigin href="./assets/DeferredRequestRegistry-O6RDJKs0.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Rz_lD4HK.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-BrEm7qNv.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-3Aq84phF.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-Bgjtqo_1.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-CiGN2w5X.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-lmrYznmk.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-39dTX4Wi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-QS_pSfjY.js">
+    <link rel="modulepreload" crossorigin href="./assets/assertNever-DWSyoPEi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-BKEr35uH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DA9DjSPo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-BtW-rR_1.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BYXBU1of.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-CJOnx12W.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-D3x_db9Y.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-Drh7NmIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-D2lG83Oh.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B_cxg-E4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D0Vj4Kqc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtXb4bUU.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CQqv2gQL.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-8UD0A5sU.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CXLJUPFl.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNC_tnlW.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-apDpadc4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CEeVCRd_.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-0ac7Aukl.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BqKH-Jd9.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-BBn8CPhf.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-BU2qXMKx.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-OnFQK5Wu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-8AYn-wiF.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-DS_VtWMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-CO3ppIfA.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-DTWCDKdn.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-DrBRErTM.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-fq1RMGX_.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-C5JoisA7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-D0GQBpTb.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-DdPu5Kfu.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-DvKpAc6K.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-CnD1Dah5.js">
+    <link rel="modulepreload" crossorigin href="./assets/multi-map-Pp1P2DOX.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-OQZHipbB.js">
+    <link rel="modulepreload" crossorigin href="./assets/card-C-c-4jyF.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-9WfvUF7e.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-CVN1lcMF.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BhNN2V5a.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-TNNaT1M9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-B0dx2Gp0.js">
+    <link rel="modulepreload" crossorigin href="./assets/azure-BTXHztTw.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-CYnquDho.js">
+    <link rel="modulepreload" crossorigin href="./assets/SSRProvider-DC7ElCZZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-CIAP2NOh.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-DbDKSvEd.js">
+    <link rel="modulepreload" crossorigin href="./assets/usePress-BHGkpw8X.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-CUwqpKjd.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DzgPOFJ-.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-BPGG2gPG.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-CVKxYu_0.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-BhH-Mm8O.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-AcL8c6qH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-D-4ifFXh.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-Bfogio62.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-BRG6IPhC.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-YwM0Pd7v.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-Bw1ifb7c.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-DBdMgUNq.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-BfkXNxmI.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CkudG0Ej.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-dVmh0yTy.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CHAHPgkx.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-CAoNMkjq.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-qZo1ox6x.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-DPTa_EpU.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-OkOxlkkM.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BOmLQIKI.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DK1MWd7f.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-CZV6_g2i.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-CdjCA1J8.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Ba0LbbH4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-C9V-on2J.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-qEtcJ95s.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-Q_UEP94Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-F9sJtuof.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-3V5UxC3B.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-az74f3Mp.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-BgmMM9Zg.js">
+    <link rel="modulepreload" crossorigin href="./assets/html-to-image-BnSc-Wa0.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-DYwTiH9-.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-m8w66E4s.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5FQGJX7Z-CM1a_K7I.js">
+    <link rel="modulepreload" crossorigin href="./assets/katex-rvFxOCU-.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-renderer-MR9df58W.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-rfxSsiHU.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-B9_ToVd4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useRunCells-5m6jCnyo.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-DJ8khuob.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-DTN9kFDq.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-rhOJovGE.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-BO8E69bZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BGe7pJXT.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-CHaNfieI.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-OKerBHH8.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-DRbCSry7.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-D1keIaYa.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-CpE7XQLs.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-CJeRXUtp.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-BCnp9gKC.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-DKXKGKvX.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-DRUDRiy0.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-CrUXojcA.js">
+    <link rel="modulepreload" crossorigin href="./assets/process-output-CTVsT--B.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-CObhN-9g.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-DP4vAkvg.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-CBkHtTOV.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-DzHkbIdO.js">
+    <link rel="modulepreload" crossorigin href="./assets/image-DXfkah9d.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-DKSqmedg.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-DUn4LN4W.js">
+    <link rel="modulepreload" crossorigin href="./assets/isEmpty-CfmnKtgL.js">
+    <link rel="modulepreload" crossorigin href="./assets/bot-message-square-CK6eoGWy.js">
+    <link rel="modulepreload" crossorigin href="./assets/chat-display-D_Fuuy6r.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-DV8gdCvH.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B006EYFX.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-DbmSqx09.js">
+    <link rel="modulepreload" crossorigin href="./assets/ellipsis-vertical-CAB7tdza.js">
+    <link rel="modulepreload" crossorigin href="./assets/components-Bpgzv_5_.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-WsubyItX.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-RCwU-rnE.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BsV5fVR-.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-BdH_5I58.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-D5BgdrnX.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-resizable-panels.browser.esm-DDRqG5ui.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-aware-panel-CfsfBlhO.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-BvQKiC0F.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-YC7rpcmD.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-vwi9L975.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DH-1xZGq.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-headphone-B5q2Ow55.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-icons-CWLHDa1J.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-DLpfIr8v.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CrQYrsUC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-B1jGbQlH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-m1e6E3Ao.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-yyiB9aJX.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-C1RN112u.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-RrUi-pOT.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-CzkousWe.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-Bx4-SO9M.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-Be7p_si8.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-Ck7z0-tq.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BYA9UDHe.js">
+    <link rel="modulepreload" crossorigin href="./assets/code-xml-DwHPF_nL.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-DBW9RXtT.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-CxAsQQ77.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-CzQUw9rV.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-idScn0w0.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-jmgGt1lS.css">
+    <link rel="stylesheet" crossorigin href="./assets/markdown-renderer-DdDKmWlR.css">
+    <link rel="stylesheet" crossorigin href="./assets/JsonOutput-B7vuddcd.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-GjXovVsl.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">%23%20%2F%2F%2F%20script%0A%23%20requires-python%20%3D%20%22%3E%3D3.12%22%0A%23%20dependencies%20%3D%20%5B%0A%23%20%20%20%20%20%22duckdb%3D%3D1.4.4%22%2C%0A%23%20%20%20%20%20%22lxml%3D%3D6.0.0%22%2C%0A%23%20%20%20%20%20%22marimo%22%2C%0A%23%20%20%20%20%20%22pandas%3D%3D2.3.2%22%2C%0A%23%20%20%20%20%20%22polars%3D%3D1.24.0%22%2C%0A%23%20%20%20%20%20%22pyarrow%3D%3D22.0.0%22%2C%0A%23%20%20%20%20%20%22sqlalchemy%3D%3D2.0.45%22%2C%0A%23%20%5D%0A%23%20%2F%2F%2F%0A%0Aimport%20marimo%0A%0A__generated_with%20%3D%20%220.21.1%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20Loading%20Data%0A%0A%20%20%20%20_By%20%5Betrotta%5D(https%3A%2F%2Fgithub.com%2Fetrotta)._%0A%0A%20%20%20%20This%20tutorial%20covers%20how%20to%20load%20data%20of%20varying%20formats%20and%20from%20different%20sources%20using%20%5Bpolars%5D(https%3A%2F%2Fdocs.pola.rs%2F).%0A%0A%20%20%20%20It%20includes%20examples%20of%20how%20to%20load%20and%20write%20to%20a%20variety%20of%20formats%2C%20shows%20how%20to%20convert%20data%20from%20other%20libraries%20to%20support%20formats%20not%20supported%20directly%20by%20polars%2C%20includes%20relevant%20links%20for%20users%20that%20need%20to%20connect%20with%20external%20sources%2C%20and%20explains%20how%20to%20deal%20with%20custom%20formats%20via%20plugins.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo%2C%20pl)%3A%0A%20%20%20%20df%20%3D%20pl.DataFrame(%0A%20%20%20%20%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%22format%22%3A%20%22Parquet%22%2C%20%22lazy%22%3A%20True%2C%20%22notes%22%3A%20None%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%22format%22%3A%20%22CSV%22%2C%20%22lazy%22%3A%20True%2C%20%22notes%22%3A%20None%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22format%22%3A%20%22Databases%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22lazy%22%3A%20False%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22notes%22%3A%20%22Requires%20another%20library%20as%20an%20Engine%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22format%22%3A%20%22Excel%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22lazy%22%3A%20False%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22notes%22%3A%20%22Requires%20another%20library%20as%20an%20Engine%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22format%22%3A%20%22Newline-delimited%20JSON%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22lazy%22%3A%20True%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22notes%22%3A%20None%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22format%22%3A%20%22Traditional%20JSON%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22lazy%22%3A%20False%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22notes%22%3A%20None%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%22format%22%3A%20%22Arrow%22%2C%20%22lazy%22%3A%20False%2C%20%22notes%22%3A%20%22You%20can%20load%20XML%20and%20HTML%20files%20via%20pandas%22%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%22format%22%3A%20%22Plugins%22%2C%20%22lazy%22%3A%20True%2C%20%22notes%22%3A%20%22The%20most%20flexible%2C%20but%20takes%20some%20effort%20to%20implement%22%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%22format%22%3A%20%22Feather%20%2F%20IPC%22%2C%20%22lazy%22%3A%20True%2C%20%22notes%22%3A%20None%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%22format%22%3A%20%22Avro%22%2C%20%22lazy%22%3A%20False%2C%20%22notes%22%3A%20None%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%22format%22%3A%20%22Delta%22%2C%20%22lazy%22%3A%20True%2C%20%22notes%22%3A%20%22No%20Lazy%20writing%22%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%22format%22%3A%20%22Iceberg%22%2C%20%22lazy%22%3A%20True%2C%20%22notes%22%3A%20%22No%20Lazy%20writing%22%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20orient%3D%22rows%22%2C%0A%20%20%20%20)%0A%20%20%20%20mo.vstack(%0A%20%20%20%20%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.ui.table(df%2C%20label%3D%22Quick%20Reference%22%2C%20pagination%3DFalse)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22We%20will%20also%20use%20this%20table%20to%20demonstrate%20writing%20and%20reading%20to%20each%20format%22%2C%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20)%0A%20%20%20%20return%20(df%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Parquet%0A%20%20%20%20Parquet%20is%20a%20popular%20format%20for%20storing%20tabular%20data%20based%20on%20the%20Arrow%20memory%20spec%2C%20it%20is%20a%20great%20default%20and%20you'll%20find%20a%20lot%20of%20datasets%20already%20using%20it%20in%20sites%20like%20HuggingFace%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(df%2C%20folder%2C%20pl)%3A%0A%20%20%20%20df.write_parquet(folder%20%2F%20%22data.parquet%22)%20%20%23%20Eager%20API%20-%20Writing%20to%20a%20file%0A%20%20%20%20_%20%3D%20pl.read_parquet(folder%20%2F%20%22data.parquet%22)%20%20%23%20Eager%20API%20-%20Reading%20from%20a%20file%0A%20%20%20%20lz%20%3D%20pl.scan_parquet(folder%20%2F%20%22data.parquet%22)%20%20%23%20Lazy%20API%20-%20Reading%20from%20a%20file%0A%20%20%20%20lz.sink_parquet(folder%20%2F%20%22data_copy.parquet%22)%20%20%23%20Lazy%20API%20-%20Writing%20to%20a%20file%0A%20%20%20%20return%20(lz%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20CSV%0A%20%20%20%20A%20classic%20and%20common%20format%20that%20has%20been%20widely%20used%20for%20decades.%0A%0A%20%20%20%20The%20API%20is%20almost%20identical%20to%20Parquet%20-%20You%20can%20just%20replace%20%60parquet%60%20by%20%60csv%60%20and%20it%20will%20work%20with%20the%20default%20settings%2C%20but%20polars%20also%20allows%20for%20you%20to%20customize%20some%20settings%20such%20as%20the%20delimiter%20and%20quoting%20rules.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(df%2C%20folder%2C%20lz%2C%20pl)%3A%0A%20%20%20%20lz.sink_csv(folder%20%2F%20%22data.csv%22)%20%20%23%20Lazy%20API%20-%20Writing%20to%20a%20file%0A%20%20%20%20df.write_csv(folder%20%2F%20%22data_no_head.csv%22%2C%20include_header%3DFalse%2C%20separator%3D%22%3B%22)%20%20%23%20Eager%20API%20-%20Writing%20to%20a%20file%0A%0A%20%20%20%20_%20%3D%20pl.scan_csv(folder%20%2F%20%22data.csv%22)%20%20%23%20Lazy%20API%20-%20Reading%20from%20a%20file%0A%20%20%20%20_%20%3D%20pl.read_csv(folder%20%2F%20%22data_no_head.csv%22%2C%20has_header%3DFalse%2C%20separator%3D%22%3B%22)%20%20%23%20Eager%20API%20-%20Reading%20from%20a%20file%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20JSON%0A%0A%20%20%20%20JavaScript%20Object%20Notation%20is%20somewhat%20commonly%20used%20for%20storing%20unstructed%20data%2C%20and%20extremely%20commonly%20used%20for%20API%20responses.%0A%0A%20%20%20%20For%20large%20datasets%20you'll%20frequently%20see%20a%20variation%20in%20which%20each%20line%20in%20the%20file%20defines%20one%20separate%20object%2C%20called%20%22Newline%20delimited%20JSON%22%20(%60ndjson%60)%20or%20%22JSON%20Lines%22%20(%60jsonl%60)%0A%0A%20%20%20%20%2F%2F%2F%20Note%0A%0A%20%20%20%20%20%20%20%20It's%20a%20lot%20more%20common%20to%20find%20Nested%20data%20in%20JSON%20than%20in%20other%20formats%2C%20but%20other%20formats%20such%20as%20Parquet%20also%20support%20nested%20datatypes.%0A%0A%20%20%20%20%20%20%20%20Polars%20supports%20Lists%20with%20variable%20length%2C%20Arrays%20with%20fixed%20length%2C%20and%20Structs%20with%20well%20defined%20fields%2C%20but%20not%20mappings%20with%20arbitrary%20keys.%0A%0A%20%20%20%20%20%20%20%20You%20might%20want%20to%20transform%20data%20by%20unnesting%20structs%20and%20exploding%20lists%20after%20loading%20from%20complex%20JSON%20files.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(df%2C%20folder%2C%20lz%2C%20pl)%3A%0A%20%20%20%20%23%20Newline%20Delimited%20JSON%0A%20%20%20%20lz.sink_ndjson(folder%20%2F%20%22data.ndjson%22)%20%20%23%20Lazy%20API%20-%20Writing%20to%20a%20file%0A%20%20%20%20df.write_ndjson(folder%20%2F%20%22data.ndjson%22)%20%20%23%20Eager%20API%20-%20Writing%20to%20a%20file%0A%0A%20%20%20%20_%20%3D%20pl.scan_ndjson(folder%20%2F%20%22data.ndjson%22)%20%20%23%20Lazy%20API%20-%20Reading%20from%20a%20file%0A%20%20%20%20_%20%3D%20pl.read_ndjson(folder%20%2F%20%22data.ndjson%22)%20%20%23%20Eager%20API%20-%20Reading%20from%20a%20file%0A%0A%20%20%20%20%23%20Normal%20JSON%0A%20%20%20%20df.write_json(folder%20%2F%20%22data.json%22)%20%20%23%20Eager%20API%20-%20Writing%20to%20a%20file%0A%20%20%20%20_%20%3D%20pl.read_json(folder%20%2F%20%22data.json%22)%20%20%23%20Eager%20API%20-%20Reading%20from%20a%20file%0A%0A%20%20%20%20%23%20Note%20that%20there%20are%20no%20Lazy%20methods%20for%20normal%20JSON%20files%2C%0A%20%20%20%20%23%20either%20use%20NDJSON%20instead%20or%20use%20%60lz.collect().write_json()%60%20to%20collect%20into%20memory%20before%20writing%2C%20and%20%60pl.read_json().lazy()%60%20to%20read%20into%20memory%20before%20operating%20in%20lazy%20mode%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Databases%0A%0A%20%20%20%20Polars%20doesn't%20supports%20any%20databases%20_directly_%2C%20but%20rather%20uses%20other%20libraries%20as%20Engines.%20Reading%20and%20writing%20to%20databases%20using%20polars%20methods%20does%20not%20supports%20Lazy%20execution%2C%20but%20you%20may%20pass%20an%20SQL%20Query%20for%20the%20database%20to%20pre-filter%20the%20data%20before%20reaches%20polars.%20See%20the%20%5BUser%20Guide%5D(https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Fio%2Fdatabase)%20%20for%20more%20details.%0A%0A%20%20%20%20You%20can%20also%20use%20other%20libraries%20with%20%5Barrow%20support%5D(%23arrow-support)%20or%20%5Bpolars%20plugins%5D(%23plugin-support)%20to%20read%20from%20databases%20before%20loading%20into%20polars%2C%20some%20of%20which%20support%20lazy%20reading.%0A%0A%20%20%20%20Using%20DuckDB%20as%20an%20example%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(df%2C%20duckdb%2C%20folder)%3A%0A%20%20%20%20conn%20%3D%20duckdb.connect(str(folder%20%2F%20%22db.duckdb%22))%0A%20%20%20%20conn.register(%22df_polars%22%2C%20df)%0A%20%20%20%20conn.execute(%22CREATE%20OR%20REPLACE%20TABLE%20quick_reference%20AS%20SELECT%20*%20FROM%20df_polars%22)%0A%0A%20%20%20%20query%20%3D%20%22%22%22SELECT%20*%20FROM%20quick_reference%20WHERE%20format%20LIKE%20'%25Database%25'%22%22%22%0A%20%20%20%20conn.sql(query).pl()%0A%20%20%20%20return%20(conn%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Excel%0A%0A%20%20%20%20From%20a%20performance%20perspective%2C%20we%20recommend%20using%20other%20formats%20if%20possible%2C%20such%20as%20Parquet%20or%20CSV%20files.%0A%0A%20%20%20%20Similarly%20to%20Databases%2C%20polars%20doesn't%20supports%20it%20natively%20but%20rather%20uses%20other%20libraries%20as%20Engines.%20See%20the%20%5BUser%20Guide%5D(https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Fio%2Fexcel)%20if%20you%20need%20to%20use%20it.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Others%20natively%20supported%0A%0A%20%20%20%20If%20you%20understood%20the%20above%20examples%2C%20then%20all%20other%20formats%20should%20feel%20familiar%20-%20the%20core%20API%20is%20the%20same%20for%20all%20formats%2C%20%60read%60%20and%20%60write%60%20for%20the%20Eager%20API%20or%20%60scan%60%20and%20%60sink%60%20for%20the%20lazy%20API.%0A%0A%20%20%20%20See%20https%3A%2F%2Fdocs.pola.rs%2Fapi%2Fpython%2Fstable%2Freference%2Fio.html%20for%20the%20full%20list%20of%20formats%20natively%20supported%20by%20Polars%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Arrow%20Support%0A%0A%20%20%20%20You%20can%20convert%20Arrow%20compatible%20data%20from%20other%20libraries%20such%20as%20%60pandas%60%2C%20%60duckdb%60%20or%20%60pyarrow%60%20to%20polars%20DataFrames%20and%20vice-versa%2C%20much%20of%20the%20time%20without%20even%20having%20to%20copy%20data.%0A%0A%20%20%20%20This%20allows%20for%20you%20to%20use%20other%20libraries%20to%20load%20data%20in%20formats%20not%20support%20by%20polars%2C%20then%20convert%20the%20dataframe%20in-memory%20to%20polars.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(df%2C%20folder%2C%20pd%2C%20pl)%3A%0A%20%20%20%20%23%20XML%20Example%20using%20%60pandas%60%20read_xml()%20and%20to_xml()%20methods%0A%20%20%20%20df.to_pandas().to_xml(folder%20%2F%20%22data.xml%22)%0A%20%20%20%20pandas_df%20%3D%20pd.read_xml(folder%20%2F%20%22data.xml%22)%0A%20%20%20%20_%20%3D%20pl.from_pandas(pandas_df)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Plugin%20Support%0A%0A%20%20%20%20You%20can%20also%20write%20%5BIO%20Plugins%5D(https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Fplugins%2Fio_plugins%2F)%20for%20Polars%20in%20order%20to%20support%20any%20format%20you%20need%2C%20or%20use%20other%20libraries%20that%20support%20polars%20via%20their%20own%20plugins%20such%20as%20DuckDB.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(conn)%3A%0A%20%20%20%20%23%20Requires%20duckdb%20%3E%3D%201.4.0%0A%20%20%20%20conn.sql(%22SELECT%20*%20FROM%20quick_reference%22).pl(lazy%3DTrue)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Creating%20your%20own%20Plugin%0A%0A%20%20%20%20The%20simplest%20form%20of%20plugins%20are%20essentially%20generators%20that%20yield%20DataFrames.%0A%0A%20%20%20%20Without%20parsing%20filters%20you%20will%20be%20missing%20on%20performance%20improvements%2C%20but%20even%20just%20this%20can%20help%20improve%20your%20performance%20in%20many%20cases%20as%20it%20allows%20for%20polars%20to%20optimize%20the%20query%20and%20request%20data%20in%20batches%20as%20opposed%20to%20always%20loading%20everything%20in%20memory.%0A%0A%20%20%20%20Below%20is%20a%20example%20plugin%20which%20just%20takes%20the%20product%20between%20multiple%20iterables%2C%20some%20highlights%20are%20that%3A%0A%0A%20%20%20%20-%20You%20must%20use%20%60register_io_source%60%20for%20polars%20to%20create%20the%20LazyFrame%20which%20will%20consume%20the%20Generator%0A%20%20%20%20-%20You%20are%20expected%20to%20provide%20a%20Schema%20before%20the%20Generator%20starts%0A%20%20%20%20-%20-%20For%20many%20use%20cases%20the%20Plugin%20may%20be%20able%20to%20infer%20it%2C%20but%20you%20could%20also%20pass%20it%20explicitly%20to%20the%20plugin%20function%0A%20%20%20%20-%20Ideally%20you%20should%20parse%20some%20of%20the%20filters%20and%20column%20selectors%20to%20avoid%20unnecessary%20work%2C%20but%20it%20is%20possible%20to%20delegate%20that%20to%20polars%20after%20loading%20the%20data%20in%20order%20to%20keep%20it%20simpler%20(at%20the%20cost%20of%20efficiency)%0A%0A%20%20%20%20Efficiently%20parsing%20the%20filter%20expressions%20is%20out%20of%20the%20scope%20for%20this%20notebook.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(my_custom_input_plugin)%3A%0A%20%20%20%20my_custom_input_plugin(int%2C%20range(3)%2C%20range(5))%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(my_custom_input_plugin%2C%20pl)%3A%0A%20%20%20%20my_custom_input_plugin(bool%2C%20%5BTrue%2C%20False%5D%2C%20%5BTrue%2C%20False%5D).with_columns(%0A%20%20%20%20%20%20%20%20(pl.col(%22A%22)%20%26%20pl.col(%22B%22)).alias(%22AND%22)%2C%0A%20%20%20%20%20%20%20%20(pl.col(%22A%22)%20%26%20pl.col(%22B%22)).not_().alias(%22NAND%22)%2C%0A%20%20%20%20%20%20%20%20(pl.col(%22A%22)%20%7C%20pl.col(%22B%22)).alias(%22OR%22)%2C%0A%20%20%20%20%20%20%20%20(pl.col(%22A%22)%20%5E%20pl.col(%22B%22)).alias(%22XOR%22)%2C%0A%20%20%20%20).collect()%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(Iterator%2C%20get_positional_names%2C%20itertools%2C%20pl%2C%20register_io_source)%3A%0A%20%20%20%20def%20my_custom_input_plugin(dtype%2C%20*iterables)%20-%3E%20pl.LazyFrame%3A%0A%20%20%20%20%20%20%20%20schema%20%3D%20pl.Schema(%7Bkey%3A%20dtype%20for%20key%20in%20get_positional_names(len(iterables))%7D)%0A%0A%20%20%20%20%20%20%20%20def%20source_generator(%0A%20%20%20%20%20%20%20%20%20%20%20%20with_columns%3A%20list%5Bstr%5D%20%7C%20None%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20predicate%3A%20pl.Expr%20%7C%20None%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20n_rows%3A%20int%20%7C%20None%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20batch_size%3A%20int%20%7C%20None%2C%0A%20%20%20%20%20%20%20%20)%20-%3E%20Iterator%5Bpl.DataFrame%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20Generator%20function%20that%20creates%20the%20source.%0A%20%20%20%20%20%20%20%20%20%20%20%20This%20function%20will%20be%20registered%20as%20IO%20source.%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20batch_size%20is%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20batch_size%20%3D%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20n_rows%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20batch_size%20%3D%20min(batch_size%2C%20n_rows)%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20generator%20%3D%20itertools.product(*iterables)%0A%20%20%20%20%20%20%20%20%20%20%20%20while%20n_rows%20is%20None%20or%20n_rows%20%3E%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20rows%20%3D%20%5B%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20while%20len(rows)%20%3C%20batch_size%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20rows.append(next(generator))%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20except%20StopIteration%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20n_rows%20%3D%20-1%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20df%20%3D%20pl.from_records(rows%2C%20schema%3Dschema%2C%20orient%3D%22row%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20n_rows%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20n_rows%20-%3D%20df.height%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20batch_size%20%3D%20min(batch_size%2C%20n_rows)%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20If%20we%20would%20make%20a%20performant%20reader%2C%20we%20would%20not%20read%20these%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20columns%20at%20all.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20with_columns%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20df%20%3D%20df.select(with_columns)%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20If%20the%20source%20supports%20predicate%20pushdown%2C%20the%20expression%20can%20be%20parsed%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20to%20skip%20rows%2Fgroups.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20predicate%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20df%20%3D%20df.filter(predicate)%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20yield%20df%0A%0A%20%20%20%20%20%20%20%20return%20register_io_source(io_source%3Dsource_generator%2C%20schema%3Dschema)%0A%0A%20%20%20%20return%20(my_custom_input_plugin%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20DuckDB%0A%0A%20%20%20%20As%20demonstrated%20above%2C%20in%20addition%20to%20Arrow%20interoperability%20support%2C%20%5BDuckDB%5D(https%3A%2F%2Fduckdb.org%2F)%20also%20has%20added%20support%20for%20loading%20query%20results%20into%20a%20polars%20DataFrame%20or%20LazyFrame%20via%20a%20polars%20plugin.%0A%0A%20%20%20%20You%20can%20read%20more%20about%20polars%20and%20duckdb%20integrations%20in%0A%0A%20%20%20%20-%20https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Fecosystem%2F%23duckdb%0A%20%20%20%20-%20https%3A%2F%2Fduckdb.org%2Fdocs%2Fstable%2Fguides%2Fpython%2Fpolars.html%0A%0A%20%20%20%20You%20can%20learn%20more%20about%20DuckDB%20in%20the%20marimo%20course%20about%20it%20as%20well%2C%20including%20Marimo%20SQL%20related%20features%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Amazing%20if%20you%20need%20of%20features%20not%20yet%20supported%20by%20Polars%20such%20as%20geospatial%20data%0A%20%20%20%20duckdb_query%20%3D%20%22%22%22%0A%20%20%20%20%20%20%20%20SELECT%20%0A%20%20%20%20%20%20%20%20%20%20%20%20id%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20ST_X(geometry)%20as%20longitude%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20ST_Y(geometry)%20as%20latitude%0A%20%20%20%20%20%20%20%20FROM%20locations%0A%20%20%20%20%22%22%22%0A%20%20%20%20return%20(duckdb_query%2C)%0A%0A%0A%40app.cell%0Adef%20_(duckdb_conn%2C%20duckdb_query)%3A%0A%20%20%20%20%23%20Eager%20(default)%3A%0A%20%20%20%20duckdb_conn.sql(duckdb_query).pl()%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(duckdb_conn%2C%20duckdb_query)%3A%0A%20%20%20%20%23%20Lazy%20(requires%20%3E%3D%201.4.0)%3A%0A%20%20%20%20duckdb_conn.sql(duckdb_query).pl(lazy%3DTrue)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Hive%20Partitions%0A%0A%20%20%20%20There%20is%20also%20support%20for%20%5BHive%5D(https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Fio%2Fhive%2F)%20partitioned%20data%2C%20but%20parts%20of%20the%20API%20are%20still%20unstable%20(may%20change%20in%20future%20polars%20versions%0A%20%20%20%20).%0A%0A%20%20%20%20Even%20without%20using%20partitions%2C%20many%20methods%20also%20support%20glob%20patterns%20to%20read%20multiple%20files%20in%20the%20same%20folder%20such%20as%20%60scan_csv(folder%20%2F%20%22*.csv%22)%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(df%2C%20folder%2C%20pl)%3A%0A%20%20%20%20df.write_parquet(str((folder%20%2F%20%22hive%22).resolve())%20%2B%20%22%2F%22%2C%20partition_by%3D%5B%22lazy%22%5D)%0A%20%20%20%20_%20%3D%20pl.scan_parquet(str((folder%20%2F%20%22hive%22).resolve())%20%2B%20%22%2F%22).filter(pl.col(%22lazy%22).eq(True)).collect()%0A%0A%20%20%20%20print(*(folder%20%2F%20%22hive%22).rglob(%22*.parquet%22)%2C%20sep%3D%22%5Cn%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20Reading%20from%20the%20Cloud%0A%0A%20%20%20%20Polars%20also%20has%20support%20for%20reading%20public%20and%20private%20datasets%20from%20multiple%20websites%0A%20%20%20%20and%20cloud%20storage%20solutions.%0A%0A%20%20%20%20If%20you%20must%20(re)use%20the%20same%20file%20many%20times%20in%20the%20same%20machine%20you%20may%20want%20to%20manually%20download%20it%20then%20load%20from%20your%20local%20file%20system%20instead%20to%20avoid%20re-downloading%20though%2C%20or%20download%20and%20write%20to%20disk%20only%20if%20the%20file%20does%20not%20exists.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Arbitrary%20web%20sites%0A%0A%20%20%20%20You%20can%20load%20files%20from%20nearly%20any%20website%20just%20by%20using%20a%20HTTPS%20URL%2C%20as%20long%20as%20it%20is%20not%20locked%20behind%20authorization.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(disabled%3DTrue)%0Adef%20_()%3A%0A%20%20%20%20%23%20df%20%3D%20pl.read_csv('https%3A%2F%2Fexample.com%2Ffile.csv')%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Hugging%20Face%20%26%20Kaggle%20Datasets%0A%0A%20%20%20%20Look%20for%20polars%20inside%20of%20dropdowns%20such%20as%20%22Use%20this%20dataset%22%20in%20Hugging%20Face%20or%20%22Code%22%20in%20Kaggle%2C%20and%20oftentimes%20you'll%20get%20a%20snippet%20to%20load%20data%20directly%20into%20a%20dataframe%20you%20can%20use%0A%0A%20%20%20%20Read%20more%3A%20%5BHugging%20Face%5D(https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Fio%2Fhugging-face%2F)%2C%20%5BKaggle%5D(https%3A%2F%2Fgithub.com%2FKaggle%2Fkagglehub%2Fblob%2Fmain%2FREADME.md%23kaggledatasetadapterpolars)%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(disabled%3DTrue)%0Adef%20_()%3A%0A%20%20%20%20%23%20df%20%3D%20pl.read_parquet('hf%3A%2F%2Fdatasets%2Fusername%2Fdataset%2F*.parquet')%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Cloud%20Storage%20-%20AWS%20S3%2C%20Azure%20Blob%20Storage%2C%20Google%20Cloud%20Storage%0A%0A%20%20%20%20The%20API%20is%20the%20same%20for%20all%20three%20storage%20providers%2C%20check%20the%20%5BUser%20Guide%5D(https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Fio%2Fcloud-storage%2F)%20if%20you%20need%20of%20any%20of%20them.%0A%0A%20%20%20%20Runnable%20examples%20are%20not%20included%20in%20this%20Notebook%20as%20it%20would%20require%20setting%20up%20authentication%2C%20but%20the%20disabled%20cell%20below%20shows%20an%20example%20using%20Azure.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(disabled%3DTrue)%0Adef%20_(adlfs%2C%20df%2C%20os%2C%20pl)%3A%0A%20%20%20%20fs%20%3D%20adlfs.AzureBlobFileSystem(connection_string%3Dos.environ%5B%22AZURE_STORAGE_CONNECTION_STRING%22%5D)%0A%20%20%20%20destination%20%3D%20f%22abfs%3A%2F%2F%7Bos.environ%5B'AZURE_CONTAINER_NAME'%5D%7D%2Ffile.parquet%22%0A%0A%20%20%20%20%23%20Writing%0A%20%20%20%20with%20fs.open(destination%2C%20mode%3D%22wb%22)%20as%20f%3A%0A%20%20%20%20%20%20%20%20df.write_parquet(f)%0A%0A%20%20%20%20%23%20Reading%0A%20%20%20%20pl.read_parquet(%0A%20%20%20%20%20%20%20%20destination%2C%20storage_options%3D%7B%22account_name%22%3A%20os.environ%5B%22AZURE_STORAGE_ACCOUNT%22%5D%2C%20%22use_azure_cli%22%3A%20%22True%22%7D%0A%20%20%20%20)%0A%0A%20%20%20%20%23%20Deleting%0A%20%20%20%20fs.delete(destination)%0A%0A%20%20%20%20%23%20If%20you%20get%20an%20error%20saying%20that%20the%20account%20does%20not%20exists%2C%20double%20check%20you%20logged%20in%20the%20correct%20account%20and%20subscription%20via%20%60az%20login%60%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20Multiplexing%0A%0A%20%20%20%20You%20can%20also%20split%20a%20query%20into%20multiple%20sinks%20via%20%5Bmultiplexing%5D(https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Flazy%2Fmultiplexing%2F)%2C%20to%20avoid%20reading%20multiple%20times%2C%20repeating%20the%20same%20operations%20for%20each%20sink%20or%20collecting%20intermediary%20results%20into%20memory.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(folder%2C%20lz%2C%20pl)%3A%0A%20%20%20%20lz2%20%3D%20lz.with_columns(pl.col(pl.String).str.to_uppercase())%0A%20%20%20%20lz3%20%3D%20lz.with_columns(pl.col(pl.String).str.to_lowercase())%0A%0A%20%20%20%20%23%20Collecting%20multiple%20LazyFrames%20into%20memory%0A%20%20%20%20_df%2C%20_df2%2C%20_df3%20%3D%20pl.collect_all(%5Blz%2C%20lz2%2C%20lz3%5D)%0A%0A%20%20%20%20%23%20Sinking%20multiple%20LazyFrames%20into%20different%20destinations%0A%20%20%20%20sinks%20%3D%20%5B%0A%20%20%20%20%20%20%20%20lz.sink_csv(folder%20%2F%20%22data_1.csv%22%2C%20lazy%3DTrue)%2C%0A%20%20%20%20%20%20%20%20lz2.sink_csv(folder%20%2F%20%22data_2.csv%22%2C%20lazy%3DTrue)%2C%0A%20%20%20%20%20%20%20%20lz3.sink_csv(folder%20%2F%20%22data_3.csv%22%2C%20lazy%3DTrue)%2C%0A%20%20%20%20%5D%0A%20%20%20%20_%20%3D%20pl.collect_all(sinks)%0A%20%20%20%20return%20(sinks%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20Async%20Execution%0A%0A%20%20%20%20Polars%20also%20has%20experimental%20support%20for%20running%20lazy%20queries%20in%20%60async%60%20mode%2C%20letting%20you%20%60await%60%20operations%20inside%20of%20async%20functions.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Aasync%20def%20_(lz)%3A%0A%20%20%20%20await%20lz.collect_async()%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Aasync%20def%20_(folder%2C%20lz%2C%20pl%2C%20sinks)%3A%0A%20%20%20%20%23%20If%20you%20want%20to%20write%20to%20a%20file%2C%20use%20%60lz.sink_format(lazy%3DTrue)%60%20followed%20by%20%60...collect_async()%60%20or%20%60pl.collect_all_async(...)%60%0A%20%20%20%20_%20%3D%20await%20lz.sink_csv(folder%20%2F%20%22data_from_async.csv%22%2C%20lazy%3DTrue).collect_async()%0A%20%20%20%20_%20%3D%20await%20pl.collect_all_async(sinks)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Conclusion%0A%20%20%20%20As%20you%20have%20seen%2C%20polars%20makes%20it%20easy%20to%20work%20with%20a%20variety%20of%20formats%20and%20different%20data%20sources.%0A%0A%20%20%20%20From%20natively%20supported%20formats%20such%20as%20Parquet%20and%20CSV%20files%2C%20to%20using%20other%20libraries%20as%20an%20intermediary%20for%20XML%20or%20geospatial%20data%2C%20and%20plugins%20for%20newly%20emerging%20or%20proprietary%20formats%2C%20as%20long%20as%20your%20data%20can%20fit%20in%20a%20table%20then%20odds%20are%20you%20can%20turn%20it%20into%20a%20polars%20DataFrame.%0A%0A%20%20%20%20Combined%20with%20loading%20directly%20from%20remote%20sources%2C%20including%20public%20data%20platforms%20such%20as%20Hugging%20Face%20and%20Kaggle%20as%20well%20as%20private%20data%20in%20your%20cloud%2C%20you%20can%20import%20datasets%20for%20almost%20anything%20you%20can%20imagine.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Utilities%0A%20%20%20%20Imports%2C%20utility%20functions%20and%20alike%20used%20through%20the%20Notebook%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(disabled%3DTrue)%0Adef%20_()%3A%0A%20%20%20%20%23%20You%20may%20need%20to%20install%20%60fsspec%20%60%20and%20%60adlfs%20%60%20beyond%20the%20dependencies%20included%20in%20the%20notebook%0A%20%20%20%20import%20os%0A%20%20%20%20import%20adlfs%0A%0A%20%20%20%20return%20adlfs%2C%20os%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20pathlib%0A%20%20%20%20import%20tempfile%0A%0A%20%20%20%20folder%20%3D%20pathlib.Path(tempfile.mkdtemp())%0A%20%20%20%20folder%0A%20%20%20%20return%20(folder%2C)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20math%0A%20%20%20%20import%20string%0A%20%20%20%20import%20itertools%0A%20%20%20%20from%20typing%20import%20Iterator%0A%0A%20%20%20%20return%20Iterator%2C%20itertools%2C%20string%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20polars%20as%20pl%0A%20%20%20%20import%20pandas%20as%20pd%0A%20%20%20%20from%20polars.io.plugins%20import%20register_io_source%0A%20%20%20%20import%20duckdb%0A%0A%20%20%20%20return%20duckdb%2C%20pd%2C%20pl%2C%20register_io_source%0A%0A%0A%40app.cell%0Adef%20_(itertools%2C%20string)%3A%0A%20%20%20%20def%20get_positional_names(count%3A%20int)%20-%3E%20list%5Bstr%5D%3A%0A%20%20%20%20%20%20%20%20out%20%3D%20%5B%5D%0A%20%20%20%20%20%20%20%20size%20%3D%200%0A%20%20%20%20%20%20%20%20while%20True%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20size%20%2B%3D%201%20%20%23%20number%20of%20characters%20in%20each%20column%20name%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20column%20in%20itertools.product(*itertools.repeat(string.ascii_uppercase%2C%20size))%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20len(out)%20%3E%3D%20count%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20out%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20out.append(%22%22.join(column))%0A%0A%20%20%20%20return%20(get_positional_names%2C)%0A%0A%0A%40app.cell%0Adef%20_(duckdb)%3A%0A%20%20%20%20%23%20Connect%20to%20an%20ephemeral%20in-memory%20DuckDB%20database%0A%20%20%20%20duckdb_conn%20%3D%20duckdb.connect(%22%3Amemory%3A%22)%0A%0A%20%20%20%20%23%20Install%20and%20load%20the%20spatial%20extension%20for%20geometry%20support%0A%20%20%20%20duckdb_conn.install_extension(%22spatial%22)%0A%20%20%20%20duckdb_conn.load_extension(%22spatial%22)%0A%0A%20%20%20%20%23%20Create%20a%20table%20with%20geometry%20column%0A%20%20%20%20duckdb_conn.sql(%22%22%22%0A%20%20%20%20%20%20%20%20CREATE%20TABLE%20locations%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20id%20INTEGER%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%20VARCHAR%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20geometry%20GEOMETRY%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%22%22%22)%0A%0A%20%20%20%20%23%20Insert%20some%20sample%20data%20with%20geometry%20points%0A%20%20%20%20duckdb_conn.sql(%22%22%22%0A%20%20%20%20%20%20%20%20INSERT%20INTO%20locations%20VALUES%0A%20%20%20%20%20%20%20%20(1%2C%20'New%20York'%2C%20ST_Point(-74.0059%2C%2040.7128))%2C%0A%20%20%20%20%20%20%20%20(2%2C%20'Los%20Angeles'%2C%20ST_Point(-118.2437%2C%2034.0522))%2C%0A%20%20%20%20%20%20%20%20(3%2C%20'Chicago'%2C%20ST_Point(-87.6298%2C%2041.8781))%2C%0A%20%20%20%20%20%20%20%20(4%2C%20'Houston'%2C%20ST_Point(-95.3698%2C%2029.7604))%2C%0A%20%20%20%20%20%20%20%20(5%2C%20'Phoenix'%2C%20ST_Point(-112.0740%2C%2033.4484))%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%20(duckdb_conn%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "cwd": "",
+            "mode": "edit",
+            "version": "0.21.1",
+            "serverToken": "unused",
+            "config": {"ai": {"custom_providers": {}, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "medium"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>05 reactive plots</title>
+    <script type="module" crossorigin src="./assets/index-DyRdaW9o.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-TXkS1QI3.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-A78R3nYl.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-d_A4rA-x.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-LvLJmgfZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-Bj1aDYRI.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-B3qBwwSJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-CP2fAiZX.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-CNBv2dAU.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-CjXriKgk.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-BmOH9agK.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-CSu739Rf.js">
+    <link rel="modulepreload" crossorigin href="./assets/Combination-tjZP3FH6.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-Bs2e3wuf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CIU0Lack.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-BvP5LBIs.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-BnZGcuDh.js">
+    <link rel="modulepreload" crossorigin href="./assets/x-yqLqiq5Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DygbgNTD.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-DOQlecCr.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BhMe50aT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-BGESiCQL.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BU8KB_Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-WUlsM6MC.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-awXiPaF0.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-BkJc8lDE.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-DnJbrtRQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-H_cgTO0M.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-CORJ8yYa.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-D2igisxY.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-ImXS-885.js">
+    <link rel="modulepreload" crossorigin href="./assets/DeferredRequestRegistry-CMZsNx4R.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-CdR60lKM.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-DnMOyddG.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-D9X9QKiL.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-DZy_SQ_v.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-BGkTcW3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-DlRqgfqz.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-39dTX4Wi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-QS_pSfjY.js">
+    <link rel="modulepreload" crossorigin href="./assets/assertNever-Dw9aFN4h.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-BKEr35uH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-BDXC6oVR.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-BY4jV7Yb.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-CwdqVOYu.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-DRC4SgqY.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-CeYo4YI0.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-BcTiTw8T.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-bMgYkaP2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DUY6xZX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D89dID68.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CU-Ty5ht.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BjtLy-VA.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-odxAaH5Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Dq_iQ08e.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DfBASypd.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-51xFOPFs.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CEQIJ2pn.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-FMMSUPAS.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-DDAiY7kz.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-CPplrWRQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-CVt8hZ5L.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-DuoFhI7N.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-GB_lFVaq.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-DIo_1hTm.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-D8CkpJG7.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Cl1doThW.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-B3efE3T2.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-Cmx6WhDY.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-CCtxWKxf.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-DCSoZZhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-_z3dkNFy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-CKhrfxsx.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CVbqSkT8.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-BJEd-iA7.js">
+    <link rel="modulepreload" crossorigin href="./assets/multi-map-kCmlVJ-5.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-0YTlkh9P.js">
+    <link rel="modulepreload" crossorigin href="./assets/card-WPBELA1S.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DsNfSYaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-BXzvlof-.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BTEPE6IB.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-DmqkEXI4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BUC67G8E.js">
+    <link rel="modulepreload" crossorigin href="./assets/azure-Ddr1pZpW.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-44Cj1Me-.js">
+    <link rel="modulepreload" crossorigin href="./assets/SSRProvider-DC7ElCZZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-B1_BdDTF.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-DMA_kIIZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/usePress-DsLftN-x.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-BPldEXfy.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-BKV6zi_7.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-Cvl9xY6R.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-tdkZNn4k.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-FXVKPW36.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-DVm0BCFt.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-Bfogio62.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-R2OkQKR0.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-DMCkK2TI.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-BCOZVFBt.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-6uJrSKbw.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-irHJCpFh.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CAR4dOiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-B-s-VRHt.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-DeCFDX1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-DtQaB9NM.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-n1-FF7zs.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-C3Y44M85.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-OkOxlkkM.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BOmLQIKI.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DK1MWd7f.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-CZV6_g2i.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-D_HRHf_c.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-dVj6GVNE.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-jGxNsOWc.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-CRNJOvqT.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-B59Kn5nL.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-B2Fl6iYU.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-D2jTOQOG.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-B0ZtYqUC.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-6RnnFDPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/html-to-image-b9BimK8l.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-ShrwcKIv.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-BdX_Y5NA.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5FQGJX7Z-BJDu6jwt.js">
+    <link rel="modulepreload" crossorigin href="./assets/katex-rvFxOCU-.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-renderer-B6a5ZAwT.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-DQqqP-WF.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-BTm4CTKr.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-qh-NzTWO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-T3alJPda.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-C3K3rlAZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-DBqDb4Nb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-D3F4nmET.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-CzBDvj6R.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-8VTEe-0T.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-aq1t6BkR.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-D7FeWASw.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-CmtFqjqu.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BGa3qZre.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CeILsq6V.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BSyDxU0G.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-BAfiIxKf.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-B9sHgc9n.js">
+    <link rel="modulepreload" crossorigin href="./assets/process-output-4yip1nZE.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-CObhN-9g.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-Dxmp_Bd_.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-BQUzYly2.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-DVwc11C3.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-D4Tdvkms.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai--4VOMvH8.js">
+    <link rel="modulepreload" crossorigin href="./assets/isEmpty-9KlyX4nB.js">
+    <link rel="modulepreload" crossorigin href="./assets/bot-message-square-BzawfL5p.js">
+    <link rel="modulepreload" crossorigin href="./assets/chat-display-Co6iGNSx.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-F2DZENgf.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-4zY5Dv0P.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-Be-iRLAY.js">
+    <link rel="modulepreload" crossorigin href="./assets/components-CF9x5raB.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-BQP0K_pZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-BhEcsHTu.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BlB0Ba6E.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-sD4fbzpH.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-BEHvSeoM.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-resizable-panels.browser.esm-RgA6v8U3.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-aware-panel-D7ygyp92.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-BWK_nLJy.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-BRlAqdmq.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-DgTL09j7.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DmjbJYSq.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-Fa5c_iPb.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-code-D9wtWSiR.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-DFiYrN2w.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-BOzRCrXK.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-B7_NRa34.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-DGtw6Lae.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-eWwLICkT.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-D1hTncYV.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-BhvWC48z.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-DRf51_gT.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-1hBRXVlM.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-Dzwrcr75.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-C_qcB35v.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-36rMhJTw.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BeVScbIo.js">
+    <link rel="modulepreload" crossorigin href="./assets/code-xml-BMv1Dtd2.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-BG-iMGgV.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-oV8Csj8Y.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-DD8FJvQ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-_LzfhNmX.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-jmgGt1lS.css">
+    <link rel="stylesheet" crossorigin href="./assets/markdown-renderer-DdDKmWlR.css">
+    <link rel="stylesheet" crossorigin href="./assets/JsonOutput-B7vuddcd.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrPzoH7F.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">%23%20%2F%2F%2F%20script%0A%23%20requires-python%20%3D%20%22%3E%3D3.10%22%0A%23%20dependencies%20%3D%20%5B%0A%23%20%20%20%20%20%22marimo%22%2C%0A%23%20%20%20%20%20%22numpy%3D%3D2.4.3%22%2C%0A%23%20%20%20%20%20%22plotly%5Bexpress%5D%3D%3D6.3.0%22%2C%0A%23%20%20%20%20%20%22polars%3D%3D1.24.0%22%2C%0A%23%20%20%20%20%20%22statsmodels%3D%3D0.14.5%22%2C%0A%23%20%5D%0A%23%20%2F%2F%2F%0A%0Aimport%20marimo%0A%0A__generated_with%20%3D%20%220.20.4%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%20Reactive%20Plots%0A%0A%20%20%20%20_By%20%5Betrotta%5D(https%3A%2F%2Fgithub.com%2Fetrotta)._%0A%0A%20%20%20%20This%20tutorial%20covers%20Data%20Visualisation%20basics%20using%20marimo%2C%20%5Bpolars%5D(https%3A%2F%2Fdocs.pola.rs%2F)%20and%20%5Bplotly%5D(https%3A%2F%2Fplotly.com%2Fpython%2Fplotly-express%2F).%0A%20%20%20%20It%20shows%20how%20to%20load%20data%2C%20explore%20and%20visualise%20it%2C%20then%20use%20User%20Interface%20elements%20(including%20the%20plots%20themselves)%20to%20filter%20and%20select%20data%20for%20more%20refined%20analysis.%0A%0A%20%20%20%20We%20will%20be%20using%20a%20%5BSpotify%20Tracks%20dataset%5D(https%3A%2F%2Fhuggingface.co%2Fdatasets%2Fmaharshipandya%2Fspotify-tracks-dataset).%20Before%20you%20write%20any%20code%20yourself%2C%20I%20recommend%20taking%20some%20time%20to%20understand%20the%20data%20you're%20working%20with%2C%20from%20which%20columns%20are%20available%20to%20what%20are%20their%20possible%20values%2C%20as%20well%20as%20more%20abstract%20details%20such%20as%20the%20scope%2C%20coverage%20and%20intended%20uses%20of%20the%20dataset.%0A%0A%20%20%20%20Note%20that%20this%20dataset%20does%20not%20contains%20data%20about%20***all***%20%20tracks%2C%20you%20can%20try%20using%20a%20larger%20dataset%20such%20as%20%5Bbigdata-pw%2FSpotify%5D(https%3A%2F%2Fhuggingface.co%2Fdatasets%2Fbigdata-pw%2FSpotify)%2C%20but%20I'm%20sticking%20with%20the%20smaller%20one%20to%20keep%20the%20notebook%20size%20manageable%20for%20most%20users.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(pl)%3A%0A%20%20%20%20%23%20You%20can%20read%20directly%20from%20the%20Hugging%20Face%20dataset%2C%20in%20which%20case%20polars%20will%20only%20read%20the%20necessary%20data%3A%0A%20%20%20%20repo_id%2C%20branch%2C%20file_path%20%3D%20(%0A%20%20%20%20%20%20%20%20%22maharshipandya%2Fspotify-tracks-dataset%22%2C%0A%20%20%20%20%20%20%20%20%22~parquet%22%2C%0A%20%20%20%20%20%20%20%20%22default%2Ftrain%2F0000.parquet%22%2C%0A%20%20%20%20)%0A%20%20%20%20URL%20%3D%20f%22hf%3A%2F%2Fdatasets%2F%7Brepo_id%7D%40%7Bbranch%7D%2F%7Bfile_path%7D%22%0A%20%20%20%20lz%20%3D%20pl.scan_parquet(URL)%0A%20%20%20%20%23%20Or%20save%20to%20a%20local%20file%20first%20if%20you%20want%20to%20avoid%20downloading%20it%20each%20time%20you%20run%3A%0A%20%20%20%20%23%20file_path%20%3D%20%22spotify-tracks.parquet%22%0A%20%20%20%20%23%20lz%20%3D%20pl.scan_parquet(file_path)%0A%20%20%20%20return%20(lz%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20You%20should%20always%20take%20a%20look%20at%20the%20data%20you%20are%20working%20on%20before%20actually%20doing%20any%20operations%20on%20it%20-%20for%20data%20coming%20from%20sources%20such%20as%20HuggingFace%20or%20Kaggle%20you%20can%20preview%20it%20via%20their%20websites%2C%20and%20optionally%20filter%20or%20do%20some%20transformations%20before%20downloading.%0A%0A%20%20%20%20The%20%5BPolars%20Lazy%20API%5D(https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Flazy%2F)%20allows%20for%20you%20define%20operations%20before%20loading%20the%20data%2C%20and%20polars%20will%20optimize%20the%20plan%20in%20order%20to%20avoid%20doing%20unnecessary%20operations%20or%20loading%20data%20we%20do%20not%20care%20about.%0A%0A%20%20%20%20Let's%20say%20that%20looking%20at%20the%20dataset's%20preview%20in%20the%20Data%20Viewer%2C%20we%20decided%20we%20do%20not%20want%20the%20Unnamed%20column%20(which%20appears%20to%20be%20the%20row%20index)%2C%20nor%20do%20we%20care%20about%20the%20original%20ID%2C%20and%20we%20only%20want%20non-explicit%20tracks.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(lz%2C%20pl)%3A%0A%20%20%20%20df%20%3D%20(%0A%20%20%20%20%20%20%20%20lz%0A%20%20%20%20%20%20%20%20%23%20Filter%20data%20we%20consider%20relevant%20(somewhat%20arbitrary%20in%20this%20example)%0A%20%20%20%20%20%20%20%20.filter(pl.col(%22explicit%22)%20%3D%3D%20False)%0A%20%20%20%20%20%20%20%20.drop(%22Unnamed%3A%200%22%2C%20%22track_id%22%2C%20%22explicit%22)%0A%20%20%20%20%20%20%20%20.with_columns(%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Perform%20whichever%20transformations%20you%20want%20%20(again%20somewhat%20arbitrary%20in%20this%20example)%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Convert%20the%20duration%20from%20milliseconds%20to%20seconds%20(int)%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22duration_ms%22).floordiv(1_000).alias(%22duration_seconds%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Convert%20the%20popularity%20from%20an%20integer%200%20~%20100%20to%20a%20percentage%200%20~%201.0%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22popularity%22).truediv(100)%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%23%20lastly%2C%20download%20(if%20needed)%20and%20collect%20into%20memory%0A%20%20%20%20%20%20%20%20.collect()%0A%20%20%20%20)%0A%20%20%20%20df%0A%20%20%20%20return%20(df%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20When%20you%20start%20exploring%20a%20dataset%2C%20some%20of%20the%20first%20things%20to%20do%20may%20include%3A%0A%0A%20%20%20%20-%20investigating%20any%20values%20that%20seem%20weird%0A%20%20%20%20-%20verifying%20if%20there%20could%20be%20issues%20in%20the%20data%0A%20%20%20%20-%20checking%20for%20potential%20bugs%20in%20our%20pipelines%0A%20%20%20%20-%20ensuring%20you%20understand%20the%20data%20correctly%2C%20including%20its%20relationships%20and%20edge%20cases%0A%0A%20%20%20%20For%20example%2C%20the%20%22min%22%20value%20for%20the%20duration%20column%20is%20zero%2C%20and%20the%20max%20is%20over%20an%20hour.%20Why%20is%20that%3F%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(disabled%3DTrue)%0Adef%20_(df%2C%20pl)%3A%0A%20%20%20%20%23%20We%20*could*%20just%20filter%20some%20of%20the%20rows%20and%20look%20at%20them%20as%20a%20table%2C%20for%20example...%0A%20%20%20%20pl.concat(%5Bdf.sort(%22duration_ms%22).head(5)%2C%20df.sort(%22duration_ms%22%2C%20descending%3DTrue).head(5)%5D)%0A%20%20%20%20%23%20But%20creating%20a%20visualisation%20for%20this%20helps%20paint%20the%20full%20picture%20of%20how%20the%20data%20is%20distributed%2C%20rather%20than%20focusing%20*only*%20on%20some%20outiers%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20For%20this%20Notebook%20we%20will%20be%20using%20%5Bplotly%5D(https%3A%2F%2Fplotly.com%2Fpython)%2C%20but%20Marimo%20also%20%5Bsupports%20other%20plotting%20libraries%5D(https%3A%2F%2Fdocs.marimo.io%2Fguides%2Fworking_with_data%2Fplotting%2F).%0A%0A%20%20%20%20Let's%20visualize%20it%20using%20a%20%5Bbar%20chart%5D(https%3A%2F%2Fplotly.com%2Fpython%2Fbar-charts%2F)%20and%20get%20a%20feel%20for%20which%20region%20makes%20sense%20to%20focus%20on%20for%20our%20analysis%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(df%2C%20mo%2C%20px)%3A%0A%20%20%20%20duration_counts%20%3D%20df.group_by(%22duration_seconds%22).len(%22count%22)%0A%20%20%20%20fig%20%3D%20px.bar(duration_counts%2C%20x%3D%22duration_seconds%22%2C%20y%3D%22count%22)%0A%20%20%20%20fig.update_layout(selectdirection%3D%22h%22)%0A%20%20%20%20plot%20%3D%20mo.ui.plotly(fig)%0A%20%20%20%20plot%0A%20%20%20%20return%20(plot%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20Note%20how%20there%20are%20a%20few%20outliers%20with%20extremely%20little%20duration%20(less%20than%202%20minutes)%20and%20a%20few%20with%20extremely%20long%20duration%20(more%20than%206%20minutes)%0A%0A%20%20%20%20You%20can%20select%20a%20region%20in%20the%20graph%20by%20clicking%20and%20dragging%2C%20which%20can%20later%20be%20used%20to%20filter%20or%20transform%20data.%20In%20this%20Notebook%20we%20set%20a%20default%20if%20there%20is%20no%20selection%2C%20but%20you%20should%20try%20selecting%20a%20region%20yourself.%0A%0A%20%20%20%20We%20will%20focus%20on%20those%20within%20that%20middle%20ground%20from%20around%20120%20seconds%20to%20360%20seconds%2C%20but%20you%20can%20play%20around%20with%20it%20a%20bit%20and%20see%20how%20the%20results%20change%20if%20you%20move%20the%20Selection%20region.%20Perhaps%20you%20can%20even%20find%20some%20Classical%20songs%3F%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(pl%2C%20plot)%3A%0A%20%20%20%20%23%20The%20format%20of%20plot.value%20may%20vary%20depending%20on%20which%20kind%20of%20plot%20you%20are%20working%20with%2C%20let's%20see%20what%20we%20have%20for%20this%20case%3A%0A%20%20%20%20pl.DataFrame(plot.value)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(df%2C%20pl%2C%20plot)%3A%0A%20%20%20%20%23%20Now%2C%20we%20want%20to%20filter%20to%20only%20include%20tracks%20whose%20duration%20falls%20inside%20of%20our%20selection%20-%20we%20will%20need%20to%20first%20identify%20the%20extremes%2C%20then%20filter%20based%20on%20them%0A%20%20%20%20min_dur%2C%20max_dur%20%3D%20get_extremes(%0A%20%20%20%20%20%20%20%20plot.value%2C%20col%3D%22duration_seconds%22%2C%20defaults_if_missing%3D(120%2C%20360)%0A%20%20%20%20)%20%20%23%20Utility%20function%20defined%20in%20the%20bottom%20of%20the%20Notebook%0A%20%20%20%20%23%20Calculate%20how%20many%20we%20are%20keeping%20vs%20throwing%20away%20with%20the%20filter%0A%20%20%20%20duration_in_range%20%3D%20pl.col(%22duration_seconds%22).is_between(min_dur%2C%20max_dur)%0A%20%20%20%20print(%0A%20%20%20%20%20%20%20%20f%22Filtering%20to%20keep%20rows%20between%20%7Bmin_dur%7Ds%20and%20%7Bmax_dur%7Ds%20duration%20-%20Throwing%20away%20%7Bdf.select(1%20-%20duration_in_range.mean()).item()%3A.2%25%7D%20of%20the%20rows%22%0A%20%20%20%20)%0A%0A%20%20%20%20%23%20Actually%20apply%20the%20filter%0A%20%20%20%20filtered_duration%20%3D%20df.filter(duration_in_range)%0A%20%20%20%20filtered_duration%0A%20%20%20%20return%20(filtered_duration%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Now%20that%20our%20data%20is%20'clean'%2C%20let's%20start%20coming%20up%20with%20and%20answering%20some%20questions%20about%20it.%20Some%20examples%3A%0A%0A%20%20%20%20-%20Which%20tracks%20or%20artists%20are%20the%20most%20popular%3F%20(Both%20globally%20as%20well%20as%20for%20each%20genre)%0A%20%20%20%20-%20Which%20genres%20are%20the%20most%20popular%3F%20The%20loudest%3F%0A%20%20%20%20-%20What%20are%20some%20common%20combinations%20of%20different%20artists%3F%0A%20%20%20%20-%20What%20can%20we%20infer%20anything%20based%20on%20the%20track's%20title%20or%20artist%20name%3F%0A%20%20%20%20-%20How%20popular%20is%20some%20specific%20song%20you%20like%3F%0A%20%20%20%20-%20How%20much%20does%20the%20mode%20and%20key%20affect%20other%20attributes%3F%0A%20%20%20%20-%20Can%20you%20classify%20a%20song's%20genre%20based%20on%20its%20attributes%3F%0A%0A%20%20%20%20For%20brevity%2C%20we%20will%20not%20explore%20all%20of%20them%20-%20feel%20free%20to%20try%20some%20of%20the%20others%20yourself%2C%20or%20go%20more%20in%20deep%20in%20the%20explored%20ones.%0A%20%20%20%20Make%20sure%20to%20come%20up%20with%20some%20questions%20of%20your%20own%20and%20explore%20them%20as%20well!%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(filter_genre%2C%20filtered_duration%2C%20mo%2C%20pl)%3A%0A%20%20%20%20most_popular_artists%20%3D%20(%0A%20%20%20%20%20%20%20%20filtered_duration.lazy()%0A%20%20%20%20%20%20%20%20%23%20If%20you%20saw%20the%20Dataset%20description%20or%20looked%20closely%20at%20the%20Artists%20column%20you%20may%20notice%20there%20are%20some%20rows%20with%20multiple%20artists%20separated%20by%20%3B%3B.%20We%20will%20have%20to%20separate%20each%20of%20these.%0A%20%20%20%20%20%20%20%20.with_columns(pl.col(%22artists%22).str.split(%22%3B%22))%0A%20%20%20%20%20%20%20%20%23%20Similarly%20to%20the%20utility%20function%20you%20saw%20before%2C%20filter_genre%20is%20also%20defined%20in%20a%20later%20cell.%0A%20%20%20%20%20%20%20%20%23%20While%20developing%2C%20you%20can%20add%20things%20out%20of%20order%20then%20go%20back%20to%20old%20cells%20and%20edit%20them%0A%20%20%20%20%20%20%20%20%23%20it's%20up%20to%20you%20whenever%20to%20put%20them%20in%20whichever%20order%20makes%20the%20most%20sense%20to%20you.%0A%20%20%20%20%20%20%20%20.filter(True%20if%20filter_genre.value%20is%20None%20else%20pl.col(%22track_genre%22).eq(filter_genre.value))%0A%20%20%20%20%20%20%20%20.explode(%22artists%22)%0A%20%20%20%20%20%20%20%20.group_by(%22artists%22)%0A%20%20%20%20%20%20%20%20.agg(%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20How%20to%20aggregate%20it%20is%20also%20a%20question%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Do%20we%20take%20the%20sum%20of%20each%20of%20their%20songs%20popularity%3F%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Do%20we%20just%20take%20their%20most%20popular%20song%3F%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Do%20we%20take%20an%20average%20of%20their%20songs%20popularity%3F%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20We'll%20proceed%20with%20the%20average%20of%20their%20top%2010%20most%20popular%20songs%20for%20now%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20but%20that%20is%20something%20you%20may%20want%20to%20modify%20and%20experiment%20with%2C%20or%20ask%20for%20input%20from%20stakeholders%20in%20real%20problems.%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22popularity%22).top_k(10).mean()%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Say%20that%20after%20doing%20this%20you%20don't%20recognize%20them%20and%20want%20to%20know%20what%20are%20their%20top%20hits%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Let's%20also%20take%20some%20of%20their%20most%20popular%20albums%20songs%20for%20reference%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22track_name%22).sort_by(%22popularity%22).unique(maintain_order%3DTrue).top_k(5)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22album_name%22).sort_by(%22popularity%22).unique(maintain_order%3DTrue).top_k(5)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22track_genre%22).top_k_by(%22popularity%22%2C%20k%3D1).alias(%22Most%20popular%20genre%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20And%20for%20good%20measure%2C%20see%20how%20many%20total%20tracks%20they%20have%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22track_name%22).n_unique().alias(%22tracks_count%22)%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20.sort(%22popularity%22%2C%20descending%3DTrue)%0A%20%20%20%20%20%20%20%20.collect()%0A%20%20%20%20)%0A%20%20%20%20mo.vstack(%0A%20%20%20%20%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md(%22Let's%20start%20by%20taking%20a%20look%20at%20the%20most%20popular%20artists%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Also%20adjust%20the%20formatting%20for%20displaying%20columns%20that%20include%20multiple%20values%20in%20the%20same%20line%0A%20%20%20%20%20%20%20%20%20%20%20%20most_popular_artists.with_columns(pl.col(pl.List(pl.String())).list.join(%22%5Cn%22))%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md(%22Recognize%20any%20of%20your%20favourite%20songs%3F%20Me%20neither.%20Let's%20try%20adding%20a%20filter%20by%20genre%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20filter_genre%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22(the%20code%20is%20omitted%20for%20brevity%2C%20but%20you%20can%20click%20the%20eye%20icon%20to%20see%20it)%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20So%20far%20so%20good%20-%20but%20there's%20been%20a%20distinct%20lack%20of%20visualations%2C%20so%20let's%20fix%20that.%0A%0A%20%20%20%20Let's%20start%20simple%2C%20just%20some%20metrics%20for%20each%20genre%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(filtered_duration%2C%20pl%2C%20px)%3A%0A%20%20%20%20fig_dur_per_genre%20%3D%20px.scatter(%0A%20%20%20%20%20%20%20%20filtered_duration.group_by(%22track_genre%22)%0A%20%20%20%20%20%20%20%20.agg(%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22duration_seconds%22%2C%20%22popularity%22).mean().round(2)%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20.sort(%22track_genre%22%2C%20descending%3DTrue)%2C%0A%20%20%20%20%20%20%20%20hover_name%3D%22track_genre%22%2C%0A%20%20%20%20%20%20%20%20y%3D%22duration_seconds%22%2C%0A%20%20%20%20%20%20%20%20x%3D%22popularity%22%2C%0A%20%20%20%20)%0A%20%20%20%20fig_dur_per_genre%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Now%2C%20why%20don't%20we%20play%20a%20bit%20with%20marimo's%20UI%20elements%3F%0A%0A%20%20%20%20We%20will%20use%20Dropdowns%20to%20allow%20for%20the%20user%20to%20select%20any%20column%20to%20use%20for%20the%20visualisation%2C%20and%20throw%20in%20some%20extras%0A%0A%20%20%20%20-%20A%20slider%20for%20the%20transparency%20to%20help%20understand%20dense%20clusters%0A%20%20%20%20-%20Add%20a%20Trendline%20to%20the%20scatterplot%20(requires%20statsmodels)%0A%20%20%20%20-%20Filter%20by%20some%20specific%20Genre%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(%0A%20%20%20%20alpha%2C%0A%20%20%20%20color%2C%0A%20%20%20%20filter_genre2%2C%0A%20%20%20%20filtered_duration%2C%0A%20%20%20%20include_trendline%2C%0A%20%20%20%20mo%2C%0A%20%20%20%20pl%2C%0A%20%20%20%20px%2C%0A%20%20%20%20x_axis%2C%0A%20%20%20%20y_axis%2C%0A)%3A%0A%20%20%20%20fig2%20%3D%20px.scatter(%0A%20%20%20%20%20%20%20%20filtered_duration.filter(%0A%20%20%20%20%20%20%20%20%20%20%20%20(pl.col(%22track_genre%22)%20%3D%3D%20filter_genre2.value)%20if%20filter_genre2.value%20is%20not%20None%20else%20True%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20x%3Dx_axis.value%2C%0A%20%20%20%20%20%20%20%20y%3Dy_axis.value%2C%0A%20%20%20%20%20%20%20%20color%3Dcolor.value%2C%0A%20%20%20%20%20%20%20%20opacity%3Dalpha.value%2C%0A%20%20%20%20%20%20%20%20trendline%3D%22lowess%22%20if%20include_trendline.value%20else%20None%2C%0A%20%20%20%20%20%20%20%20render_mode%3D%22webgl%22%2C%0A%20%20%20%20%20%20%20%20%23%20strings%20on%20hover%20get%20fairly%20heavy%20when%20there%20are%20too%20many%20rows%2C%20but%20you%20can%20try%20using%20it%20after%20applying%20a%20few%20filters%0A%20%20%20%20%20%20%20%20%23%20hover_name%3D%22track_name%22%2C%0A%20%20%20%20%20%20%20%20%23%20hover_data%3D(%22artists%22%2C%20%22album_name%22)%2C%0A%20%20%20%20)%0A%20%20%20%20chart2%20%3D%20mo.ui.plotly(fig2)%0A%0A%20%20%20%20mo.vstack(%5Bmo.hstack(%5Bx_axis%2C%20y_axis%2C%20color%2C%20alpha%2C%20include_trendline%2C%20filter_genre2%5D)%2C%20chart2%5D)%0A%20%20%20%20return%20(chart2%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20As%20we%20have%20seen%20before%2C%20we%20can%20also%20use%20the%20plot%20as%20an%20input%20to%20select%20a%20region%20and%20look%20at%20it%20in%20more%20detail.%0A%0A%20%20%20%20Try%20selecting%20a%20region%20then%20performing%20some%20explorations%20of%20your%20own%20with%20the%20data%20inside%20of%20it.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(chart2%2C%20filtered_duration%2C%20mo%2C%20pl)%3A%0A%20%20%20%20%23%20Looking%20at%20which%20sort%20of%20songs%20were%20included%20in%20that%20region%0A%20%20%20%20if%20len(chart2.value)%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20out%20%3D%20mo.md(%22No%20data%20found%20in%20selection%22)%0A%20%20%20%20%20%20%20%20active_columns%20%3D%20column_order%20%3D%20None%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20active_columns%20%3D%20list(chart2.value%5B0%5D.keys())%0A%20%20%20%20%20%20%20%20column_order%20%3D%20%5B%22track_name%22%2C%20*active_columns%2C%20%22album_name%22%2C%20%22artists%22%5D%0A%20%20%20%20%20%20%20%20out%20%3D%20filtered_duration.join(pl.DataFrame(chart2.value).unique()%2C%20on%3Dactive_columns).select(%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(column_order)%2C%20pl.exclude(*column_order)%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20out%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20In%20this%20notebook%2C%20we've%20focused%20on%20a%20few%20key%20aspects.%20First%2C%20it's%20essential%20to%20*understand*%20the%20data%20you're%20working%20with%20%E2%80%94%20this%20forms%20the%20foundation%20of%20any%20analysis.%0A%0A%20%20%20%20Creating%20plots%20is%20a%20powerful%20way%20to%20identify%20patterns%2C%20outliers%2C%20and%20trends.%20These%20visualizations%20are%20not%20just%20for%20_presentation_%3B%20they%20are%20tools%20for%20deeper%20insight.%0A%0A%20%20%20%20%2F%2F%2F%20NOTE%0A%20%20%20%20With%20marimo's%20%60interactive%60%20UI%20elements%2C%20exploring%20different%20_facets_%20of%20the%20data%20becomes%20seamless%2C%20allowing%20for%20dynamic%20analysis%20without%20altering%20the%20code.%0A%0A%20%20%20%20Keep%20these%20points%20in%20mind%20as%20you%20continue%20to%20work%20with%20data.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20Utility%20Functions%20and%20UI%20Elements%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.function%0Adef%20get_extremes(selection%2C%20col%2C%20defaults_if_missing)%3A%0A%20%20%20%20%22Get%20the%20minimum%20and%20maximum%20values%20for%20a%20given%20column%20within%20the%20selection%22%0A%20%20%20%20if%20selection%20is%20None%20or%20len(selection)%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20print(%0A%20%20%20%20%20%20%20%20%20%20%20%20f%22Could%20not%20find%20a%20selected%20region.%20Using%20default%20values%20%7Bdefaults_if_missing%7D%20instead%2C%20try%20clicking%20and%20dragging%20in%20the%20plot%20to%20change%20them.%22%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20return%20defaults_if_missing%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20min(row%5Bcol%5D%20for%20row%20in%20selection)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20max(row%5Bcol%5D%20for%20row%20in%20selection)%2C%0A%20%20%20%20%20%20%20%20)%0A%0A%0A%40app.cell%0Adef%20_(filtered_duration%2C%20mo)%3A%0A%20%20%20%20filter_genre%20%3D%20mo.ui.dropdown(%0A%20%20%20%20%20%20%20%20options%3Dfiltered_duration%5B%22track_genre%22%5D.unique().sort().to_list()%2C%0A%20%20%20%20%20%20%20%20allow_select_none%3DTrue%2C%0A%20%20%20%20%20%20%20%20value%3DNone%2C%0A%20%20%20%20%20%20%20%20searchable%3DTrue%2C%0A%20%20%20%20%20%20%20%20label%3D%22Filter%20by%20Track%20Genre%3A%22%2C%0A%20%20%20%20)%0A%20%20%20%20return%20(filter_genre%2C)%0A%0A%0A%40app.cell%0Adef%20_(filtered_duration%2C%20mo)%3A%0A%20%20%20%20%23%20Columns%20that%20make%20sense%20for%20the%20scatterplot%20and%20the%20corresponding%20UI%20elements%0A%20%20%20%20options%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%22duration_seconds%22%2C%0A%20%20%20%20%20%20%20%20%22popularity%22%2C%0A%20%20%20%20%20%20%20%20%22danceability%22%2C%0A%20%20%20%20%20%20%20%20%22energy%22%2C%0A%20%20%20%20%20%20%20%20%22key%22%2C%0A%20%20%20%20%20%20%20%20%22loudness%22%2C%0A%20%20%20%20%20%20%20%20%22mode%22%2C%0A%20%20%20%20%20%20%20%20%22speechiness%22%2C%0A%20%20%20%20%20%20%20%20%22acousticness%22%2C%0A%20%20%20%20%20%20%20%20%22instrumentalness%22%2C%0A%20%20%20%20%20%20%20%20%22liveness%22%2C%0A%20%20%20%20%20%20%20%20%22valence%22%2C%0A%20%20%20%20%20%20%20%20%22tempo%22%2C%0A%20%20%20%20%5D%0A%20%20%20%20x_axis%20%3D%20mo.ui.dropdown(options%2C%20value%3D%22energy%22%2C%20label%3D%22X%22)%0A%20%20%20%20y_axis%20%3D%20mo.ui.dropdown(options%2C%20value%3D%22danceability%22%2C%20label%3D%22Y%22)%0A%20%20%20%20color%20%3D%20mo.ui.dropdown(options%2C%20value%3D%22loudness%22%2C%20allow_select_none%3DTrue%2C%20searchable%3DTrue%2C%20label%3D%22Color%20column%22)%0A%20%20%20%20alpha%20%3D%20mo.ui.slider(start%3D0.01%2C%20stop%3D1.0%2C%20step%3D0.01%2C%20value%3D0.1%2C%20label%3D%22Alpha%22%2C%20show_value%3DTrue)%0A%20%20%20%20include_trendline%20%3D%20mo.ui.checkbox(label%3D%22Trendline%22)%0A%20%20%20%20%23%20We%20*could*%20reuse%20the%20same%20filter_genre%20from%20above%2C%20but%20it%20would%20cause%20marimo%20to%20rerun%20both%20the%20table%20and%20the%20graph%20whenever%20we%20change%20it%0A%20%20%20%20filter_genre2%20%3D%20mo.ui.dropdown(%0A%20%20%20%20%20%20%20%20options%3Dfiltered_duration%5B%22track_genre%22%5D.unique().sort().to_list()%2C%0A%20%20%20%20%20%20%20%20allow_select_none%3DTrue%2C%0A%20%20%20%20%20%20%20%20value%3DNone%2C%0A%20%20%20%20%20%20%20%20searchable%3DTrue%2C%0A%20%20%20%20%20%20%20%20label%3D%22Filter%20by%20Track%20Genre%3A%22%2C%0A%20%20%20%20)%0A%20%20%20%20return%20alpha%2C%20color%2C%20filter_genre2%2C%20include_trendline%2C%20x_axis%2C%20y_axis%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%20Appendix%20%3A%20Some%20other%20examples%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20%23%20Components%20to%20filter%20for%20some%20specific%20song%0A%20%20%20%20filter_artist%20%3D%20mo.ui.text(label%3D%22Artist%3A%20%22)%0A%20%20%20%20filter_track%20%3D%20mo.ui.text(label%3D%22Track%20name%3A%20%22)%0A%20%20%20%20return%20filter_artist%2C%20filter_track%0A%0A%0A%40app.cell(disabled%3DTrue)%0Adef%20_(filtered_duration%2C%20mo%2C%20pl)%3A%0A%20%20%20%20%23%20Note%20that%20we%20cannot%20use%20dropdown%20due%20to%20the%20sheer%20number%20of%20elements%20being%20enormous%3A%0A%20%20%20%20all_artists%20%3D%20filtered_duration.select(pl.col(%22artists%22).str.split(%22%3B%22).explode().unique().sort())%5B%22artists%22%5D.to_list()%0A%20%20%20%20all_tracks%20%3D%20filtered_duration%5B%22track_name%22%5D.unique().sort().to_list()%0A%20%20%20%20alternative_filter_artist%20%3D%20mo.ui.dropdown(all_artists%2C%20value%3DNone%2C%20searchable%3DTrue)%0A%20%20%20%20alternative_filter_track%20%3D%20mo.ui.dropdown(all_tracks%2C%20value%3DNone%2C%20searchable%3DTrue)%0A%20%20%20%20%23%20So%20we%20just%20provide%20freeform%20text%20boxes%20and%20filter%20ourselfves%20later%0A%20%20%20%20%23%20(the%20%22alternative_%22%20in%20the%20name%20is%20just%20to%20avoid%20conflicts%20with%20the%20above%20cell%2C%0A%20%20%20%20%23%20%20despite%20this%20being%20disabled%20marimo%20still%20requires%20global%20variables%20to%20be%20unique)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(filter_artist%2C%20filter_track%2C%20filtered_duration%2C%20mo%2C%20pl)%3A%0A%20%20%20%20def%20score_match_text(col%3A%20pl.Expr%2C%20string%3A%20str%20%7C%20None)%20-%3E%20pl.Expr%3A%0A%20%20%20%20%20%20%20%20if%20not%20string%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20pl.lit(0)%0A%20%20%20%20%20%20%20%20col%20%3D%20col.str.to_lowercase()%0A%20%20%20%20%20%20%20%20string%20%3D%20string.casefold()%0A%20%20%20%20%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20For%20a%20more%20professional%20use%20case%2C%20you%20might%20want%20to%20look%20into%20string%20distance%20functions%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20in%20the%20polars-ds%20package%20or%20other%20polars%20plugins%0A%20%20%20%20%20%20%20%20%20%20%20%20-col.str.len_chars().cast(pl.Int32())%0A%20%20%20%20%20%20%20%20%20%20%20%20%2B%20pl.when(col.str.contains(string)).then(50).otherwise(0)%0A%20%20%20%20%20%20%20%20%20%20%20%20%2B%20pl.when(col.str.starts_with(string)).then(50).otherwise(0)%0A%20%20%20%20%20%20%20%20)%0A%0A%0A%20%20%20%20filtered_artist_track%20%3D%20(%0A%20%20%20%20%20%20%20%20filtered_duration.select(%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22artists%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22track_name%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20score_match_text(pl.col(%22track_name%22)%2C%20filter_track.value)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2B%20pl.col(%22artists%22).str.split(%22%3B%22).list.eval(score_match_text(pl.element()%2C%20filter_artist.value)).list.sum()%0A%20%20%20%20%20%20%20%20%20%20%20%20).alias(%22match_score%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22album_name%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22track_genre%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22popularity%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22duration_seconds%22)%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20.filter(pl.col(%22match_score%22)%20%3E%200)%0A%20%20%20%20%20%20%20%20.sort(%22match_score%22%2C%20descending%3DTrue)%0A%20%20%20%20)%0A%0A%20%20%20%20mo.vstack(%5Bmo.md(%22Filter%20a%20track%20based%20on%20its%20name%20or%20artist%22)%2C%20filter_artist%2C%20filter_track%2C%20filtered_artist_track%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(filter_genre2%2C%20filtered_duration%2C%20mo%2C%20pl)%3A%0A%20%20%20%20%23%20Artists%20combinations%0A%20%20%20%20artist_combinations%20%3D%20(%0A%20%20%20%20%20%20%20%20filtered_duration.lazy()%0A%20%20%20%20%20%20%20%20.filter((pl.col(%22track_genre%22)%20%3D%3D%20filter_genre2.value)%20if%20filter_genre2.value%20is%20not%20None%20else%20True)%0A%20%20%20%20%20%20%20%20.with_columns(pl.col(%22artists%22).str.split(%22%3B%22))%0A%20%20%20%20%20%20%20%20.with_columns(pl.col(%22artists%22).alias(%22other_artist%22))%0A%20%20%20%20%20%20%20%20.explode(%22artists%22)%0A%20%20%20%20%20%20%20%20.explode(%22other_artist%22)%0A%20%20%20%20%20%20%20%20%23%20Filter%20to%3A%0A%20%20%20%20%20%20%20%20%23%201)%20Remove%20an%20artist%20with%20themselves%0A%20%20%20%20%20%20%20%20%23%202)%20Remove%20duplicate%20combinations%2C%20otherwise%20we%20would%20have%20once%20row%20for%20(A%2C%20B)%20and%20one%20for%20(B%2C%20A)%0A%20%20%20%20%20%20%20%20.filter(pl.col(%22artists%22)%20%3E%20pl.col(%22other_artist%22))%0A%20%20%20%20%20%20%20%20.group_by(%22artists%22%2C%20%22other_artist%22)%0A%20%20%20%20%20%20%20%20.len(%22count%22)%0A%20%20%20%20%20%20%20%20.collect()%0A%20%20%20%20)%0A%20%20%20%20mo.vstack(%0A%20%20%20%20%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md(%22Check%20which%20artists%20collaborate%20with%20others%20most%20often%20(reuses%20the%20last%20genre%20filter)%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20filter_genre2%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20artist_combinations.sort(%22count%22%2C%20descending%3DTrue)%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20align%3D%22center%22%2C%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20polars%20as%20pl%0A%20%20%20%20import%20plotly.express%20as%20px%0A%0A%20%20%20%20return%20pl%2C%20px%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "cwd": "",
+            "mode": "edit",
+            "version": "0.20.4",
+            "serverToken": "unused",
+            "config": {"ai": {"custom_providers": {}, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "medium"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

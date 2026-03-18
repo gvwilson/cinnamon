@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>04 quadratic program</title>
+    <script type="module" crossorigin src="./assets/index-0n92c_W7.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-BW0IMuFq.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-BDxNtGmi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-BoaCR37F.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-LvLJmgfZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-Bj1aDYRI.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-B3qBwwSJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-icT_Ltz2.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-hTpPIsMT.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-Dy81QR4n.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-Ej3vmCIF.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-CSu739Rf.js">
+    <link rel="modulepreload" crossorigin href="./assets/Combination-Cs9nbinQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-UxKrm8hS.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DJBpXGro.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Cm-Z7dYr.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-BE0hEwVo.js">
+    <link rel="modulepreload" crossorigin href="./assets/x-BI1M8X_v.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-CxT2Geqr.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-D9723Brr.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-Hc8CXlvz.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-C0aUZfE0.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-EYp9AUJI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-O0nX5vok.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-CQUIhlu2.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-Dx6-QZGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-CfcLlFFp.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-H_cgTO0M.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-tNbLd14P.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-BMfCOLaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-ClFZlR7U.js">
+    <link rel="modulepreload" crossorigin href="./assets/DeferredRequestRegistry-O6RDJKs0.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Rz_lD4HK.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-BrEm7qNv.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-3Aq84phF.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-Bgjtqo_1.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-CiGN2w5X.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-lmrYznmk.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-39dTX4Wi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-QS_pSfjY.js">
+    <link rel="modulepreload" crossorigin href="./assets/assertNever-DWSyoPEi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-BKEr35uH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DA9DjSPo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-BtW-rR_1.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BYXBU1of.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-CJOnx12W.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-D3x_db9Y.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-Drh7NmIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-D2lG83Oh.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B_cxg-E4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D0Vj4Kqc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtXb4bUU.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CQqv2gQL.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-8UD0A5sU.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CXLJUPFl.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNC_tnlW.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-apDpadc4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CEeVCRd_.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-0ac7Aukl.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BqKH-Jd9.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-BBn8CPhf.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-BU2qXMKx.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-OnFQK5Wu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-8AYn-wiF.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-DS_VtWMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-CO3ppIfA.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-DTWCDKdn.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-DrBRErTM.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-fq1RMGX_.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-C5JoisA7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-D0GQBpTb.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-DdPu5Kfu.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-DvKpAc6K.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-CnD1Dah5.js">
+    <link rel="modulepreload" crossorigin href="./assets/multi-map-Pp1P2DOX.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-OQZHipbB.js">
+    <link rel="modulepreload" crossorigin href="./assets/card-C-c-4jyF.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-9WfvUF7e.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-CVN1lcMF.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BhNN2V5a.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-TNNaT1M9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-B0dx2Gp0.js">
+    <link rel="modulepreload" crossorigin href="./assets/azure-BTXHztTw.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-CYnquDho.js">
+    <link rel="modulepreload" crossorigin href="./assets/SSRProvider-DC7ElCZZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-CIAP2NOh.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-DbDKSvEd.js">
+    <link rel="modulepreload" crossorigin href="./assets/usePress-BHGkpw8X.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-CUwqpKjd.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DzgPOFJ-.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-BPGG2gPG.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-CVKxYu_0.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-BhH-Mm8O.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-AcL8c6qH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-D-4ifFXh.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-Bfogio62.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-BRG6IPhC.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-YwM0Pd7v.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-Bw1ifb7c.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-DBdMgUNq.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-BfkXNxmI.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CkudG0Ej.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-dVmh0yTy.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CHAHPgkx.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-CAoNMkjq.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-qZo1ox6x.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-DPTa_EpU.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-OkOxlkkM.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BOmLQIKI.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DK1MWd7f.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-CZV6_g2i.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-CdjCA1J8.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Ba0LbbH4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-C9V-on2J.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-qEtcJ95s.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-Q_UEP94Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-F9sJtuof.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-3V5UxC3B.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-az74f3Mp.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-BgmMM9Zg.js">
+    <link rel="modulepreload" crossorigin href="./assets/html-to-image-BnSc-Wa0.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-DYwTiH9-.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-m8w66E4s.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5FQGJX7Z-CM1a_K7I.js">
+    <link rel="modulepreload" crossorigin href="./assets/katex-rvFxOCU-.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-renderer-MR9df58W.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-rfxSsiHU.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-B9_ToVd4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useRunCells-5m6jCnyo.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-DJ8khuob.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-DTN9kFDq.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-rhOJovGE.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-BO8E69bZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BGe7pJXT.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-CHaNfieI.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-OKerBHH8.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-DRbCSry7.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-D1keIaYa.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-CpE7XQLs.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-CJeRXUtp.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-BCnp9gKC.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-DKXKGKvX.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-DRUDRiy0.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-CrUXojcA.js">
+    <link rel="modulepreload" crossorigin href="./assets/process-output-CTVsT--B.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-CObhN-9g.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-DP4vAkvg.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-CBkHtTOV.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-DzHkbIdO.js">
+    <link rel="modulepreload" crossorigin href="./assets/image-DXfkah9d.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-DKSqmedg.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-DUn4LN4W.js">
+    <link rel="modulepreload" crossorigin href="./assets/isEmpty-CfmnKtgL.js">
+    <link rel="modulepreload" crossorigin href="./assets/bot-message-square-CK6eoGWy.js">
+    <link rel="modulepreload" crossorigin href="./assets/chat-display-D_Fuuy6r.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-DV8gdCvH.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B006EYFX.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-DbmSqx09.js">
+    <link rel="modulepreload" crossorigin href="./assets/ellipsis-vertical-CAB7tdza.js">
+    <link rel="modulepreload" crossorigin href="./assets/components-Bpgzv_5_.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-WsubyItX.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-RCwU-rnE.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BsV5fVR-.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-BdH_5I58.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-D5BgdrnX.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-resizable-panels.browser.esm-DDRqG5ui.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-aware-panel-CfsfBlhO.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-BvQKiC0F.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-YC7rpcmD.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-vwi9L975.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DH-1xZGq.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-headphone-B5q2Ow55.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-icons-CWLHDa1J.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-DLpfIr8v.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CrQYrsUC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-B1jGbQlH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-m1e6E3Ao.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-yyiB9aJX.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-C1RN112u.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-RrUi-pOT.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-CzkousWe.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-Bx4-SO9M.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-Be7p_si8.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-Ck7z0-tq.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BYA9UDHe.js">
+    <link rel="modulepreload" crossorigin href="./assets/code-xml-DwHPF_nL.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-DBW9RXtT.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-CxAsQQ77.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-CzQUw9rV.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-idScn0w0.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-jmgGt1lS.css">
+    <link rel="stylesheet" crossorigin href="./assets/markdown-renderer-DdDKmWlR.css">
+    <link rel="stylesheet" crossorigin href="./assets/JsonOutput-B7vuddcd.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-GjXovVsl.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">%23%20%2F%2F%2F%20script%0A%23%20requires-python%20%3D%20%22%3E%3D3.13%22%0A%23%20dependencies%20%3D%20%5B%0A%23%20%20%20%20%20%22cvxpy-base%22%2C%0A%23%20%20%20%20%20%22marimo%22%2C%0A%23%20%20%20%20%20%22matplotlib%3D%3D3.10.8%22%2C%0A%23%20%20%20%20%20%22numpy%3D%3D2.4.3%22%2C%0A%23%20%20%20%20%20%22wigglystuff%3D%3D0.2.37%22%2C%0A%23%20%5D%0A%23%20%2F%2F%2F%0A%0Aimport%20marimo%0A%0A__generated_with%20%3D%20%220.21.1%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20Quadratic%20Program%0A%0A%20%20%20%20A%20quadratic%20program%20is%20an%20optimization%20problem%20with%20a%20quadratic%20objective%20and%0A%20%20%20%20affine%20equality%20and%20inequality%20constraints.%20A%20common%20standard%20form%20is%20the%0A%20%20%20%20following%3A%0A%0A%20%20%20%20%5C%5B%0A%20%20%20%20%20%20%20%20%5Cbegin%7Barray%7D%7Bll%7D%0A%20%20%20%20%20%20%20%20%5Ctext%7Bminimize%7D%20%20%20%26%20(1%2F2)x%5ETPx%20%2B%20q%5ETx%5C%5C%0A%20%20%20%20%20%20%20%20%5Ctext%7Bsubject%20to%7D%20%26%20Gx%20%5Cleq%20h%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20Ax%20%3D%20b.%0A%20%20%20%20%20%20%20%20%5Cend%7Barray%7D%0A%20%20%20%20%5C%5D%0A%0A%20%20%20%20Here%20%24P%20%5Cin%20%5Cmathcal%7BS%7D%5E%7Bn%7D_%2B%24%2C%20%24q%20%5Cin%20%5Cmathcal%7BR%7D%5En%24%2C%20%24G%20%5Cin%20%5Cmathcal%7BR%7D%5E%7Bm%20%5Ctimes%20n%7D%24%2C%20%24h%20%5Cin%20%5Cmathcal%7BR%7D%5Em%24%2C%20%24A%20%5Cin%20%5Cmathcal%7BR%7D%5E%7Bp%20%5Ctimes%20n%7D%24%2C%20and%20%24b%20%5Cin%20%5Cmathcal%7BR%7D%5Ep%24%20are%20problem%20data%20and%20%24x%20%5Cin%20%5Cmathcal%7BR%7D%5E%7Bn%7D%24%20is%20the%20optimization%20variable.%20The%20inequality%20constraint%20%24Gx%20%5Cleq%20h%24%20is%20elementwise.%0A%0A%20%20%20%20**Why%20quadratic%20programming%3F**%20Quadratic%20programs%20are%20convex%20optimization%20problems%20that%20generalize%20both%20least-squares%20and%20linear%20programming.They%20can%20be%20solved%20efficiently%20and%20reliably%2C%20even%20in%20real-time.%0A%0A%20%20%20%20**An%20example%20from%20finance.**%20A%20simple%20example%20of%20a%20quadratic%20program%20arises%20in%20finance.%20Suppose%20we%20have%20%24n%24%20different%20stocks%2C%20an%20estimate%20%24r%20%5Cin%20%5Cmathcal%7BR%7D%5En%24%20of%20the%20expected%20return%20on%20each%20stock%2C%20and%20an%20estimate%20%24%5CSigma%20%5Cin%20%5Cmathcal%7BS%7D%5E%7Bn%7D_%2B%24%20of%20the%20covariance%20of%20the%20returns.%20Then%20we%20solve%20the%20optimization%20problem%0A%0A%20%20%20%20%5C%5B%0A%20%20%20%20%20%20%20%20%5Cbegin%7Barray%7D%7Bll%7D%0A%20%20%20%20%20%20%20%20%5Ctext%7Bminimize%7D%20%20%20%26%20(1%2F2)x%5ET%5CSigma%20x%20-%20r%5ETx%5C%5C%0A%20%20%20%20%20%20%20%20%5Ctext%7Bsubject%20to%7D%20%26%20x%20%5Cgeq%200%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20%5Cmathbf%7B1%7D%5ETx%20%3D%201%2C%0A%20%20%20%20%20%20%20%20%5Cend%7Barray%7D%0A%20%20%20%20%5C%5D%0A%0A%20%20%20%20to%20find%20a%20nonnegative%20portfolio%20allocation%20%24x%20%5Cin%20%5Cmathcal%7BR%7D%5En_%2B%24%20that%20optimally%20balances%20expected%20return%20and%20variance%20of%20return.%0A%0A%20%20%20%20When%20we%20solve%20a%20quadratic%20program%2C%20in%20addition%20to%20a%20solution%20%24x%5E%5Cstar%24%2C%20we%20obtain%20a%20dual%20solution%20%24%5Clambda%5E%5Cstar%24%20corresponding%20to%20the%20inequality%20constraints.%20A%20positive%20entry%20%24%5Clambda%5E%5Cstar_i%24%20indicates%20that%20the%20constraint%20%24g_i%5ETx%20%5Cleq%20h_i%24%20holds%20with%20equality%20for%20%24x%5E%5Cstar%24%20and%20suggests%20that%20changing%20%24h_i%24%20would%20change%20the%20optimal%20value.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Example%0A%0A%20%20%20%20In%20this%20example%2C%20we%20use%20CVXPY%20to%20construct%20and%20solve%20a%20quadratic%20program.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20cvxpy%20as%20cp%0A%20%20%20%20import%20numpy%20as%20np%0A%0A%20%20%20%20return%20cp%2C%20np%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20First%20we%20generate%20synthetic%20data.%20In%20this%20problem%2C%20we%20don't%20include%20equality%20constraints%2C%20only%20inequality.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(np)%3A%0A%20%20%20%20m%20%3D%204%0A%20%20%20%20n%20%3D%202%0A%0A%20%20%20%20np.random.seed(1)%0A%20%20%20%20q%20%3D%20np.random.randn(n)%0A%20%20%20%20G%20%3D%20np.random.randn(m%2C%20n)%0A%20%20%20%20h%20%3D%20G%20%40%20np.random.randn(n)%0A%20%20%20%20return%20G%2C%20h%2C%20n%2C%20q%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo%2C%20np)%3A%0A%20%20%20%20import%20wigglystuff%0A%0A%20%20%20%20P_widget%20%3D%20mo.ui.anywidget(%0A%20%20%20%20%20%20%20%20wigglystuff.Matrix(np.array(%5B%5B4.0%2C%20-1.4%5D%2C%20%5B-1.4%2C%204%5D%5D)%2C%20step%3D0.1)%0A%20%20%20%20)%0A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20The%20quadratic%20form%20%24P%24%20is%20equal%20to%20the%20symmetrized%20version%20of%20this%0A%20%20%20%20%20%20%20%20matrix%3A%0A%0A%20%20%20%20%20%20%20%20%7BP_widget.center()%7D%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%20(P_widget%2C)%0A%0A%0A%40app.cell%0Adef%20_(P_widget%2C%20np)%3A%0A%20%20%20%20P%20%3D%200.5%20*%20(np.array(P_widget.matrix)%20%2B%20np.array(P_widget.matrix).T)%0A%20%20%20%20return%20(P%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Next%2C%20we%20specify%20the%20problem.%20Notice%20that%20we%20use%20the%20%60quad_form%60%20function%20from%20CVXPY%20to%20create%20the%20quadratic%20form%20%24x%5ETPx%24.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(G%2C%20P%2C%20cp%2C%20h%2C%20n%2C%20q)%3A%0A%20%20%20%20x%20%3D%20cp.Variable(n)%0A%0A%20%20%20%20problem%20%3D%20cp.Problem(%0A%20%20%20%20%20%20%20%20cp.Minimize((1%20%2F%202)%20*%20cp.quad_form(x%2C%20P)%20%2B%20q.T%20%40%20x)%2C%0A%20%20%20%20%20%20%20%20%5BG%20%40%20x%20%3C%3D%20h%5D%2C%0A%20%20%20%20)%0A%20%20%20%20_%20%3D%20problem.solve()%0A%20%20%20%20return%20problem%2C%20x%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo%2C%20problem%2C%20x)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20The%20optimal%20value%20is%20%7Bproblem.value%3A.04f%7D.%0A%0A%20%20%20%20%20%20%20%20A%20solution%20%24x%24%20is%20%7Bmo.as_html(list(x.value))%7D%0A%20%20%20%20%20%20%20%20A%20dual%20solution%20is%20is%20%7Bmo.as_html(list(problem.constraints%5B0%5D.dual_value))%7D%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(G%2C%20P%2C%20h%2C%20plot_contours%2C%20q%2C%20x)%3A%0A%20%20%20%20plot_contours(P%2C%20G%2C%20h%2C%20q%2C%20x.value)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20In%20this%20plot%2C%20the%20gray%20shaded%20region%20is%20the%20feasible%20region%20(points%20satisfying%20the%20inequality)%2C%20and%20the%20ellipses%20are%20level%20curves%20of%20the%20quadratic%20form.%0A%0A%20%20%20%20**%F0%9F%8C%8A%20Try%20it!**%20Try%20changing%20the%20entries%20of%20%24P%24%20above%20with%20your%20mouse.%20How%20do%20the%0A%20%20%20%20level%20curves%20and%20the%20optimal%20value%20of%20%24x%24%20change%3F%20Can%20you%20explain%20what%20you%20see%3F%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(P%2C%20mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20rf%22%22%22%0A%20%20%20%20%20%20%20%20The%20above%20contour%20lines%20were%20generated%20with%0A%0A%20%20%20%20%20%20%20%20%5C%5B%0A%20%20%20%20%20%20%20%20P%3D%20%5Cbegin%7B%7Bbmatrix%7D%7D%0A%20%20%20%20%20%20%20%20%7BP%5B0%2C%200%5D%3A.01f%7D%20%26%20%7BP%5B0%2C%201%5D%3A.01f%7D%20%5C%5C%0A%20%20%20%20%20%20%20%20%7BP%5B1%2C%200%5D%3A.01f%7D%20%26%20%7BP%5B1%2C%201%5D%3A.01f%7D%20%5C%5C%0A%20%20%20%20%20%20%20%20%5Cend%7B%7Bbmatrix%7D%7D%0A%20%20%20%20%20%20%20%20%5C%5D%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(np)%3A%0A%20%20%20%20def%20plot_contours(P%2C%20G%2C%20h%2C%20q%2C%20x_star)%3A%0A%20%20%20%20%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%0A%20%20%20%20%20%20%20%20%23%20Create%20a%20grid%20of%20x%20and%20y%20values.%0A%20%20%20%20%20%20%20%20x%20%3D%20np.linspace(-5%2C%205%2C%20400)%0A%20%20%20%20%20%20%20%20y%20%3D%20np.linspace(-5%2C%205%2C%20400)%0A%20%20%20%20%20%20%20%20X%2C%20Y%20%3D%20np.meshgrid(x%2C%20y)%0A%0A%20%20%20%20%20%20%20%20%23%20Compute%20the%20quadratic%20form%20Q(x%2C%20y)%20%3D%20a*x%5E2%20%2B%202*b*x*y%20%2B%20c*y%5E2.%0A%20%20%20%20%20%20%20%20%23%20Here%2C%20a%20%3D%20P%5B0%2C0%5D%2C%20b%20%3D%20P%5B0%2C1%5D%20(and%20P%5B1%2C0%5D)%2C%20c%20%3D%20P%5B1%2C1%5D%0A%20%20%20%20%20%20%20%20Z%20%3D%20(%0A%20%20%20%20%20%20%20%20%20%20%20%200.5%20*%20(P%5B0%2C%200%5D%20*%20X**2%20%2B%202%20*%20P%5B0%2C%201%5D%20*%20X%20*%20Y%20%2B%20P%5B1%2C%201%5D%20*%20Y**2)%0A%20%20%20%20%20%20%20%20%20%20%20%20%2B%20q%5B0%5D%20*%20X%0A%20%20%20%20%20%20%20%20%20%20%20%20%2B%20q%5B1%5D%20*%20Y%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20%23%20---%20Evaluate%20the%20constraints%20on%20the%20grid%20---%0A%20%20%20%20%20%20%20%20%23%20We%20stack%20X%20and%20Y%20to%20get%20a%20list%20of%20(x%2Cy)%20points.%0A%20%20%20%20%20%20%20%20points%20%3D%20np.vstack(%5BX.ravel()%2C%20Y.ravel()%5D).T%0A%0A%20%20%20%20%20%20%20%20%23%20Start%20with%20all%20points%20feasible%0A%20%20%20%20%20%20%20%20feasible%20%3D%20np.ones(points.shape%5B0%5D%2C%20dtype%3Dbool)%0A%0A%20%20%20%20%20%20%20%20%23%20Apply%20the%20inequality%20constraints%20Gx%20%3C%3D%20h.%0A%20%20%20%20%20%20%20%20%23%20Each%20row%20of%20G%20and%20corresponding%20h%20defines%20a%20condition.%0A%20%20%20%20%20%20%20%20for%20i%20in%20range(G.shape%5B0%5D)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20For%20a%20given%20point%20x%2C%20the%20condition%20is%3A%20G%5Bi%2C0%5D*x%20%2B%20G%5Bi%2C1%5D*y%20%3C%3D%20h%5Bi%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20feasible%20%26%3D%20points.dot(G%5Bi%5D)%20%3C%3D%20h%5Bi%5D%20%2B%201e-8%20%20%23%20small%20tolerance%0A%20%20%20%20%20%20%20%20%23%20Reshape%20the%20boolean%20mask%20back%20to%20grid%20shape.%0A%20%20%20%20%20%20%20%20feasible_grid%20%3D%20feasible.reshape(X.shape)%0A%0A%20%20%20%20%20%20%20%20%23%20---%20Plot%20the%20feasible%20region%20and%20contour%20lines---%0A%20%20%20%20%20%20%20%20plt.figure(figsize%3D(8%2C%206))%0A%0A%20%20%20%20%20%20%20%20%23%20Use%20contourf%20to%20fill%20the%20region%20where%20feasible_grid%20is%20True.%0A%20%20%20%20%20%20%20%20%23%20We%20define%20two%20levels%2C%20so%20that%20points%20that%20are%20True%20(feasible)%20get%20one%0A%20%20%20%20%20%20%20%20%23%20color.%0A%20%20%20%20%20%20%20%20plt.contourf(%0A%20%20%20%20%20%20%20%20%20%20%20%20X%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20Y%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20feasible_grid%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20levels%3D%5B-0.5%2C%200.5%2C%201.5%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20colors%3D%5B%22white%22%2C%20%22gray%22%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20alpha%3D0.5%2C%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20contours%20%3D%20plt.contour(X%2C%20Y%2C%20Z%2C%20levels%3D10%2C%20cmap%3D%22viridis%22)%0A%20%20%20%20%20%20%20%20plt.clabel(contours%2C%20inline%3DTrue%2C%20fontsize%3D8)%0A%20%20%20%20%20%20%20%20plt.title(%22Feasible%20region%20and%20level%20curves%22)%0A%20%20%20%20%20%20%20%20plt.xlabel(%22%24x_1%24%22)%0A%20%20%20%20%20%20%20%20plt.ylabel(%22%24y_2%24%22)%0A%20%20%20%20%20%20%20%20%23%20plt.colorbar(contours%2C%20label%3D'Q(x%2C%20y)')%0A%0A%20%20%20%20%20%20%20%20ax%20%3D%20plt.gca()%0A%20%20%20%20%20%20%20%20%23%20Optionally%2C%20mark%20and%20label%20the%20point%20x_star.%0A%20%20%20%20%20%20%20%20ax.plot(x_star%5B0%5D%2C%20x_star%5B1%5D%2C%20%22ko%22%2C%20markersize%3D5)%0A%20%20%20%20%20%20%20%20ax.text(%0A%20%20%20%20%20%20%20%20%20%20%20%20x_star%5B0%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20x_star%5B1%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20r%22%24%5Cmathbf%7Bx%7D%5E%5Cstar%24%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20color%3D%22black%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20fontsize%3D12%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20verticalalignment%3D%22bottom%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20horizontalalignment%3D%22right%22%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20return%20plt.gca()%0A%0A%20%20%20%20return%20(plot_contours%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "cwd": "",
+            "mode": "edit",
+            "version": "0.21.1",
+            "serverToken": "unused",
+            "config": {"ai": {"custom_providers": {}, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

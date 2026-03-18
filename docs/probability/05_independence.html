@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>05 independence</title>
+    <script type="module" crossorigin src="./assets/index-DyRdaW9o.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-TXkS1QI3.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-A78R3nYl.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-d_A4rA-x.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-LvLJmgfZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-Bj1aDYRI.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-B3qBwwSJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-CP2fAiZX.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-CNBv2dAU.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-CjXriKgk.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-BmOH9agK.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-CSu739Rf.js">
+    <link rel="modulepreload" crossorigin href="./assets/Combination-tjZP3FH6.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-Bs2e3wuf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CIU0Lack.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-BvP5LBIs.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-BnZGcuDh.js">
+    <link rel="modulepreload" crossorigin href="./assets/x-yqLqiq5Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DygbgNTD.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-DOQlecCr.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BhMe50aT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-BGESiCQL.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BU8KB_Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-WUlsM6MC.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-awXiPaF0.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-BkJc8lDE.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-DnJbrtRQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-H_cgTO0M.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-CORJ8yYa.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-D2igisxY.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-ImXS-885.js">
+    <link rel="modulepreload" crossorigin href="./assets/DeferredRequestRegistry-CMZsNx4R.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-CdR60lKM.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-DnMOyddG.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-D9X9QKiL.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-DZy_SQ_v.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-BGkTcW3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-DlRqgfqz.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-39dTX4Wi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-QS_pSfjY.js">
+    <link rel="modulepreload" crossorigin href="./assets/assertNever-Dw9aFN4h.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-BKEr35uH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-BDXC6oVR.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-BY4jV7Yb.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-CwdqVOYu.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-DRC4SgqY.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-CeYo4YI0.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-BcTiTw8T.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-bMgYkaP2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DUY6xZX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D89dID68.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CU-Ty5ht.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BjtLy-VA.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-odxAaH5Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Dq_iQ08e.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DfBASypd.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-51xFOPFs.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CEQIJ2pn.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-FMMSUPAS.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-DDAiY7kz.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-CPplrWRQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-CVt8hZ5L.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-DuoFhI7N.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-GB_lFVaq.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-DIo_1hTm.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-D8CkpJG7.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Cl1doThW.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-B3efE3T2.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-Cmx6WhDY.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-CCtxWKxf.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-DCSoZZhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-_z3dkNFy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-CKhrfxsx.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CVbqSkT8.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-BJEd-iA7.js">
+    <link rel="modulepreload" crossorigin href="./assets/multi-map-kCmlVJ-5.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-0YTlkh9P.js">
+    <link rel="modulepreload" crossorigin href="./assets/card-WPBELA1S.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DsNfSYaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-BXzvlof-.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BTEPE6IB.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-DmqkEXI4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BUC67G8E.js">
+    <link rel="modulepreload" crossorigin href="./assets/azure-Ddr1pZpW.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-44Cj1Me-.js">
+    <link rel="modulepreload" crossorigin href="./assets/SSRProvider-DC7ElCZZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-B1_BdDTF.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-DMA_kIIZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/usePress-DsLftN-x.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-BPldEXfy.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-BKV6zi_7.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-Cvl9xY6R.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-tdkZNn4k.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-FXVKPW36.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-DVm0BCFt.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-Bfogio62.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-R2OkQKR0.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-DMCkK2TI.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-BCOZVFBt.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-6uJrSKbw.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-irHJCpFh.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CAR4dOiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-B-s-VRHt.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-DeCFDX1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-DtQaB9NM.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-n1-FF7zs.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-C3Y44M85.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-OkOxlkkM.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BOmLQIKI.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DK1MWd7f.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-CZV6_g2i.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-D_HRHf_c.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-dVj6GVNE.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-jGxNsOWc.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-CRNJOvqT.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-B59Kn5nL.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-B2Fl6iYU.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-D2jTOQOG.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-B0ZtYqUC.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-6RnnFDPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/html-to-image-b9BimK8l.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-ShrwcKIv.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-BdX_Y5NA.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5FQGJX7Z-BJDu6jwt.js">
+    <link rel="modulepreload" crossorigin href="./assets/katex-rvFxOCU-.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-renderer-B6a5ZAwT.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-DQqqP-WF.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-BTm4CTKr.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-qh-NzTWO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-T3alJPda.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-C3K3rlAZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-DBqDb4Nb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-D3F4nmET.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-CzBDvj6R.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-8VTEe-0T.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-aq1t6BkR.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-D7FeWASw.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-CmtFqjqu.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BGa3qZre.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CeILsq6V.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BSyDxU0G.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-BAfiIxKf.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-B9sHgc9n.js">
+    <link rel="modulepreload" crossorigin href="./assets/process-output-4yip1nZE.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-CObhN-9g.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-Dxmp_Bd_.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-BQUzYly2.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-DVwc11C3.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-D4Tdvkms.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai--4VOMvH8.js">
+    <link rel="modulepreload" crossorigin href="./assets/isEmpty-9KlyX4nB.js">
+    <link rel="modulepreload" crossorigin href="./assets/bot-message-square-BzawfL5p.js">
+    <link rel="modulepreload" crossorigin href="./assets/chat-display-Co6iGNSx.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-F2DZENgf.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-4zY5Dv0P.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-Be-iRLAY.js">
+    <link rel="modulepreload" crossorigin href="./assets/components-CF9x5raB.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-BQP0K_pZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-BhEcsHTu.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BlB0Ba6E.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-sD4fbzpH.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-BEHvSeoM.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-resizable-panels.browser.esm-RgA6v8U3.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-aware-panel-D7ygyp92.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-BWK_nLJy.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-BRlAqdmq.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-DgTL09j7.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DmjbJYSq.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-Fa5c_iPb.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-code-D9wtWSiR.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-DFiYrN2w.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-BOzRCrXK.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-B7_NRa34.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-DGtw6Lae.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-eWwLICkT.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-D1hTncYV.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-BhvWC48z.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-DRf51_gT.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-1hBRXVlM.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-Dzwrcr75.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-C_qcB35v.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-36rMhJTw.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BeVScbIo.js">
+    <link rel="modulepreload" crossorigin href="./assets/code-xml-BMv1Dtd2.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-BG-iMGgV.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-oV8Csj8Y.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-DD8FJvQ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-_LzfhNmX.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-jmgGt1lS.css">
+    <link rel="stylesheet" crossorigin href="./assets/markdown-renderer-DdDKmWlR.css">
+    <link rel="stylesheet" crossorigin href="./assets/JsonOutput-B7vuddcd.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrPzoH7F.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">%23%20%2F%2F%2F%20script%0A%23%20requires-python%20%3D%20%22%3E%3D3.10%22%0A%23%20dependencies%20%3D%20%5B%0A%23%20%20%20%20%20%22marimo%22%2C%0A%23%20%20%20%20%20%22numpy%3D%3D2.4.3%22%2C%0A%23%20%20%20%20%20%22pandas%3D%3D2.3.2%22%2C%0A%23%20%5D%0A%23%20%2F%2F%2F%0A%0Aimport%20marimo%0A%0A__generated_with%20%3D%20%220.20.4%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20Independence%20in%20Probability%20Theory%0A%0A%20%20%20%20_This%20notebook%20is%20a%20computational%20companion%20to%20the%20book%20%5B%22Probability%20for%20Computer%20Scientists%22%5D(https%3A%2F%2Fchrispiech.github.io%2FprobabilityForComputerScientists%2Fen%2Fpart1%2Findependence%2F)%2C%20by%20Stanford%20professor%20Chris%20Piech._%0A%0A%20%20%20%20In%20probability%20theory%2C%20independence%20is%20a%20fundamental%20concept%20that%20helps%20us%20understand%0A%20%20%20%20when%20events%20don't%20influence%20each%20other.%20Two%20events%20are%20independent%20if%20knowing%20the%0A%20%20%20%20outcome%20of%20one%20event%20doesn't%20change%20our%20belief%20about%20the%20other%20event%20occurring.%0A%0A%20%20%20%20%23%23%20Definition%20of%20Independence%0A%0A%20%20%20%20Two%20events%20%24E%24%20and%20%24F%24%20are%20independent%20if%3A%0A%0A%20%20%20%20%24%24P(E%7CF)%20%3D%20P(E)%24%24%0A%0A%20%20%20%20This%20means%20that%20knowing%20%24F%24%20occurred%20doesn't%20change%20the%20probability%20of%20%24E%24%20occurring.%0A%0A%20%20%20%20%23%23%23%20_Alternative%20Definition_%0A%0A%20%20%20%20Using%20the%20chain%20rule%2C%20we%20can%20derive%20another%20equivalent%20definition%3A%0A%0A%20%20%20%20%24%24P(E%20%5Ccap%20F)%20%3D%20P(E)%20%5Ccdot%20P(F)%24%24%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Independence%20is%20Symmetric%0A%0A%20%20%20%20This%20property%20is%20symmetric%3A%20if%20%24E%24%20is%20independent%20of%20%24F%24%2C%20then%20%24F%24%20is%20independent%20of%20%24E%24.%0A%20%20%20%20We%20can%20prove%20this%20using%20Bayes'%20Theorem%3A%0A%0A%20%20%20%20%5C%5BP(E%7CF)%20%3D%20%5Cfrac%7BP(F%7CE)P(E)%7D%7BP(F)%7D%5C%5D%0A%0A%20%20%20%20%5C%5B%3D%20%5Cfrac%7BP(F)P(E)%7D%7BP(F)%7D%5C%5D%0A%0A%20%20%20%20%5C%5B%3D%20P(E)%5C%5D%0A%0A%20%20%20%20%23%23%20Independence%20and%20Complements%0A%0A%20%20%20%20Given%20independent%20events%20%24A%24%20and%20%24B%24%2C%20we%20can%20prove%20that%20%24A%24%20and%20%24B%5EC%24%20are%20also%20independent%3A%0A%0A%0A%20%20%20%20%5C%5BP(AB%5EC)%20%3D%20P(A)%20-%20P(AB)%5C%5D%0A%0A%20%20%20%20%5C%5B%3D%20P(A)%20-%20P(A)P(B)%5C%5D%0A%0A%20%20%20%20%5C%5B%3D%20P(A)(1%20-%20P(B))%5C%5D%0A%0A%20%20%20%20%5C%5B%3D%20P(A)P(B%5EC)%5C%5D%0A%0A%20%20%20%20%23%23%20Generalized%20Independence%0A%0A%20%20%20%20Events%20%24E_1%2C%20E_2%2C%20%5Cldots%2C%20E_n%24%20are%20independent%20if%20for%20every%20subset%20with%20%24r%24%20elements%20(where%20%24r%20%5Cleq%20n%24)%3A%0A%0A%20%20%20%20%5C%5BP(E_1%2C%20E_2%2C%20%5Cldots%2C%20E_r)%20%3D%20%5Cprod_%7Bi%3D1%7D%5Er%20P(E_i)%5C%5D%0A%0A%20%20%20%20For%20example%2C%20consider%20getting%205%20heads%20on%205%20coin%20flips.%20Let%20%24H_i%24%20be%20the%20event%20that%20the%20%24i%24th%20flip%20is%20heads%3A%0A%0A%0A%20%20%20%20%5C%5BP(H_1%2C%20H_2%2C%20H_3%2C%20H_4%2C%20H_5)%20%3D%20P(H_1)P(H_2)P(H_3)P(H_4)P(H_5)%5C%5D%0A%0A%20%20%20%20%5C%5B%3D%20%5Cprod_%7Bi%3D1%7D%5E5%20P(H_i)%5C%5D%0A%0A%20%20%20%20%5C%5B%3D%20%5Cleft(%5Cfrac%7B1%7D%7B2%7D%5Cright)%5E5%20%3D%200.03125%5C%5D%0A%0A%20%20%20%20%23%23%20Conditional%20Independence%0A%0A%20%20%20%20Events%20%24E_1%2C%20E_2%2C%20E_3%24%20are%20conditionally%20independent%20given%20event%20%24F%24%20if%3A%0A%0A%20%20%20%20%5C%5BP(E_1%2C%20E_2%2C%20E_3%20%7C%20F)%20%3D%20P(E_1%7CF)P(E_2%7CF)P(E_3%7CF)%5C%5D%0A%0A%20%20%20%20This%20can%20be%20written%20more%20succinctly%20using%20product%20notation%3A%0A%0A%20%20%20%20%5C%5BP(E_1%2C%20E_2%2C%20E_3%20%7C%20F)%20%3D%20%5Cprod_%7Bi%3D1%7D%5E3%20P(E_i%7CF)%5C%5D%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20callout_text%20%3D%20mo.md(r%22%22%22While%20the%20rules%20of%20probability%20stay%20the%20same%20when%20conditioning%20on%20an%20event%2C%20the%20independence%20%0A%20%20%20%20%20%20%20%20property%20between%20events%20might%20change.%20Events%20that%20were%20dependent%20can%20become%20independent%20when%20%0A%20%20%20%20%20%20%20%20conditioning%20on%20an%20event.%20Events%20that%20were%20independent%20can%20become%20dependent.%0A%0A%20%20%20%20%20%20%20%20For%20example%2C%20if%20events%20%24E_1%2C%20E_2%2C%20E_3%24%20are%20conditionally%20independent%20given%20event%20%24F%24%2C%20%0A%20%20%20%20%20%20%20%20it%20is%20not%20necessarily%20true%20that%3A%0A%0A%20%20%20%20%20%20%20%20%24%24P(E_1%2CE_2%2CE_3)%20%3D%20%5Cprod_%7Bi%3D1%7D%5E3%20P(E_i)%24%24%0A%0A%20%20%20%20%20%20%20%20as%20we%20are%20no%20longer%20conditioning%20on%20%24F%24.%0A%20%20%20%20%20%20%20%20%22%22%22)%0A%20%20%20%20mo.callout(%0A%20%20%20%20%20%20%20%20callout_text%2C%0A%20%20%20%20%20%20%20%20kind%3D%22warn%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.function%0Adef%20check_independence(p_e%2C%20p_f%2C%20p_intersection)%3A%0A%20%20%20%20expected%20%3D%20p_e%20*%20p_f%0A%20%20%20%20tolerance%20%3D%201e-5%20%20%23%20Stricter%20tolerance%20for%20comparison%0A%0A%20%20%20%20return%20abs(p_intersection%20-%20expected)%20%3C%20tolerance%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20%23%20Example%201%3A%20Rolling%20dice%0A%20%20%20%20p_first_even%20%3D%200.5%20%20%20%20%20%20%23%20P(First%20die%20is%20even)%0A%20%20%20%20p_second_six%20%3D%201%2F6%20%20%20%20%20%20%23%20P(Second%20die%20is%206)%0A%20%20%20%20p_both%20%3D%201%2F12%20%20%20%20%20%20%20%20%20%20%20%23%20P(First%20even%20AND%20second%20is%206)%0A%20%20%20%20dice_independent%20%3D%20check_independence(p_first_even%2C%20p_second_six%2C%20p_both)%0A%20%20%20%20example1%20%3D%20f%22%22%22%0A%20%20%20%20%23%23%23%23%201.%20Rolling%20Two%20Dice%20%F0%9F%8E%B2%0A%0A%20%20%20%20-%20P(First%20die%20is%20even)%20%3D%20%7Bp_first_even%3A.3f%7D%0A%20%20%20%20-%20P(Second%20die%20shows%206)%20%3D%20%7Bp_second_six%3A.3f%7D%0A%20%20%20%20-%20P(Both%20events%20occur)%20%3D%20%7Bp_both%3A.3f%7D%0A%0A%20%20%20%20**Result**%3A%20Events%20are%20%7B'independent'%20if%20dice_independent%20else%20'dependent'%7D%0A%0A%20%20%20%20%3Cdetails%3E%0A%20%20%20%20%3Csummary%3EWhy%3F%3C%2Fsummary%3E%0A%20%20%20%20Rolling%20dice%20are%20independent%20events%20because%20the%20outcome%20of%20one%20die%20doesn't%20affect%20the%20other.%20%0A%20%20%20%20The%20probability%20of%20getting%20a%206%20on%20the%20second%20die%20(1%2F6)%20remains%20the%20same%20regardless%20of%20what%20shows%20on%20the%20first%20die.%20This%20is%20why%20P(Both)%20%3D%201%2F12%2C%20which%20equals%20P(First%20even)%20*%20P(Second%20is%206)%20%3D%200.5%20*%201%2F6.%0A%20%20%20%20%3C%2Fdetails%3E%0A%20%20%20%20%22%22%22%0A%20%20%20%20mo.md(example1)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20%23%20Example%202%3A%20Drawing%20cards%20(dependent%20events)%0A%20%20%20%20p_first_heart%20%3D%2013%2F52%20%20%20%20%23%20P(First%20card%20is%20heart)%0A%20%20%20%20p_second_heart%20%3D%2012%2F51%20%20%20%23%20P(Second%20card%20is%20heart%20%7C%20First%20was%20heart)%0A%0A%20%20%20%20%23%20For%20dependent%20events%2C%20P(A%E2%88%A9B)%20%3D%20P(A)%20*%20P(B%7CA)%0A%20%20%20%20p_both_hearts%20%3D%20(13%2F52)%20*%20(12%2F51)%20%20%23%20Joint%20probability%20%3D%200.059%0A%0A%20%20%20%20%23%20If%20events%20were%20independent%2C%20we'd%20expect%3A%0A%20%20%20%20theoretical_if_independent%20%3D%20(13%2F52)%20*%20(13%2F52)%20%20%23%20%3D%200.0625%0A%0A%20%20%20%20%23%20Test%20independence%20by%20comparing%20actual%20joint%20probability%20with%20theoretical%20independent%20probability%0A%20%20%20%20cards_independent%20%3D%20check_independence(13%2F52%2C%2013%2F52%2C%20p_both_hearts)%0A%0A%20%20%20%20example2%20%3D%20f%22%22%22%0A%20%20%20%20%23%23%23%23%202.%20Drawing%20Cards%20Without%20Replacement%20%E2%99%A5%EF%B8%8F%0A%20%20%20%20-%20P(First%20card%20is%20heart)%20%3D%20%7Bp_first_heart%3A.3f%7D%0A%20%20%20%20-%20P(Second%20card%20is%20heart%20%7C%20First%20was%20heart)%20%3D%20%7Bp_second_heart%3A.3f%7D%0A%20%20%20%20-%20P(Both%20cards%20are%20hearts)%20%3D%20%7Bp_both_hearts%3A.3f%7D%0A%20%20%20%20-%20If%20independent%2C%20P(Both%20hearts)%20would%20be%20%3D%20%7Btheoretical_if_independent%3A.3f%7D%0A%0A%20%20%20%20**Result**%3A%20Events%20are%20%7B'independent'%20if%20cards_independent%20else%20'dependent'%7D%0A%0A%20%20%20%20%3Cdetails%3E%0A%20%20%20%20%3Csummary%3EWhy%3F%3C%2Fsummary%3E%0A%20%20%20%20Drawing%20cards%20without%20replacement%20makes%20events%20dependent.%20The%20probability%20of%20getting%20%0A%20%20%20%20a%20second%20heart%20(12%2F51%20%E2%89%88%200.235)%20is%20less%20than%20the%20first%20(13%2F52%20%3D%200.25)%20because%20there's%20one%20fewer%20heart%20available.%20This%20makes%20the%20actual%20probability%20of%20both%20hearts%20(0.059)%20less%20than%20what%20we'd%20%0A%20%20%20%20expect%20if%20the%20events%20were%20independent%20(0.063).%0A%20%20%20%20%3C%2Fdetails%3E%0A%20%20%20%20%22%22%22%0A%20%20%20%20mo.md(example2)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20%23%20Example%203%3A%20Computer%20system%0A%20%20%20%20p_hardware%20%3D%200.02%20%20%20%20%20%20%20%23%20P(Hardware%20failure)%0A%20%20%20%20p_software%20%3D%200.03%20%20%20%20%20%20%20%23%20P(Software%20crash)%0A%20%20%20%20p_both_failure%20%3D%200.0006%20%23%20P(Both%20failures)%0A%20%20%20%20system_independent%20%3D%20check_independence(p_hardware%2C%20p_software%2C%20p_both_failure)%0A%20%20%20%20example3%20%3D%20f%22%22%22%0A%20%20%20%20%23%23%23%23%203.%20Computer%20System%20Failures%20%F0%9F%92%BB%0A%0A%20%20%20%20-%20P(Hardware%20failure)%20%3D%20%7Bp_hardware%3A.3f%7D%0A%20%20%20%20-%20P(Software%20crash)%20%3D%20%7Bp_software%3A.3f%7D%0A%20%20%20%20-%20P(Both%20failures%20occur)%20%3D%20%7Bp_both_failure%3A.3f%7D%0A%0A%20%20%20%20**Result**%3A%20Events%20are%20%7B'independent'%20if%20system_independent%20else%20'dependent'%7D%0A%0A%20%20%20%20%3Cdetails%3E%0A%20%20%20%20%3Csummary%3EWhy%3F%3C%2Fsummary%3E%0A%20%20%20%20Computer%20hardware%20and%20software%20failures%20are%20typically%20independent%20because%20they%20often%20have%20different%20root%20causes.%20Hardware%20failures%20might%20be%20due%20to%20physical%20issues%20(heat%2C%20power)%2C%20while%20software%20crashes%20come%20from%20programming%20bugs.%20This%20is%20why%20P(Both)%20%3D%200.0006%2C%20which%20equals%20P(Hardware)%20*%20P(Software)%20%3D%200.02%20*%200.03.%0A%20%20%20%20%3C%2Fdetails%3E%0A%20%20%20%20%22%22%22%0A%20%20%20%20mo.md(example3)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Establishing%20Independence%0A%0A%20%20%20%20In%20practice%2C%20we%20can%20establish%20independence%20through%3A%0A%0A%20%20%20%201.%20**Mathematical%20Verification**%3A%20Show%20that%20P(E%E2%88%A9F)%20%3D%20P(E)P(F)%0A%20%20%20%202.%20**Empirical%20Testing**%3A%20Analyze%20data%20to%20check%20if%20events%20appear%20independent%0A%20%20%20%203.%20**Domain%20Knowledge**%3A%20Use%20understanding%20of%20the%20system%20to%20justify%20independence%0A%0A%20%20%20%20%3E%20**Note**%3A%20Perfect%20independence%20is%20rare%20in%20real%20data.%20We%20often%20make%20independence%20assumptions%0A%20%20%20%20when%20dependencies%20are%20negligible%20and%20the%20simplification%20is%20useful.%0A%0A%20%20%20%20%23%23%20Backup%20Systems%20in%20Space%20Missions%0A%0A%20%20%20%20Consider%20a%20space%20mission%20with%20two%20backup%20life%20support%20systems%3A%0A%0A%20%20%20%20%24%24P(%09ext%7BPrimary%20fails%7D)%20%3D%20p_1%24%24%0A%0A%20%20%20%20%24%24P(%09ext%7BSecondary%20fails%7D)%20%3D%20p_2%24%24%0A%0A%20%20%20%20If%20the%20systems%20are%20truly%20independent%20(different%20power%20sources%2C%20separate%20locations%2C%20distinct%20technologies)%3A%0A%0A%20%20%20%20%24%24P(%09ext%7BLife%20support%20fails%7D)%20%3D%20p_1p_2%24%24%0A%0A%20%20%20%20For%20example%3A%0A%0A%20%20%20%20-%20If%20%24p_1%20%3D%200.01%24%20and%20%24p_2%20%3D%200.02%24%20(99%25%20and%2098%25%20reliable)%0A%20%20%20%20-%20Then%20%24P(%09ext%7BTotal%20failure%7D)%20%3D%200.0002%24%20(99.98%25%20reliable)%0A%0A%20%20%20%20However%2C%20if%20both%20systems%20share%20vulnerabilities%20(same%20radiation%20exposure%2C%20temperature%20extremes)%3A%0A%0A%20%20%20%20%24%24P(%09ext%7BLife%20support%20fails%7D)%20%3E%20p_1p_2%24%24%0A%0A%20%20%20%20This%20example%20shows%20why%20space%20agencies%20invest%20heavily%20in%20ensuring%20true%20independence%20of%20backup%20systems.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Interactive%20Example%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(flip_button%2C%20mo%2C%20reset_button)%3A%0A%20%20%20%20mo.hstack(%5Bflip_button%2C%20reset_button%5D%2C%20justify%3D'center')%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20flip_button%20%3D%20mo.ui.run_button(label%3D%22Flip%20Coins!%22%2C%20kind%3D%22info%22)%0A%20%20%20%20reset_button%20%3D%20mo.ui.run_button(label%3D%22Reset%22%2C%20kind%3D%22danger%22)%0A%20%20%20%20stats_display%20%3D%20mo.md(%22*Click%20'Flip%20Coins!'%20to%20start%20simulation*%22)%0A%20%20%20%20return%20flip_button%2C%20reset_button%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(flip_button%2C%20mo%2C%20np%2C%20reset_button)%3A%0A%20%20%20%20if%20reset_button.value%20or%20not%20flip_button.value%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md(%22*Click%20'Flip%20Coins!'%20to%20start%20simulation*%22)%0A%20%20%20%20if%20flip_button.value%3A%0A%20%20%20%20%20%20%20%20coin1%20%3D%20%22H%22%20if%20np.random.random()%20%3C%200.5%20else%20%22T%22%0A%20%20%20%20%20%20%20%20coin2%20%3D%20%22H%22%20if%20np.random.random()%20%3C%200.5%20else%20%22T%22%0A%0A%20%20%20%20%20%20%20%20%23%20Calculate%20probabilities%20for%20this%20flip%0A%20%20%20%20%20%20%20%20p_h1%20%3D%201%20if%20coin1%20%3D%3D%20%22H%22%20else%200%0A%20%20%20%20%20%20%20%20p_h2%20%3D%201%20if%20coin2%20%3D%3D%20%22H%22%20else%200%0A%20%20%20%20%20%20%20%20p_both_h%20%3D%201%20if%20(coin1%20%3D%3D%20%22H%22%20and%20coin2%20%3D%3D%20%22H%22)%20else%200%0A%20%20%20%20%20%20%20%20p_product%20%3D%20p_h1%20*%20p_h2%0A%0A%20%20%20%20%20%20%20%20stats%20%3D%20f%22%22%22%0A%20%20%20%20%20%20%20%20%23%20Current%20Flip%20Results%0A%0A%20%20%20%20%20%20%20%20**Individual%20Probabilities%3A**%0A%0A%20%20%20%20%20%20%20%20-%20P(Heads%20on%20Coin%201)%20%3D%20%7Bp_h1%3A.3f%7D%0A%20%20%20%20%20%20%20%20-%20P(Heads%20on%20Coin%202)%20%3D%20%7Bp_h2%3A.3f%7D%0A%0A%20%20%20%20%20%20%20%20**Testing%20Independence%3A**%0A%0A%20%20%20%20%20%20%20%20-%20P(Both%20Heads)%20%3D%20%7Bp_both_h%3A.3f%7D%0A%20%20%20%20%20%20%20%20-%20P(H%E2%82%81)P(H%E2%82%82)%20%3D%20%7Bp_product%3A.3f%7D%0A%0A%20%20%20%20%20%20%20%20**Are%20they%20independent%3F**%0A%20%20%20%20%20%20%20%20The%20events%20appear%20%7B'independent'%20if%20abs(p_both_h%20-%20p_product)%20%3C%200.1%20else%20'dependent'%7D%0A%20%20%20%20%20%20%20%20(difference%3A%20%7Babs(p_both_h%20-%20p_product)%3A.3f%7D)%0A%0A%20%20%20%20%20%20%20%20**Current%20Flip%3A**%0A%0A%20%20%20%20%20%20%20%20%7C%20Coin%201%20%7C%20Coin%202%20%7C%0A%20%20%20%20%20%20%20%20%7C--------%7C--------%7C%0A%20%20%20%20%20%20%20%20%7C%20%7Bcoin1%7D%20%7C%20%7Bcoin2%7D%20%7C%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20stats%20%3D%20%22*Click%20'Flip%20Coins!'%20to%20start%20simulation*%22%0A%0A%20%20%20%20new_stats_display%20%3D%20mo.md(stats)%0A%20%20%20%20new_stats_display%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Understanding%20the%20Simulation%0A%0A%20%20%20%20This%20simulation%20demonstrates%20independence%20using%20coin%20flips%2C%20where%20each%20coin's%20outcome%20is%20unaffected%20by%20the%20other.%0A%0A%20%20%20%20%23%23%23%20Reading%20the%20Results%0A%0A%20%20%20%201.%20**Individual%20Probabilities%3A**%0A%0A%20%20%20%20%20%20%20%20%20%20%20-%20P(H%E2%82%81)%3A%201%20if%20heads%2C%200%20if%20tails%20on%20first%20coin%0A%20%20%20%20%20%20%20%20%20%20%20-%20P(H%E2%82%82)%3A%201%20if%20heads%2C%200%20if%20tails%20on%20second%20coin%0A%0A%20%20%20%202.%20**Testing%20Independence%3A**%0A%0A%20%20%20%20%20%20%20%20%20%20%20-%20P(Both%20Heads)%3A%201%20if%20both%20show%20heads%2C%200%20otherwise%0A%20%20%20%20%20%20%20%20%20%20%20-%20P(H%E2%82%81)P(H%E2%82%82)%3A%20Product%20of%20individual%20results%0A%0A%20%20%20%20%3E%20**Note**%3A%20Each%20click%20performs%20a%20new%20independent%20trial.%20While%20a%20single%20flip%20shows%20binary%20outcomes%20(0%20or%201)%2C%0A%20%20%20%20the%20theoretical%20probability%20is%200.5%20for%20each%20coin%20and%200.25%20for%20both%20heads.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20%F0%9F%A4%94%20Test%20Your%20Understanding%0A%0A%20%20%20%20Which%20of%20these%20statements%20about%20independence%20are%20true%3F%0A%0A%20%20%20%20%3Cdetails%3E%0A%20%20%20%20%3Csummary%3EIf%20P(E%7CF)%20%3D%20P(E)%2C%20then%20E%20and%20F%20are%20independent%3C%2Fsummary%3E%0A%20%20%20%20%E2%9C%85%20True!%20This%20is%20one%20definition%20of%20independence%20-%20knowing%20F%20occurred%20doesn't%20change%20the%20probability%20of%20E.%0A%20%20%20%20%3C%2Fdetails%3E%0A%0A%20%20%20%20%3Cdetails%3E%0A%20%20%20%20%3Csummary%3EIndependent%20events%20cannot%20occur%20simultaneously%3C%2Fsummary%3E%0A%20%20%20%20%E2%9D%8C%20False!%20Independent%20events%20can%20and%20do%20occur%20together%20-%20their%20joint%20probability%20is%20just%20the%20product%20of%20their%20individual%20probabilities.%0A%20%20%20%20%3C%2Fdetails%3E%0A%0A%20%20%20%20%3Cdetails%3E%0A%20%20%20%20%3Csummary%3EIf%20P(E%E2%88%A9F)%20%3D%20P(E)P(F)%2C%20then%20E%20and%20F%20are%20independent%3C%2Fsummary%3E%0A%20%20%20%20%E2%9C%85%20True!%20This%20is%20the%20multiplicative%20definition%20of%20independence.%0A%20%20%20%20%3C%2Fdetails%3E%0A%0A%20%20%20%20%3Cdetails%3E%0A%20%20%20%20%3Csummary%3EIndependence%20is%20symmetric%3A%20if%20E%20is%20independent%20of%20F%2C%20then%20F%20is%20independent%20of%20E%3C%2Fsummary%3E%0A%20%20%20%20%E2%9C%85%20True!%20The%20definition%20P(E%E2%88%A9F)%20%3D%20P(E)P(F)%20is%20symmetric%20in%20E%20and%20F.%0A%20%20%20%20%3C%2Fdetails%3E%0A%0A%20%20%20%20%3Cdetails%3E%0A%20%20%20%20%3Csummary%3EThree%20events%20being%20pairwise%20independent%20means%20they%20are%20mutually%20independent%3C%2Fsummary%3E%0A%20%20%20%20%E2%9D%8C%20False!%20Pairwise%20independence%20doesn't%20guarantee%20mutual%20independence%20-%20we%20need%20to%20check%20all%20combinations.%0A%20%20%20%20%3C%2Fdetails%3E%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Summary%0A%0A%20%20%20%20In%20this%20exploration%20of%20probability%20independence%2C%20we've%20discovered%20how%20to%20recognize%20when%20events%20truly%20don't%20influence%20each%20other.%20Through%20the%20lens%20of%20both%20mathematical%20definitions%20and%20interactive%20examples%2C%20we've%20seen%20how%20independence%20manifests%20in%20scenarios%20ranging%20from%20simple%20coin%20flips%20to%20critical%20system%20designs.%0A%0A%20%20%20%20The%20power%20of%20independence%20lies%20in%20its%20simplicity%3A%20when%20events%20are%20independent%2C%20we%20can%20multiply%20their%20individual%20probabilities%20to%20understand%20their%20joint%20behavior.%20Yet%2C%20as%20our%20examples%20showed%2C%20true%20independence%20is%20often%20more%20nuanced%20than%20it%20first%20appears.%20What%20seems%20independent%20might%20harbor%20hidden%20dependencies%2C%20and%20what%20appears%20dependent%20might%20be%20independent%20under%20certain%20conditions.%0A%0A%20%20%20%20_The%20art%20lies%20not%20just%20in%20calculating%20probabilities%2C%20but%20in%20developing%20the%20intuition%20to%20recognize%20independence%20in%20real-world%20scenarios%E2%80%94a%20skill%20essential%20for%20making%20informed%20decisions%20in%20uncertain%20situations._%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20import%20pandas%20as%20pd%0A%0A%20%20%20%20return%20(np%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "cwd": "",
+            "mode": "edit",
+            "version": "0.20.4",
+            "serverToken": "unused",
+            "config": {"ai": {"custom_providers": {}, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

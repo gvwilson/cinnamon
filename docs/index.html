@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marimo Learn - Interactive Python Notebooks</title>
+    <meta name="description" content="Learn Python, data science, and machine learning with interactive marimo notebooks">
+    <link rel="icon" type="image/png" href="assets/marimo-learn.png">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+
+    <header class="bg-white">
+        <div class="container mx-auto px-4 py-12 max-w-6xl">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-12">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Interactive Python Learning with <span class="text-primary">marimo</span></h1>
+                    <p class="text-lg text-gray-600 mb-6">Explore our collection of interactive notebooks for Python, data science, and machine learning.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#courses" class="btn-primary py-2 px-6">Explore Courses</a>
+                        <a href="https://github.com/marimo-team/learn" target="_blank" class="bg-white border border-gray-300 hover:border-primary text-gray-700 font-medium py-2 px-6 rounded-md transition duration-300">View on GitHub</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="logo-container">
+                        <img src="https://github.com/marimo-team/learn/blob/main/assets/marimo-learn.png?raw=true" alt="Marimo Logo" class="w-64 h-64 mx-auto object-contain">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Why Learn with <span class="text-primary">Marimo</span>?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card">
+                    <div class="icon-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+</svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Interactive Learning</h3>
+                    <p class="text-gray-600">Learn by doing with interactive notebooks that run directly in your browser.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+</svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Practical Examples</h3>
+                    <p class="text-gray-600">Real-world examples and applications to reinforce your understanding.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+</svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Comprehensive Curriculum</h3>
+                    <p class="text-gray-600">From Python basics to advanced machine learning concepts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="courses" class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Explore Our <span class="text-primary">Courses</span></h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                    
+                    
+                        <div class="content-card hover-grow">
+                            <div class="card-accent"></div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">
+                                    <a href="altair/" class="hover:text-primary">
+                                        Learn Altair
+                                    </a>
+                                </h3>
+                                <p class="text-gray-600 mb-4">
+                                    
+                                        <p>Learn the basics of Altair, a high-performance visualization library, using lessons developed at the University of Washington.</p>
+                                    
+                                </p>
+                                <div class="mt-4">
+                                    <ol class="space-y-1 list-decimal pl-5">
+                                        
+                                            <li>
+                                                <a href="altair/01_introduction.html" class="link-primary">
+                                                    Introduction to Altair
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="altair/02_marks_encoding.html" class="link-primary">
+                                                    Data Types, Graphical Marks, and Visual Encoding Channels
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="altair/03_data_transformation.html" class="link-primary">
+                                                    Data Transformation
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="altair/04_scales_axes_legends.html" class="link-primary">
+                                                    Scales, Axes, and Legends
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="altair/05_view_composition.html" class="link-primary">
+                                                    Multi-View Composition
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="altair/06_interaction.html" class="link-primary">
+                                                    Interaction
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="altair/07_cartographic.html" class="link-primary">
+                                                    Cartographic Visualization
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="altair/08_debugging.html" class="link-primary">
+                                                    Altair Debugging Guide
+                                                </a>
+                                            </li>
+                                        
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    
+                
+                    
+                    
+                        <div class="content-card hover-grow">
+                            <div class="card-accent"></div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">
+                                    <a href="duckdb/" class="hover:text-primary">
+                                        Learn DuckDB
+                                    </a>
+                                </h3>
+                                <p class="text-gray-600 mb-4">
+                                    
+                                        <p>These notebooks teach you the basics of DuckDB, a fast in-memory database engine that can interoperate with dataframes, and show how marimo gives DuckDB superpowers.</p>
+                                    
+                                </p>
+                                <div class="mt-4">
+                                    <ol class="space-y-1 list-decimal pl-5">
+                                        
+                                            <li>
+                                                <a href="duckdb/01_getting_started.html" class="link-primary">
+                                                    What is DuckDB?
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="duckdb/08_loading_parquet.html" class="link-primary">
+                                                    Loading Parquet files with DuckDB
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="duckdb/09_loading_json.html" class="link-primary">
+                                                    Loading JSON
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="duckdb/11_working_with_apache_arrow.html" class="link-primary">
+                                                    Working with Apache Arrow
+                                                </a>
+                                            </li>
+                                        
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    
+                
+                    
+                    
+                        <div class="content-card hover-grow">
+                            <div class="card-accent"></div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">
+                                    <a href="optimization/" class="hover:text-primary">
+                                        Learn Optimization
+                                    </a>
+                                </h3>
+                                <p class="text-gray-600 mb-4">
+                                    
+                                        <p>Learn the basics of convex optimization using Python, and see how to apply these ideas to vehicle control, portfolio allocation in finance, and other areas.</p>
+                                    
+                                </p>
+                                <div class="mt-4">
+                                    <ol class="space-y-1 list-decimal pl-5">
+                                        
+                                            <li>
+                                                <a href="optimization/01_least_squares.html" class="link-primary">
+                                                    Least Squares
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="optimization/02_linear_program.html" class="link-primary">
+                                                    Linear Program
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="optimization/03_minimum_fuel_optimal_control.html" class="link-primary">
+                                                    Minimal Fuel Optimal Control
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="optimization/04_quadratic_program.html" class="link-primary">
+                                                    Quadratic Program
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="optimization/05_portfolio_optimization.html" class="link-primary">
+                                                    Portfolio Optimization
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="optimization/06_convex_optimization.html" class="link-primary">
+                                                    Convex Optimization
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="optimization/07_sdp.html" class="link-primary">
+                                                    Semidefinite Program
+                                                </a>
+                                            </li>
+                                        
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    
+                
+                    
+                    
+                        <div class="content-card hover-grow">
+                            <div class="card-accent"></div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">
+                                    <a href="polars/" class="hover:text-primary">
+                                        Learn Polars
+                                    </a>
+                                </h3>
+                                <p class="text-gray-600 mb-4">
+                                    
+                                        <p>Learn the basics of data wrangling with a high-performance Python library called Polars.</p>
+                                    
+                                </p>
+                                <div class="mt-4">
+                                    <ol class="space-y-1 list-decimal pl-5">
+                                        
+                                            <li>
+                                                <a href="polars/01_why_polars.html" class="link-primary">
+                                                    An introduction to Polars
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="polars/02_dataframes.html" class="link-primary">
+                                                    DataFrames
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="polars/03_loading_data.html" class="link-primary">
+                                                    Loading Data
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="polars/04_basic_operations.html" class="link-primary">
+                                                    Basic operations on data
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="polars/05_reactive_plots.html" class="link-primary">
+                                                    Reactive Plots
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="polars/06_dataframe_transformer.html" class="link-primary">
+                                                    Polars with Marimo's Dataframe Transformer
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="polars/07_querying_with_sql.html" class="link-primary">
+                                                    SQL Features in Marimo and Polars
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="polars/08_working_with_columns.html" class="link-primary">
+                                                    Working with Columns
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="polars/09_data_types.html" class="link-primary">
+                                                    Data Types
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="polars/10_strings.html" class="link-primary">
+                                                    Strings
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="polars/11_missing_data.html" class="link-primary">
+                                                    Dealing with Missing Data
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="polars/12_aggregations.html" class="link-primary">
+                                                    Aggregations
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="polars/13_window_functions.html" class="link-primary">
+                                                    Window Functions
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="polars/14_user_defined_functions.html" class="link-primary">
+                                                    User-Defined Functions
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="polars/16_lazy_execution.html" class="link-primary">
+                                                    Lazy Execution
+                                                </a>
+                                            </li>
+                                        
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    
+                
+                    
+                    
+                        <div class="content-card hover-grow">
+                            <div class="card-accent"></div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">
+                                    <a href="probability/" class="hover:text-primary">
+                                        Learn Probability
+                                    </a>
+                                </h3>
+                                <p class="text-gray-600 mb-4">
+                                    
+                                        <p>These marimo notebooks teach the fundamental of probability with an emphasis on interactive learning and computation in Python.</p>
+                                    
+                                </p>
+                                <div class="mt-4">
+                                    <ol class="space-y-1 list-decimal pl-5">
+                                        
+                                            <li>
+                                                <a href="probability/01_sets.html" class="link-primary">
+                                                    Sets
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/02_axioms.html" class="link-primary">
+                                                    Axioms of Probability
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/03_probability_of_or.html" class="link-primary">
+                                                    Probability of Or
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/04_conditional_probability.html" class="link-primary">
+                                                    Conditional Probability
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/05_independence.html" class="link-primary">
+                                                    Independence in Probability Theory
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/06_probability_of_and.html" class="link-primary">
+                                                    Probability of And
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/07_law_of_total_probability.html" class="link-primary">
+                                                    Law of Total Probability
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/08_bayes_theorem.html" class="link-primary">
+                                                    Bayes' Theorem
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/09_random_variables.html" class="link-primary">
+                                                    Random Variables
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/10_probability_mass_function.html" class="link-primary">
+                                                    Probability Mass Functions
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/11_expectation.html" class="link-primary">
+                                                    Expectation
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/12_variance.html" class="link-primary">
+                                                    Variance
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/13_bernoulli_distribution.html" class="link-primary">
+                                                    Bernoulli Distribution
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/14_binomial_distribution.html" class="link-primary">
+                                                    Binomial Distribution
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/15_poisson_distribution.html" class="link-primary">
+                                                    Poisson Distribution
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/16_continuous_distribution.html" class="link-primary">
+                                                    Continuous Distributions
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/17_normal_distribution.html" class="link-primary">
+                                                    Normal Distribution
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/18_central_limit_theorem.html" class="link-primary">
+                                                    Central Limit Theorem
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/19_maximum_likelihood_estimation.html" class="link-primary">
+                                                    Maximum Likelihood Estimation
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/20_naive_bayes.html" class="link-primary">
+                                                    Naive Bayes Classification
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="probability/21_logistic_regression.html" class="link-primary">
+                                                    Logistic Regression
+                                                </a>
+                                            </li>
+                                        
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    
+                
+                    
+                    
+                        <div class="content-card hover-grow">
+                            <div class="card-accent"></div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">
+                                    <a href="python/" class="hover:text-primary">
+                                        Learn Python
+                                    </a>
+                                </h3>
+                                <p class="text-gray-600 mb-4">
+                                    
+                                        <p>These notebooks will help you learn the basics of Python programming in an easy, interactive way.</p>
+                                    
+                                </p>
+                                <div class="mt-4">
+                                    <ol class="space-y-1 list-decimal pl-5">
+                                        
+                                            <li>
+                                                <a href="python/01_numbers.html" class="link-primary">
+                                                    Numbers
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="python/02_strings.html" class="link-primary">
+                                                    Strings
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="python/03_collections.html" class="link-primary">
+                                                    Collections
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="python/04_conditional_logic.html" class="link-primary">
+                                                    Conditional logic
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="python/05_loops.html" class="link-primary">
+                                                    Loops
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="python/06_dictionaries.html" class="link-primary">
+                                                    Dictionaries
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="python/07_advanced_collections.html" class="link-primary">
+                                                    Advanced Collections
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="python/08_functions.html" class="link-primary">
+                                                    Functions
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="python/09_modules.html" class="link-primary">
+                                                    Using Modules
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="python/10_exceptions.html" class="link-primary">
+                                                    Handling Errors
+                                                </a>
+                                            </li>
+                                        
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    
+                
+                    
+                    
+                        <div class="content-card hover-grow">
+                            <div class="card-accent"></div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">
+                                    <a href="queueing/" class="hover:text-primary">
+                                        Learn Queueing Theory
+                                    </a>
+                                </h3>
+                                <p class="text-gray-600 mb-4">
+                                    
+                                        <p>Why is your line always slower than the other one? Why do traffic jams happen without any apparent cause? These lessons use a mixture of queueing theory and simulation to explain these scenarios and others.</p>
+                                    
+                                </p>
+                                <div class="mt-4">
+                                    <ol class="space-y-1 list-decimal pl-5">
+                                        
+                                            <li>
+                                                <a href="queueing/01_basic_ideas.html" class="link-primary">
+                                                    Basic Ideas in Queueing Theory
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="queueing/02_queue_formation.html" class="link-primary">
+                                                    Queue Formation
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="queueing/03_littles_law.html" class="link-primary">
+                                                    Little's Law
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="queueing/04_sojourn_time.html" class="link-primary">
+                                                    Sojourn Time
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="queueing/05_mm1_nonlinearity.html" class="link-primary">
+                                                    M/M/1 Queue Nonlinearity
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="queueing/06_pooled_vs_separate.html" class="link-primary">
+                                                    Pooled vs. Separate Queues
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="queueing/07_late_merge.html" class="link-primary">
+                                                    Late Merge
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="queueing/08_inspectors_paradox.html" class="link-primary">
+                                                    The Inspector's Paradox
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="queueing/09_convoy_effect.html" class="link-primary">
+                                                    The Convoy Effect
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="queueing/10_priority_starvation.html" class="link-primary">
+                                                    Priority Starvation
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="queueing/11_tandem_queue.html" class="link-primary">
+                                                    Tandem Queue Blocking
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="queueing/12_rush_hour.html" class="link-primary">
+                                                    Rush Hour Displacement
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="queueing/13_braess_paradox.html" class="link-primary">
+                                                    Braess's Paradox
+                                                </a>
+                                            </li>
+                                        
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    
+                
+                    
+                    
+                        <div class="content-card hover-grow">
+                            <div class="card-accent"></div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">
+                                    <a href="sql/" class="hover:text-primary">
+                                        Learn SQL
+                                    </a>
+                                </h3>
+                                <p class="text-gray-600 mb-4">
+                                    
+                                        <p>Learn the basics of SQL, the industry standard for interacting with relational databases. These notebooks also show how easy it is to work with relational data in marimo.</p>
+                                    
+                                </p>
+                                <div class="mt-4">
+                                    <ol class="space-y-1 list-decimal pl-5">
+                                        
+                                            <li>
+                                                <a href="sql/01_basic_select.html" class="link-primary">
+                                                    Basic Selection
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="sql/02_filter.html" class="link-primary">
+                                                    Filtering
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="sql/03_aggregate_group.html" class="link-primary">
+                                                    Aggregating and Grouping
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="sql/04_null.html" class="link-primary">
+                                                    Missing Data
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="sql/05_join.html" class="link-primary">
+                                                    Combining Tables
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="sql/06_keys.html" class="link-primary">
+                                                    Primary and Foreign Keys
+                                                </a>
+                                            </li>
+                                        
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="py-16 bg-light">
+        <div class="container mx-auto px-4 max-w-6xl text-center">
+            <h2 class="text-3xl font-bold mb-6">Want to Contribute?</h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">Help us improve these learning materials by contributing to the GitHub repository. We welcome new content, bug fixes, and improvements!</p>
+            <a href="https://github.com/marimo-team/learn" target="_blank" class="btn-primary py-3 px-8 inline-flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" clip-rule="evenodd"></path>
+</svg>
+                Contribute on GitHub
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p>&copy; 2026 marimo. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://github.com/marimo-team/learn" target="_blank" class="footer-link">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" clip-rule="evenodd"></path>
+</svg>
+                    </a>
+                    <a href="https://marimo.io" target="_blank" class="footer-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+</svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

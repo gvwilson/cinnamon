@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>08 working with columns</title>
+    <script type="module" crossorigin src="./assets/index-0n92c_W7.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-BW0IMuFq.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-BDxNtGmi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-BoaCR37F.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-LvLJmgfZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-Bj1aDYRI.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-B3qBwwSJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-icT_Ltz2.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-hTpPIsMT.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-Dy81QR4n.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-Ej3vmCIF.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-CSu739Rf.js">
+    <link rel="modulepreload" crossorigin href="./assets/Combination-Cs9nbinQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-UxKrm8hS.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DJBpXGro.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Cm-Z7dYr.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-BE0hEwVo.js">
+    <link rel="modulepreload" crossorigin href="./assets/x-BI1M8X_v.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-CxT2Geqr.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-D9723Brr.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-Hc8CXlvz.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-C0aUZfE0.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-EYp9AUJI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-O0nX5vok.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-CQUIhlu2.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-Dx6-QZGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-CfcLlFFp.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-H_cgTO0M.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-tNbLd14P.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-BMfCOLaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-ClFZlR7U.js">
+    <link rel="modulepreload" crossorigin href="./assets/DeferredRequestRegistry-O6RDJKs0.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Rz_lD4HK.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-BrEm7qNv.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-3Aq84phF.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-Bgjtqo_1.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-CiGN2w5X.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-lmrYznmk.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-39dTX4Wi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-QS_pSfjY.js">
+    <link rel="modulepreload" crossorigin href="./assets/assertNever-DWSyoPEi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-BKEr35uH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DA9DjSPo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-BtW-rR_1.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BYXBU1of.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-CJOnx12W.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-D3x_db9Y.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-Drh7NmIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-D2lG83Oh.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B_cxg-E4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D0Vj4Kqc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtXb4bUU.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CQqv2gQL.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-8UD0A5sU.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CXLJUPFl.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNC_tnlW.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-apDpadc4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CEeVCRd_.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-0ac7Aukl.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BqKH-Jd9.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-BBn8CPhf.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-BU2qXMKx.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-OnFQK5Wu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-8AYn-wiF.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-DS_VtWMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-CO3ppIfA.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-DTWCDKdn.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-DrBRErTM.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-fq1RMGX_.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-C5JoisA7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-D0GQBpTb.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-DdPu5Kfu.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-DvKpAc6K.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-CnD1Dah5.js">
+    <link rel="modulepreload" crossorigin href="./assets/multi-map-Pp1P2DOX.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-OQZHipbB.js">
+    <link rel="modulepreload" crossorigin href="./assets/card-C-c-4jyF.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-9WfvUF7e.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-CVN1lcMF.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BhNN2V5a.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-TNNaT1M9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-B0dx2Gp0.js">
+    <link rel="modulepreload" crossorigin href="./assets/azure-BTXHztTw.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-CYnquDho.js">
+    <link rel="modulepreload" crossorigin href="./assets/SSRProvider-DC7ElCZZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-CIAP2NOh.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-DbDKSvEd.js">
+    <link rel="modulepreload" crossorigin href="./assets/usePress-BHGkpw8X.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-CUwqpKjd.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DzgPOFJ-.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-BPGG2gPG.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-CVKxYu_0.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-BhH-Mm8O.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-AcL8c6qH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-D-4ifFXh.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-Bfogio62.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-BRG6IPhC.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-YwM0Pd7v.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-Bw1ifb7c.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-DBdMgUNq.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-BfkXNxmI.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CkudG0Ej.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-dVmh0yTy.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CHAHPgkx.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-CAoNMkjq.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-qZo1ox6x.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-DPTa_EpU.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-OkOxlkkM.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BOmLQIKI.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DK1MWd7f.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-CZV6_g2i.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-CdjCA1J8.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Ba0LbbH4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-C9V-on2J.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-qEtcJ95s.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-Q_UEP94Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-F9sJtuof.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-3V5UxC3B.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-az74f3Mp.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-BgmMM9Zg.js">
+    <link rel="modulepreload" crossorigin href="./assets/html-to-image-BnSc-Wa0.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-DYwTiH9-.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-m8w66E4s.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5FQGJX7Z-CM1a_K7I.js">
+    <link rel="modulepreload" crossorigin href="./assets/katex-rvFxOCU-.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-renderer-MR9df58W.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-rfxSsiHU.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-B9_ToVd4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useRunCells-5m6jCnyo.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-DJ8khuob.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-DTN9kFDq.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-rhOJovGE.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-BO8E69bZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BGe7pJXT.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-CHaNfieI.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-OKerBHH8.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-DRbCSry7.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-D1keIaYa.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-CpE7XQLs.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-CJeRXUtp.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-BCnp9gKC.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-DKXKGKvX.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-DRUDRiy0.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-CrUXojcA.js">
+    <link rel="modulepreload" crossorigin href="./assets/process-output-CTVsT--B.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-CObhN-9g.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-DP4vAkvg.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-CBkHtTOV.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-DzHkbIdO.js">
+    <link rel="modulepreload" crossorigin href="./assets/image-DXfkah9d.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-DKSqmedg.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-DUn4LN4W.js">
+    <link rel="modulepreload" crossorigin href="./assets/isEmpty-CfmnKtgL.js">
+    <link rel="modulepreload" crossorigin href="./assets/bot-message-square-CK6eoGWy.js">
+    <link rel="modulepreload" crossorigin href="./assets/chat-display-D_Fuuy6r.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-DV8gdCvH.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B006EYFX.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-DbmSqx09.js">
+    <link rel="modulepreload" crossorigin href="./assets/ellipsis-vertical-CAB7tdza.js">
+    <link rel="modulepreload" crossorigin href="./assets/components-Bpgzv_5_.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-WsubyItX.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-RCwU-rnE.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BsV5fVR-.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-BdH_5I58.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-D5BgdrnX.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-resizable-panels.browser.esm-DDRqG5ui.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-aware-panel-CfsfBlhO.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-BvQKiC0F.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-YC7rpcmD.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-vwi9L975.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DH-1xZGq.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-headphone-B5q2Ow55.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-icons-CWLHDa1J.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-DLpfIr8v.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CrQYrsUC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-B1jGbQlH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-m1e6E3Ao.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-yyiB9aJX.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-C1RN112u.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-RrUi-pOT.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-CzkousWe.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-Bx4-SO9M.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-Be7p_si8.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-Ck7z0-tq.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BYA9UDHe.js">
+    <link rel="modulepreload" crossorigin href="./assets/code-xml-DwHPF_nL.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-DBW9RXtT.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-CxAsQQ77.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-CzQUw9rV.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-idScn0w0.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-jmgGt1lS.css">
+    <link rel="stylesheet" crossorigin href="./assets/markdown-renderer-DdDKmWlR.css">
+    <link rel="stylesheet" crossorigin href="./assets/JsonOutput-B7vuddcd.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-GjXovVsl.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">%23%20%2F%2F%2F%20script%0A%23%20requires-python%20%3D%20%22%3E%3D3.11%22%0A%23%20dependencies%20%3D%20%5B%0A%23%20%20%20%20%20%22marimo%22%2C%0A%23%20%20%20%20%20%22polars%3D%3D1.24.0%22%2C%0A%23%20%5D%0A%23%20%2F%2F%2F%0A%0Aimport%20marimo%0A%0A__generated_with%20%3D%20%220.21.1%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20Working%20with%20Columns%0A%0A%20%20%20%20Author%3A%20%5BDeb%20Debnath%5D(https%3A%2F%2Fgithub.com%2Fdebajyotid2)%0A%0A%20%20%20%20**Note**%3A%20The%20following%20tutorial%20has%20been%20adapted%20from%20the%20Polars%20%5Bdocumentation%5D(https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Fexpressions%2Fexpression-expansion).%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Expressions%0A%0A%20%20%20%20Data%20transformations%20are%20sometimes%20complicated%2C%20or%20involve%20massive%20computations%20which%20are%20time-consuming.%20You%20can%20make%20a%20small%20version%20of%20the%20dataset%20with%20the%20schema%20you%20are%20trying%20to%20work%20your%20transformation%20into.%20But%20there%20is%20a%20better%20way%20to%20do%20it%20in%20Polars.%0A%0A%20%20%20%20A%20Polars%20expression%20is%20a%20lazy%20representation%20of%20a%20data%20transformation.%20%22Lazy%22%20means%20that%20the%20transformation%20is%20not%20eagerly%20(immediately)%20executed.%0A%0A%20%20%20%20Expressions%20are%20modular%20and%20flexible.%20They%20can%20be%20composed%20to%20build%20more%20complex%20expressions.%20For%20example%2C%20to%20calculate%20speed%20from%20distance%20and%20time%2C%20you%20can%20have%20an%20expression%20as%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(pl)%3A%0A%20%20%20%20speed_expr%20%3D%20pl.col(%22distance%22)%20%2F%20(pl.col(%22time%22))%0A%20%20%20%20speed_expr%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Expression%20expansion%0A%0A%20%20%20%20Expression%20expansion%20lets%20you%20write%20a%20single%20expression%20that%20can%20expand%20to%20multiple%20different%20expressions.%20So%20rather%20than%20repeatedly%20defining%20separate%20expressions%2C%20you%20can%20avoid%20redundancy%20while%20adhering%20to%20clean%20code%20principles%20(Do%20not%20Repeat%20Yourself%20-%20%5BDRY%5D(https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FDon%2527t_repeat_yourself)).%20Since%20expressions%20are%20reusable%2C%20they%20aid%20in%20writing%20concise%20code.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20For%20the%20examples%20in%20this%20notebook%2C%20we%20will%20use%20a%20sliver%20of%20the%20*AI4I%202020%20Predictive%20Maintenance%20Dataset*.%20This%20dataset%20comprises%20of%20measurements%20taken%20from%20sensors%20in%20industrial%20machinery%20undergoing%20preventive%20maintenance%20checks%20-%20basically%20being%20tested%20for%20failure%20conditions.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(StringIO%2C%20pl)%3A%0A%20%20%20%20data_csv%20%3D%20%22%22%22%0A%20%20%20%20Product%20ID%2CType%2CAir%20temperature%2CProcess%20temperature%2CRotational%20speed%2CTool%20wear%2CMachine%20failure%2CTWF%2CHDF%2CPWF%2COSF%2CRNF%0A%20%20%20%20L51172%2CL%2C302.3%2C311.3%2C1614%2C129%2C0%2C0%2C1%2C0%2C0%2C0%0A%20%20%20%20M22586%2CM%2C300.8%2C311.9%2C1761%2C113%2C1%2C0%2C0%2C0%2C1%2C0%0A%20%20%20%20L51639%2CL%2C302.6%2C310.4%2C1743%2C191%2C0%2C1%2C0%2C0%2C0%2C1%0A%20%20%20%20L50250%2CL%2C300%2C309.1%2C1631%2C110%2C0%2C0%2C0%2C1%2C0%2C0%0A%20%20%20%20M20109%2CM%2C303.4%2C312.9%2C1422%2C63%2C1%2C0%2C0%2C0%2C0%2C0%0A%20%20%20%20%22%22%22%0A%0A%20%20%20%20data%20%3D%20pl.read_csv(StringIO(data_csv))%0A%20%20%20%20data%0A%20%20%20%20return%20(data%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Function%20%60col%60%0A%0A%20%20%20%20The%20function%20%60col%60%20is%20used%20to%20refer%20to%20one%20column%20of%20a%20dataframe.%20It%20is%20one%20of%20the%20fundamental%20building%20blocks%20of%20expressions%20in%20Polars.%20%60col%60%20is%20also%20really%20handy%20in%20expression%20expansion.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Explicit%20expansion%20by%20column%20name%0A%0A%20%20%20%20The%20simplest%20form%20of%20expression%20expansion%20happens%20when%20you%20provide%20multiple%20column%20names%20to%20the%20function%20%60col%60.%0A%0A%20%20%20%20Say%20you%20wish%20to%20convert%20all%20temperature%20values%20in%20deg.%20Kelvin%20(K)%20to%20deg.%20Fahrenheit%20(F).%20One%20way%20to%20do%20this%20would%20be%20to%20define%20individual%20expressions%20for%20each%20column%20as%20follows%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl)%3A%0A%20%20%20%20exprs%20%3D%20%5B%0A%20%20%20%20%20%20%20%20((pl.col(%22Air%20temperature%22)%20-%20273.15)%20*%201.8%20%2B%2032).round(2)%2C%0A%20%20%20%20%20%20%20%20((pl.col(%22Process%20temperature%22)%20-%20273.15)%20*%201.8%20%2B%2032).round(2)%0A%20%20%20%20%5D%0A%0A%20%20%20%20result%20%3D%20data.with_columns(exprs)%0A%20%20%20%20result%0A%20%20%20%20return%20(result%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Expression%20expansion%20can%20reduce%20this%20verbosity%20when%20you%20list%20the%20column%20names%20you%20want%20the%20expression%20to%20expand%20to%20inside%20the%20%60col%60%20function.%20The%20result%20is%20the%20same%20as%20before.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl%2C%20result)%3A%0A%20%20%20%20result_2%20%3D%20data.with_columns(%0A%20%20%20%20%20%20%20%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20(pl.col(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Air%20temperature%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Process%20temperature%22%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20-%20273.15)%20*%201.8%20%2B%2032%0A%20%20%20%20%20%20%20%20).round(2)%0A%20%20%20%20)%0A%20%20%20%20result_2.equals(result)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20In%20this%20case%2C%20the%20expression%20that%20does%20the%20temperature%20conversion%20is%20expanded%20to%20a%20list%20of%20two%20expressions.%20The%20expansion%20of%20the%20expression%20is%20predictable%20and%20intuitive.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Expansion%20by%20data%20type%0A%0A%20%20%20%20Can%20we%20do%20better%20than%20explicitly%20writing%20the%20names%20of%20every%20columns%20we%20want%20transformed%3F%20Yes.%0A%0A%20%20%20%20If%20you%20provide%20data%20types%20instead%20of%20column%20names%2C%20the%20expression%20is%20expanded%20to%20all%20columns%20that%20match%20one%20of%20the%20data%20types%20provided.%0A%0A%20%20%20%20The%20example%20below%20performs%20the%20exact%20same%20computation%20as%20before%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl%2C%20result)%3A%0A%20%20%20%20result_3%20%3D%20data.with_columns(((pl.col(pl.Float64)%20-%20273.15)%20*%201.8%20%2B%2032).round(2))%0A%20%20%20%20result_3.equals(result)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20However%2C%20you%20should%20be%20careful%20to%20ensure%20that%20the%20transformation%20is%20only%20applied%20to%20the%20columns%20you%20want.%20For%20ensuring%20this%20it%20is%20important%20to%20know%20the%20schema%20of%20the%20data%20beforehand.%0A%0A%20%20%20%20%60col%60%20accepts%20multiple%20data%20types%20in%20case%20the%20columns%20you%20need%20have%20more%20than%20one%20data%20type.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl%2C%20result)%3A%0A%20%20%20%20result_4%20%3D%20data.with_columns(%0A%20%20%20%20%20%20%20%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20(pl.col(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20pl.Float32%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20pl.Float64%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20-%20273.15)%20*%201.8%20%2B%2032%0A%20%20%20%20%20%20%20%20).round(2)%0A%20%20%20%20)%0A%20%20%20%20result.equals(result_4)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Expansion%20by%20pattern%20matching%0A%0A%20%20%20%20%60col%60%20also%20accepts%20regular%20expressions%20for%20selecting%20columns%20by%20pattern%20matching.%20Regular%20expressions%20start%20and%20end%20with%20%5E%20and%20%24%2C%20respectively.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl)%3A%0A%20%20%20%20data.select(pl.col(%22%5E.*temperature%24%22))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Regular%20expressions%20can%20be%20combined%20with%20exact%20column%20names.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl)%3A%0A%20%20%20%20data.select(pl.col(%22%5E.*temperature%24%22%2C%20%22Tool%20wear%22))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20**Note**%3A%20You%20_cannot_%20mix%20strings%20(exact%20names%2C%20regular%20expressions)%20and%20data%20types%20in%20a%20%60col%60%20function.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl)%3A%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20data.select(pl.col(%22Air%20temperature%22%2C%20pl.Float64))%0A%20%20%20%20except%20TypeError%20as%20err%3A%0A%20%20%20%20%20%20%20%20print(%22TypeError%3A%22%2C%20err)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Selecting%20all%20columns%0A%0A%20%20%20%20To%20select%20all%20columns%2C%20you%20can%20use%20the%20%60all%60%20function.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl)%3A%0A%20%20%20%20result_6%20%3D%20data.select(pl.all())%0A%20%20%20%20result_6.equals(data)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Excluding%20columns%0A%0A%20%20%20%20There%20are%20scenarios%20where%20we%20might%20want%20to%20exclude%20specific%20columns%20from%20the%20ones%20selected%20by%20building%20expressions%2C%20e.g.%20by%20the%20%60col%60%20or%20%60all%60%20functions.%20For%20this%20purpose%2C%20we%20use%20the%20function%20%60exclude%60%2C%20which%20accepts%20exactly%20the%20same%20types%20of%20arguments%20as%20%60col%60%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl)%3A%0A%20%20%20%20data.select(pl.all().exclude(%22%5E.*F%24%22))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%60exclude%60%20can%20also%20be%20used%20after%20the%20function%20%60col%60%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl)%3A%0A%20%20%20%20data.select(pl.col(pl.Int64).exclude(%22%5E.*F%24%22))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Column%20renaming%0A%0A%20%20%20%20When%20applying%20a%20transformation%20with%20an%20expression%20to%20a%20column%2C%20the%20data%20in%20the%20column%20gets%20overwritten%20with%20the%20transformed%20data.%20However%2C%20this%20might%20not%20be%20the%20intended%20outcome%20in%20all%20situations%20-%20ideally%20you%20would%20want%20to%20store%20transformed%20data%20in%20a%20new%20column.%20Applying%20multiple%20transformations%20to%20the%20same%20column%20at%20the%20same%20time%20without%20renaming%20leads%20to%20errors.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl)%3A%0A%20%20%20%20from%20polars.exceptions%20import%20DuplicateError%0A%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20data.select(%0A%20%20%20%20%20%20%20%20%20%20%20%20(pl.col(%22Air%20temperature%22)%20-%20273.15)%20*%201.8%20%2B%2032%2C%20%20%23%20This%20would%20be%20named%20%22Air%20temperature%22...%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22Air%20temperature%22)%20-%20273.15%2C%20%20%23%20And%20so%20would%20this.%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20except%20DuplicateError%20as%20err%3A%0A%20%20%20%20%20%20%20%20print(%22DuplicateError%3A%22%2C%20err)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Renaming%20a%20single%20column%20with%20%60alias%60%0A%0A%20%20%20%20The%20function%20%60alias%60%20lets%20you%20rename%20a%20single%20column%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl)%3A%0A%20%20%20%20data.select(%0A%20%20%20%20%20%20%20%20%20%20%20%20((pl.col(%22Air%20temperature%22)%20-%20273.15)%20*%201.8%20%2B%2032).round(2).alias(%22Air%20temperature%20%5BF%5D%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20(pl.col(%22Air%20temperature%22)%20-%20273.15).round(2).alias(%22Air%20temperature%20%5BC%5D%22)%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Prefixing%20and%20suffixing%20column%20names%0A%0A%20%20%20%20As%20%60alias%60%20renames%20a%20single%20column%20at%20a%20time%2C%20it%20cannot%20be%20used%20during%20expression%20expansion.%20If%20it%20is%20sufficient%20add%20a%20static%20prefix%20or%20a%20static%20suffix%20to%20the%20existing%20names%2C%20you%20can%20use%20the%20functions%20%60name.prefix%60%20and%20%60name.suffix%60%20with%20%60col%60%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl)%3A%0A%20%20%20%20data.select(%0A%20%20%20%20%20%20%20%20((pl.col(%22Air%20temperature%22)%20-%20273.15)%20*%201.8%20%2B%2032).round(2).name.prefix(%22deg%20F%20%22)%2C%0A%20%20%20%20%20%20%20%20(pl.col(%22Process%20temperature%22)%20-%20273.15).round(2).name.suffix(%22%20C%22)%2C%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Dynamic%20name%20replacement%0A%0A%20%20%20%20If%20a%20static%20prefix%2Fsuffix%20is%20not%20enough%2C%20use%20%60name.map%60.%20%60name.map%60%20requires%20a%20function%20that%20transforms%20column%20names%20to%20the%20desired.%20The%20transformation%20should%20lead%20to%20unique%20names%20to%20avoid%20%60DuplicateError%60.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl)%3A%0A%20%20%20%20%23%20There%20is%20also%20%60.name.to_lowercase%60%2C%20so%20this%20usage%20of%20%60.map%60%20is%20moot.%0A%20%20%20%20data.select(pl.col(%22%5E.*F%24%22).name.map(str.lower))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Programmatically%20generating%20expressions%0A%0A%20%20%20%20For%20this%20example%2C%20we%20will%20first%20create%20four%20additional%20columns%20with%20the%20rolling%20mean%20temperatures%20of%20the%20two%20temperature%20columns.%20Such%20transformations%20are%20sometimes%20used%20to%20create%20additional%20features%20for%20machine%20learning%20models%20or%20data%20analysis.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data%2C%20pl)%3A%0A%20%20%20%20ext_temp_data%20%3D%20data.with_columns(%0A%20%20%20%20%20%20%20%20%20%20%20%20pl.col(%22%5E.*temperature%24%22).rolling_mean(window_size%3D2).round(2).name.prefix(%22Rolling%20mean%20%22)%0A%20%20%20%20).select(pl.col(%22%5E.*temperature*%24%22))%0A%20%20%20%20ext_temp_data%0A%20%20%20%20return%20(ext_temp_data%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Now%2C%20suppose%20we%20want%20to%20calculate%20the%20difference%20between%20the%20rolling%20mean%20and%20actual%20temperatures.%20We%20cannot%20use%20expression%20expansion%20here%20as%20we%20want%20differences%20between%20specific%20columns.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20At%20first%2C%20you%20may%20think%20about%20using%20a%20%60for%60%20loop%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(ext_temp_data%2C%20pl)%3A%0A%20%20%20%20_result%20%3D%20ext_temp_data%0A%20%20%20%20for%20col_name%20in%20%5B%22Air%22%2C%20%22Process%22%5D%3A%0A%20%20%20%20%20%20%20%20_result%20%3D%20_result.with_columns(%0A%20%20%20%20%20%20%20%20%20%20%20%20(abs(pl.col(f%22Rolling%20mean%20%7Bcol_name%7D%20temperature%22)%20-%20pl.col(f%22%7Bcol_name%7D%20temperature%22)))%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.round(2).alias(f%22Delta%20%7Bcol_name%7D%20temperature%22)%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20_result%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Using%20a%20%60for%60%20loop%20is%20functional%2C%20but%20not%20scalable%2C%20as%20each%20expression%20needs%20to%20be%20defined%20in%20an%20iteration%20and%20executed%20serially.%20Instead%20we%20can%20use%20a%20generator%20in%20Python%20to%20programmatically%20create%20all%20expressions%20at%20once.%20In%20conjunction%20with%20the%20%60with_columns%60%20context%2C%20we%20can%20take%20advantage%20of%20parallel%20execution%20of%20computations%20and%20query%20optimization%20from%20Polars.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(ext_temp_data%2C%20pl)%3A%0A%20%20%20%20def%20delta_expressions(colnames%3A%20list%5Bstr%5D)%20-%3E%20pl.Expr%3A%0A%20%20%20%20%20%20%20%20for%20col_name%20in%20colnames%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20yield%20(abs(pl.col(f%22Rolling%20mean%20%7Bcol_name%7D%20temperature%22)%20-%20pl.col(f%22%7Bcol_name%7D%20temperature%22))%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.round(2).alias(f%22Delta%20%7Bcol_name%7D%20temperature%22))%0A%0A%0A%20%20%20%20ext_temp_data.with_columns(delta_expressions(%5B%22Air%22%2C%20%22Process%22%5D))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20More%20flexible%20column%20selections%0A%0A%20%20%20%20For%20more%20flexible%20column%20selections%2C%20you%20can%20use%20column%20selectors%20from%20%60selectors%60.%20Column%20selectors%20allow%20for%20more%20expressiveness%20in%20the%20way%20you%20specify%20selections.%20For%20example%2C%20column%20selectors%20can%20perform%20the%20familiar%20set%20operations%20of%20union%2C%20intersection%2C%20difference%2C%20etc.%20We%20can%20use%20the%20union%20operation%20with%20the%20functions%20%60string%60%20and%20%60ends_with%60%20to%20select%20all%20string%20columns%20and%20the%20columns%20whose%20names%20end%20with%20%22%60_high%60%22%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(data)%3A%0A%20%20%20%20import%20polars.selectors%20as%20cs%0A%0A%20%20%20%20data.select(cs.string()%20%7C%20cs.ends_with(%22F%22))%0A%20%20%20%20return%20(cs%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Likewise%2C%20you%20can%20pick%20columns%20based%20on%20the%20category%20of%20the%20type%20of%20data%2C%20offering%20more%20flexibility%20than%20the%20%60col%60%20function.%20As%20an%20example%2C%20%60cs.numeric%60%20selects%20numeric%20data%20types%20(including%20%60pl.Float32%60%2C%20%60pl.Float64%60%2C%20%60pl.Int32%60%2C%20etc.)%20or%20%60cs.temporal%60%20for%20all%20dates%2C%20times%20and%20similar%20data%20types.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Combining%20selectors%20with%20set%20operations%0A%0A%20%20%20%20Multiple%20selectors%20can%20be%20combined%20using%20set%20operations%20and%20the%20usual%20Python%20operators%3A%0A%0A%0A%20%20%20%20%7C%20Operator%20%7C%20%20%20%20%20%20%20Operation%20%20%20%20%20%20%7C%0A%20%20%20%20%7C%3A--------%3A%7C%3A--------------------%3A%7C%0A%20%20%20%20%7C%20%60A%20%7C%20B%60%20%20%20%7C%20Union%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%20%20%20%20%7C%20%60A%20%26%20B%60%20%20%20%20%7C%20Intersection%20%20%20%20%20%20%20%20%20%7C%0A%20%20%20%20%7C%20%60A%20-%20B%60%20%20%20%20%7C%20Difference%20%20%20%20%20%20%20%20%20%20%20%7C%0A%20%20%20%20%7C%20%60A%20%5E%20B%60%20%20%20%20%7C%20Symmetric%20difference%20%7C%0A%20%20%20%20%7C%20%60~A%60%20%20%20%20%20%20%20%7C%20Complement%20%20%20%20%20%20%20%20%20%20%20%7C%0A%0A%20%20%20%20For%20example%2C%20to%20select%20all%20failure%20indicator%20variables%20excluding%20the%20failure%20variables%20due%20to%20wear%2C%20we%20can%20perform%20a%20set%20difference%20between%20the%20column%20selectors.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(cs%2C%20data)%3A%0A%20%20%20%20data.select(cs.contains(%22F%22)%20-%20cs.contains(%22W%22))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Resolving%20operator%20ambiguity%0A%0A%20%20%20%20Expression%20functions%20can%20be%20chained%20on%20top%20of%20selectors%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(cs%2C%20data%2C%20pl)%3A%0A%20%20%20%20ext_failure_data%20%3D%20data.select(cs.contains(%22F%22)).cast(pl.Boolean)%0A%20%20%20%20ext_failure_data%0A%20%20%20%20return%20(ext_failure_data%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20However%2C%20operators%20that%20perform%20set%20operations%20on%20column%20selectors%20operate%20on%20both%20selectors%20and%20on%20expressions.%20For%20example%2C%20the%20operator%20%60~%60%20on%20a%20selector%20represents%20the%20set%20operation%20%E2%80%9Ccomplement%E2%80%9D%20and%20on%20an%20expression%20represents%20the%20Boolean%20operation%20of%20negation.%0A%0A%20%20%20%20For%20instance%2C%20if%20you%20want%20to%20negate%20the%20Boolean%20values%20in%20the%20columns%20%E2%80%9CHDF%E2%80%9D%2C%20%E2%80%9COSF%E2%80%9D%2C%20and%20%E2%80%9CRNF%E2%80%9D%2C%20at%20first%20you%20would%20think%20about%20using%20the%20%60~%60%20operator%20with%20the%20column%20selector%20to%20choose%20all%20failure%20variables%20containing%20%22W%22.%20Because%20of%20the%20operator%20ambiguity%20here%2C%20the%20columns%20that%20are%20not%20of%20interest%20are%20selected%20here.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(cs%2C%20ext_failure_data)%3A%0A%20%20%20%20ext_failure_data.select((~cs.ends_with(%22WF%22)).name.prefix(%22No%22))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20To%20resolve%20the%20operator%20ambiguity%2C%20we%20use%20%60as_expr%60%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(cs%2C%20ext_failure_data)%3A%0A%20%20%20%20ext_failure_data.select((~cs.ends_with(%22WF%22).as_expr()).name.prefix(%22No%22))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20Debugging%20selectors%0A%0A%20%20%20%20The%20function%20%60cs.is_selector%60%20helps%20check%20whether%20a%20complex%20chain%20of%20selectors%20and%20operators%20ultimately%20results%20in%20a%20selector.%20For%20example%2C%20to%20resolve%20any%20ambiguity%20with%20the%20selector%20in%20the%20last%20example%2C%20we%20can%20do%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(cs)%3A%0A%20%20%20%20cs.is_selector(~cs.ends_with(%22WF%22).as_expr())%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Additionally%20we%20can%20use%20%60expand_selector%60%20to%20see%20what%20columns%20a%20selector%20expands%20into.%20Note%20that%20for%20this%20function%20we%20need%20to%20provide%20additional%20context%20in%20the%20form%20of%20the%20dataframe.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(cs%2C%20ext_failure_data)%3A%0A%20%20%20%20cs.expand_selector(%0A%20%20%20%20%20%20%20%20ext_failure_data%2C%0A%20%20%20%20%20%20%20%20cs.ends_with(%22WF%22)%2C%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%23%20References%0A%0A%20%20%20%201.%20AI4I%202020%20Predictive%20Maintenance%20Dataset%20%5BDataset%5D.%20(2020).%20UCI%20Machine%20Learning%20Repository.%20(%5Blink%5D(https%3A%2F%2Fdoi.org%2F10.24432%2FC5HS5C)).%0A%20%20%20%202.%20Polars%20documentation%20(%5Blink%5D(https%3A%2F%2Fdocs.pola.rs%2Fuser-guide%2Fexpressions%2Fexpression-expansion%2F%23more-flexible-column-selections))%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_()%3A%0A%20%20%20%20import%20csv%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20import%20polars%20as%20pl%0A%20%20%20%20from%20io%20import%20StringIO%0A%0A%20%20%20%20return%20StringIO%2C%20mo%2C%20pl%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "cwd": "",
+            "mode": "edit",
+            "version": "0.21.1",
+            "serverToken": "unused",
+            "config": {"ai": {"custom_providers": {}, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "medium"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

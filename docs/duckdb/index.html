@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn DuckDB - Marimo Learn</title>
+    <meta name="description" content="Learn Python, data science, and machine learning with interactive marimo notebooks">
+    <link rel="icon" type="image/png" href="../assets/marimo-learn.png">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+
+    <header class="bg-white">
+        <div class="container mx-auto px-4 py-12 max-w-6xl">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-12">
+                    <a href="../" class="link-primary text-sm mb-4 inline-block">&larr; All Courses</a>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Learn DuckDB</h1>
+                    
+                        <div class="text-lg text-gray-600"><p>These notebooks teach you the basics of DuckDB, a fast in-memory database engine that can interoperate with dataframes, and show how marimo gives DuckDB superpowers.</p></div>
+                    
+                </div>
+                <div class="md:w-1/2">
+                    <div class="logo-container">
+                        <img src="../assets/marimo-learn.png" alt="Marimo Logo" class="w-64 h-64 mx-auto object-contain">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="flex flex-col md:flex-row gap-8">
+
+                <aside class="md:w-1/3">
+                    <div class="content-card">
+                        <div class="card-accent"></div>
+                        <div class="p-6">
+                            <h2 class="text-xl font-semibold mb-4">Notebooks</h2>
+                            <ol class="space-y-1 list-decimal pl-5">
+                                
+                                    <li>
+                                        <a href="01_getting_started.html" class="link-primary">
+                                            What is DuckDB?
+                                        </a>
+                                    </li>
+                                
+                                    <li>
+                                        <a href="08_loading_parquet.html" class="link-primary">
+                                            Loading Parquet files with DuckDB
+                                        </a>
+                                    </li>
+                                
+                                    <li>
+                                        <a href="09_loading_json.html" class="link-primary">
+                                            Loading JSON
+                                        </a>
+                                    </li>
+                                
+                                    <li>
+                                        <a href="11_working_with_apache_arrow.html" class="link-primary">
+                                            Working with Apache Arrow
+                                        </a>
+                                    </li>
+                                
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden card-shadow mt-6">
+                        <div class="card-accent"></div>
+                        <div class="p-6">
+                            <h2 class="text-xl font-semibold mb-2">Help us improve this course</h2>
+                            <p class="text-sm text-gray-600">Please visit the <a href="https://github.com/marimo-team/learn/issues/48" class="link-primary">GitHub issue</a> to leave feedback or contribute.</p>
+                        </div>
+                    </div>
+                    
+                </aside>
+
+                <div class="md:w-2/3 prose">
+                    <h2>Contributors</h2>
+<p>Thanks to our notebook authors:</p>
+<ul>
+<li><a href="https://github.com/Mustjaab">Mustjaab</a></li>
+<li><a href="https://github.com/julius383">julius383</a></li>
+<li><a href="https://github.com/thliang01">thliang01</a></li>
+</ul>
+                    <h2>Running Notebooks</h2>
+<p>To run a notebook locally, use:</p>
+<pre><code>uvx marimo edit &lt;URL&gt;</code></pre>
+<p>You can also open notebooks in our online playground by adding <code>marimo.app/</code> to a notebook's URL.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-16 bg-light">
+        <div class="container mx-auto px-4 max-w-6xl text-center">
+            <h2 class="text-3xl font-bold mb-6">Want to Contribute?</h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">Help us improve these learning materials by contributing to the GitHub repository. We welcome new content, bug fixes, and improvements!</p>
+            <a href="https://github.com/marimo-team/learn" target="_blank" class="btn-primary py-3 px-8 inline-flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" clip-rule="evenodd"></path>
+</svg>
+                Contribute on GitHub
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p>&copy; 2026 marimo. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://github.com/marimo-team/learn" target="_blank" class="footer-link">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" clip-rule="evenodd"></path>
+</svg>
+                    </a>
+                    <a href="https://marimo.io" target="_blank" class="footer-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+</svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

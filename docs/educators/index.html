@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>marimo for Educators - Marimo Learn</title>
+    <meta name="description" content="Learn Python, data science, and machine learning with interactive marimo notebooks">
+    <link rel="icon" type="image/png" href="../assets/marimo-learn.png">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+
+    <header class="bg-white">
+        <div class="container mx-auto px-4 py-12 max-w-6xl">
+            <a href="../" class="link-primary text-sm mb-4 inline-block">&larr; Home</a>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">marimo for Educators</h1>
+        </div>
+    </header>
+
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="prose">
+                <h2>Introduction</h2>
+<ul>
+<li>what <em>is</em> a notebook?<ul>
+<li><em>literate programming</em> mixes prose and software in a single "runnable paper"</li>
+<li>each <em>cell</em> is prose or software</li>
+<li>prose typically written in Markdown</li>
+<li>software written in whatever programming languages the notebook supports</li>
+<li>software's output displayed in the notebook as well</li>
+</ul>
+</li>
+<li>why notebooks for everyday work?<ul>
+<li>easier to understand (think about the way textbooks present material)</li>
+<li>improves reproducibility</li>
+<li>[GVW: if we emphasize embedded AI] keep track of what you asked for as well as what you did</li>
+</ul>
+</li>
+<li>why notebooks for learning?<ul>
+<li>more engaging than static material: learners are active users of material, not passive consumers, can experiment with settings, alter code, etc.</li>
+<li>no installation required: notebooks can be hosted so learners don't have to struggle with the hard bits first (i.e., focus on learning rather than on the tool)</li>
+<li>reproducibility helps collaboration as well [GVW: but we don’t support concurrent editing a la Google Docs, which some people will regard as table stakes]</li>
+<li>less intimidating than jumping straight into scripting</li>
+<li>introduces a real-world tool</li>
+<li>[if we emphasize embedded AI] a natural way to bring LLMs into the classroom</li>
+</ul>
+</li>
+<li>why notebooks for teaching?<ul>
+<li>all of the above…</li>
+<li>create interactive lecture material in a single place</li>
+</ul>
+</li>
+<li>why the marimo notebook?<ul>
+<li>open source</li>
+<li>more than Notebook but not as intimidating as VS Code</li>
+<li>reactivity allows for (encourages) dynamic, interactive elements<ul>
+<li>marimo is both a notebook and a library of UI elements</li>
+<li>and AnyWidget makes it relatively easy to extend [GVW: point at <a href="https://github.com/gvwilson/faw">faw</a>]</li>
+</ul>
+</li>
+<li>doesn't allow out-of-order execution of cells, which reduces “worked for me” complaints</li>
+<li>plays nicely with other Python tools (because a notebook is a Python file)</li>
+<li>plays nicely with version control (same reason)</li>
+<li>helps instructors keep their prose and examples in sync</li>
+<li>configurable interaction with AI tools</li>
+<li>[if we emphasize embedded AI] natural way to teaching prompting and review</li>
+</ul>
+</li>
+<li>why <em>not</em> marimo?<ul>
+<li>not yet as widely known as Jupyter (i.e., your IT department may not already support it)</li>
+<li>not yet integrated with auto-grading tools (<a href="https://github.com/gvwilson/faw">faw</a> is a start, but we're waiting to see what you want)</li>
+<li>doesn't yet support multi-notebook books</li>
+<li>some quirks that might not make it the right tool for a CS-101 course (see below)</li>
+</ul>
+</li>
+</ul>
+<h2>Ways to Teach With marimo</h2>
+<ul>
+<li>high level<ul>
+<li>follow along with lesson (code already present)</li>
+<li>workbooks for assignments ("fill in these cells")</li>
+<li>notebooks as apps (play with data rather than write code)</li>
+<li>notebooks as lab reports (models real-world use)</li>
+</ul>
+</li>
+<li>micro<ul>
+<li>scroll through a pre-executed notebook</li>
+<li>step through a notebook by executing the cells in order</li>
+<li>fill out details or values into a mostly complete notebook</li>
+<li>tweak or fill in a notebook with some content</li>
+<li>add content to a completely blank notebook</li>
+<li>ask learners what to add <em>or</em> what's going to happen</li>
+<li>ask AI to do something and then explore/correct/improve its output</li>
+</ul>
+</li>
+</ul>
+<h2>Things to Watch Out For</h2>
+<ul>
+<li>Variable names<ul>
+<li>Underscored variable names are different from common usage, and require some understanding of scope</li>
+<li>Solution is functions-early teaching methodology, which has a sound pedagogical basis</li>
+</ul>
+</li>
+<li>Image files<ul>
+<li>For security reasons, marimo requires local image files to be in a folder called <code>public</code> below the directory the notebook is run from, and to be accessed in Markdown as <code>[alt text](/public/image.ext)</code></li>
+<li>Which means it’s important to launch the notebook from the right place</li>
+<li>Can get around this using <code>mo.image</code> but that can’t be embedded in Markdown</li>
+</ul>
+</li>
+<li><a href="https://docs.marimo.io/guides/testing/pytest/#testing-in-notebook">Using pytest in marimo</a> is straightforward as long as the cell <em>only</em> contains tests</li>
+<li>marimo uses <a href="https://katex.org/">KaTeX</a> rather than <a href="https://www.mathjax.org/">MathJax</a> for rendering math - see the appendix to this document for notes</li>
+</ul>
+<h2>Pedagogical Patterns</h2>
+<h3>Shift-Enter</h3>
+<p><strong>Description:</strong> Learner starts with complete notebook, re-executes cells; (possibly) fills in prose cells with analysis/description</p>
+<p><strong>Use For:</strong> Introduce new topics; check understanding (e.g., warmup exercise)</p>
+<p><strong>Works For:</strong> Any audience</p>
+<p><strong>Format:</strong> Synchronous</p>
+<p><strong>Pro:</strong> Gives learners a complete working example</p>
+<p><strong>Con:</strong> Low engagement</p>
+<h3>Fill in the blanks</h3>
+<p><strong>Description:</strong> Some code cells filled in, learner must complete</p>
+<p><strong>Use For:</strong> Reducing cognitive load</p>
+<p><strong>Works For:</strong> Any audience</p>
+<p><strong>Format:</strong> Assignments and labs</p>
+<p><strong>Pro:</strong> Focus attention on a specific concept (e.g., filtering data)</p>
+<p><strong>Con:</strong> “Just get AI to do it”; required work can be too easy or too hard</p>
+<h3>Tweak and twiddle</h3>
+<p><strong>Description:</strong> Learner starts with complete working notebook, is asked to alter parameters to achieve some goal</p>
+<p><strong>Use For:</strong> Compare and contrast; acquiring domain knowledge</p>
+<p><strong>Works For:</strong> Learners without programming experience (but requires some domain knowledge)</p>
+<p><strong>Format:</strong> Fixed-time workshop exercise; pair programming</p>
+<p><strong>Pro:</strong> Helps learners overcome code anxiety</p>
+<p><strong>Con:</strong> “Where do I start?” and going down rabbit holes</p>
+<h3>Notebook as app</h3>
+<p><strong>Description:</strong> Use notebook as interactive dashboard (note: usually keep prose in a separate document to make the dashboard look like an app)</p>
+<p><strong>Use For:</strong> Exploring datasets</p>
+<p><strong>Works For:</strong> Non-programmers</p>
+<p><strong>Format:</strong> Use instead of slides (but must know where you’re going); have learners suggest alternatives to explore; data analysis after (physical) lab experiment</p>
+<p><strong>Pro:</strong> Less effort to build than custom UI</p>
+<p><strong>Con:</strong> Requires testing; does not develop programming skills</p>
+<h3>Top-down delivery</h3>
+<p><strong>Description:</strong> Give learners just enough control to get to a motivating result quickly (“day one”)</p>
+<p><strong>Use For:</strong> Follow-along lectures</p>
+<p><strong>Works For:</strong> Any audience (but most engaging for people with low programming skills)</p>
+<p><strong>Format:</strong> Tutorials and workshops (synchronous)</p>
+<p><strong>Pro:</strong> Student engagement</p>
+<p><strong>Con:</strong> Hard to get the right level of detail for a mixed-ability audience</p>
+<h3>Coding as translation</h3>
+<p><strong>Description:</strong> Convert prose to code (or vice versa)</p>
+<p><strong>Use For:</strong> Connect concepts to implementation (and implementation to concepts)</p>
+<p><strong>Works For:</strong> Learners who understand theory but struggle with coding (or vice versa)</p>
+<p><strong>Format:</strong> Notebook with scaffolding text and possibly some (scaffolded) code</p>
+<p><strong>Pro:</strong> Low barrier to entry for learners with limited programming knowledge</p>
+<p><strong>Con:</strong> Hard to get the level right for mixed-ability audience</p>
+<h3>Symbolic math</h3>
+<p><strong>Description:</strong> Use SymPy for symbolic math in notebook</p>
+<p><strong>Use For:</strong> Extension of previous exercise: convert math to code or code to math</p>
+<p><strong>Works For:</strong> STEM students interested in theory</p>
+<p><strong>Format:</strong> Any</p>
+<p><strong>Pro:</strong> Introduce another real-world tool</p>
+<p><strong>Con:</strong> Math in SymPy is yet another thing to learn</p>
+<h3>Numerical methods / simulation</h3>
+<p><strong>Description:</strong> Use calculation or simulation instead of formulaic analysis</p>
+<p><strong>Use For:</strong> Make concepts tangible before introducing mathematical abstraction</p>
+<p><strong>Works For:</strong> Learners with some programming skill</p>
+<p><strong>Format:</strong> Any</p>
+<p><strong>Pro:</strong> Going from specific to general is often more engaging and approachable</p>
+<p><strong>Con:</strong> Requires programming skill; can be hard to debug</p>
+<h3>Learn an API</h3>
+<p><strong>Description:</strong> Introduce a key API example by example</p>
+<p><strong>Use For:</strong> Put focus on tools to be used in other places / lessons</p>
+<p><strong>Works For:</strong> Learners with some programming skill (and patience)</p>
+<p><strong>Format:</strong> Examples in order of increasing complexity or decreasing frequency of use</p>
+<p><strong>Pro:</strong> Guide learning in a sensible order (which AI sometimes struggles with)</p>
+<p><strong>Con:</strong> “Can’t see the forest for the trees”; learners may prefer just asking AI as needed</p>
+<h3>Choose your data</h3>
+<p><strong>Description:</strong> Replace the dataset used in a notebook with another one (which may require some modifications to code)</p>
+<p><strong>Use For:</strong> Engagement</p>
+<p><strong>Works For:</strong> Learners with specific domain interest (e.g., sports analytics)</p>
+<p><strong>Format:</strong> Common first half, learners explore on their own for second half; learners create presentations to share with others</p>
+<p><strong>Pro:</strong> Improves self-efficacy; leverages engagement with personal interests</p>
+<p><strong>Con:</strong> Can’t find data, data is too messy, learners’ interest don’t overlap</p>
+<h3>Test-driven learning</h3>
+<p><strong>Description:</strong> Instructor provides notebook full of tests; learners must write code to make those tests pass (e.g., handle messy data)</p>
+<p><strong>Use For:</strong> Think in terms of a spec</p>
+<p><strong>Works For:</strong> Learners who want firm goalposts</p>
+<p><strong>Format:</strong> Notebook full of test cases with empty cells (and function stubs) for code; works well for homework exercises</p>
+<p><strong>Pro:</strong> Helps learners stay focused on well-defined task</p>
+<p><strong>Con:</strong> Very easy to have AI generate the code without understanding it</p>
+<h3>Bug hunt</h3>
+<p><strong>Description:</strong> Give learners a notebook with one or more bugs (which can include misleading prose)</p>
+<p><strong>Use For:</strong> Developing critical reading skills (especially important for learners using AI)</p>
+<p><strong>Works For:</strong> Learners with enough programming experience to be able to debug systematically</p>
+<p><strong>Format:</strong> Works well as homework exercise</p>
+<p><strong>Pro:</strong> Some learners enjoy playing detective; extremely useful skill to learn</p>
+<p><strong>Con:</strong> Hard to calibrate bug difficulty to learner level; hard for learners to know when they’re done</p>
+<h3>Adversarial programming</h3>
+<p><strong>Description:</strong> Given a notebook full of code, write tests that break it (reverse of bug hunt)</p>
+<p><strong>Use For:</strong> Learning critical thinking</p>
+<p><strong>Works For:</strong> Learners with enough programming experience to be able to debug systematically</p>
+<p><strong>Format:</strong> Works well as homework exercise</p>
+<p><strong>Pro:</strong> Helps learners appreciate how hard it is to write robust code; improves their debugging skills</p>
+<p><strong>Con:</strong> Learners can break code in repetitive ways (e.g., provide several inputs that trigger the same flaw)</p>
+<h2>Acknowledgments</h2>
+<p>Much of this is inspired by or taken from
+<a href="https://jupyter4edu.github.io/jupyter-edu-book/"><em>Teaching and Learning with Jupyter</em></a>.</p>
+<h2>Appendix: Learner Personas</h2>
+<h3>Anya Academic</h3>
+<p><strong>Background:</strong> Biology professor at mid-sized state university; teaches undergrad microbiology and biostatistics classes, both of which emphasize data management and visualization.</p>
+<p><strong>Relevant Experience:</strong> Used R for 15 years, switched to Python three years ago, mostly self-taught. Frequently remixes teaching material she finds online, particularly examples.</p>
+<p><strong>Goals</strong></p>
+<ol>
+<li>
+<p>Wants to equip her students with modern skills, especially AI-related, both because she thinks they’re important and to increase student engagement.</p>
+</li>
+<li>
+<p>Wants more recognition at her university for her teaching work, which she believes is more likely to come from publishable innovation than from high student evaluations.</p>
+</li>
+<li>
+<p>Would like to get student engagement back to pre-COVID levels; she feels that today’s cohorts don’t know each other as well and aren’t as excited about material because of the shift to online education.</p>
+</li>
+</ol>
+<p><strong>Complications</strong></p>
+<ol>
+<li>
+<p>Is concerned about tool setup and maintenance overheads. Doesn't have time to completely rewrite courses, so will only move over if there's an incremental migration path that allows her to back out if thing don't appear to be working.</p>
+</li>
+<li>
+<p>Anya's department has two overworked IT staff, and nothing at her university is allowed to go beyond the pilot phase if it doesn't integrate with the LMS somehow.</p>
+</li>
+</ol>
+<h3>Ellis Engineer</h3>
+<p><strong>Background:</strong> Senior undergraduate in mechanical engineering who just returned to school from their third and final co-op placement. They are very excited about drones.</p>
+<p><strong>Relevant Experience:</strong> Used Jupyter notebooks with Colab in their second semester. They are comfortable with NumPy and Altair and has bumped into Pandas, but has done as many classes with MATLAB and AutoCAD as with Python.</p>
+<p><strong>Goals</strong></p>
+<ol>
+<li>
+<p>Ellis wants to create an impressive senior project to secure themself a place in a good graduate program (which they think is essential to doing interesting work with drones). They have seen custom widgets in notebooks, and are willing to invest some time to learn how to build one with AI support.</p>
+</li>
+<li>
+<p>They also want to explore small-craft aerodynamics, particularly feedback stability problems, out of personal interest and as a way to become part of the “serious” drone community.</p>
+</li>
+</ol>
+<p><strong>Complications</strong></p>
+<p>Having spent several months convinced that Lisp was the language of the future, Ellis is leery of investing too much in new technologies just because they’re cool.</p>
+<h3>Nang Newbie</h3>
+<p><strong>Background:</strong> Undergraduate business student; decided not to minor in CS because "AI is going to eat all those jobs". Nang chooses courses, tools, and interests based primarily on what the web tells him potential future employers are going to look for. He routinely uses ChatGPT for help with homework.</p>
+<p><strong>Relevant Experience:</strong> Used Scratch in middle school and did one CS class in high school that covered HTML and a bit of Python. He just finished an intro stats class that used Pandas, which to his surprise he enjoyed enough to sign up for the sequel.</p>
+<p><strong>Goals</strong></p>
+<ol>
+<li>
+<p>Nang wants to be able to do homework assignments more quickly and with less effort (hence his interest in ChatGPT).</p>
+</li>
+<li>
+<p>He wants to learn how to explore and analyze sports statistics for fun (he's a keen basketball fan), and to share what he finds with like-minded fans through online forums.</p>
+</li>
+</ol>
+<p><strong>Complications</strong></p>
+<p>Nang is taking five courses and volunteering with two campus clubs (one for the sake of his CV, and one because of his passion for basketball), so he is chronically over-committed.</p>
+<h2>Appendix: KaTeX vs. MathJax</h2>
+<p>marimo uses <a href="https://katex.org/">KaTeX</a> for rendering math (faster, slightly narrower coverage, silent errors) rather than <a href="https://www.mathjax.org/">MathJax</a>.</p>
+<h3>Use raw strings</h3>
+<p>LaTeX lives in Python strings in marimo, so use <code>r"..."</code> to preserve backslashes:</p>
+<pre><code class="language-python">mo.md(r&quot;$\\frac{1}{2}$&quot;)   # ✅
+mo.md(&quot;$\\frac{1}{2}$&quot;)    # ❌ — \\f is a form-feed character
+</code></pre>
+<h3>MathJax → KaTeX</h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>MathJax</th>
+<th>KaTeX</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text</td>
+<td><code>\\mbox</code>, <code>\\bbox</code></td>
+<td><code>\\text{}</code></td>
+</tr>
+<tr>
+<td>Text style</td>
+<td><code>\\textsc</code>, <code>\\textsl</code></td>
+<td><code>\\text{}</code></td>
+</tr>
+<tr>
+<td>Environments</td>
+<td><code>\\begin{eqnarray}</code></td>
+<td><code>\\begin{align}</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>\\begin{multline}</code></td>
+<td><code>\\begin{gather}</code></td>
+</tr>
+<tr>
+<td>References</td>
+<td><code>\\label</code>, <code>\\eqref</code>, <code>\\ref</code></td>
+<td><code>\\tag{}</code> for manual numbering</td>
+</tr>
+<tr>
+<td>Arrays</td>
+<td><code>\\cline</code>, <code>\\multicolumn</code>, <code>\\hfill</code>, <code>\\vline</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Macros</td>
+<td><code>\\DeclareMathOperator</code></td>
+<td><code>\\operatorname{}</code> inline</td>
+</tr>
+<tr>
+<td></td>
+<td><code>\\newenvironment</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Spacing</td>
+<td><code>\\mspace</code>, <code>\\setlength</code>, <code>\\strut</code>, <code>\\rotatebox</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Conditionals</td>
+<td><code>\\if</code>, <code>\\else</code>, <code>\\fi</code>, <code>\\ifx</code></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>These <em>do</em> work in KaTeX (despite outdated claims): <code>\\newcommand</code>, <code>\\def</code>, <code>\\hbox</code>, <code>\\hskip</code>, <code>\\cal</code>, <code>\\pmb</code>, <code>\\begin{equation}</code>, <code>\\begin{split}</code>, <code>\\operatorname*</code>.</p>
+<h3>Shared macros across cells</h3>
+<p><code>\\newcommand</code> works inline. For cross-cell reuse, use <code>mo.latex(filename="macros.tex")</code> in the same cell as <code>import marimo</code>.</p>
+<h3>Migration checklist</h3>
+<ol>
+<li>Find-replace <code>\\mbox{</code> → <code>\\text{</code></li>
+<li>Use raw strings (<code>r"..."</code>)</li>
+<li>Replace <code>\\begin{eqnarray}</code> → <code>\\begin{align}</code></li>
+<li>Replace <code>\\DeclareMathOperator</code> → <code>\\operatorname{}</code></li>
+<li>Remove <code>\\label</code>/<code>\\eqref</code> → use <code>\\tag{}</code> if needed</li>
+<li>Visually verify — KaTeX fails silently</li>
+</ol>
+<h3>References</h3>
+<ul>
+<li><a href="https://katex.org/docs/support_table">KaTeX Support Table</a> — definitive command lookup</li>
+<li><a href="https://github.com/KaTeX/KaTeX/wiki/Things-that-KaTeX-does-not-(yet)-support">KaTeX Unsupported Features</a></li>
+</ul>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-16 bg-light">
+        <div class="container mx-auto px-4 max-w-6xl text-center">
+            <h2 class="text-3xl font-bold mb-6">Want to Contribute?</h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">Help us improve these learning materials by contributing to the GitHub repository. We welcome new content, bug fixes, and improvements!</p>
+            <a href="https://github.com/marimo-team/learn" target="_blank" class="btn-primary py-3 px-8 inline-flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" clip-rule="evenodd"></path>
+</svg>
+                Contribute on GitHub
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p>&copy; 2026 marimo. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://github.com/marimo-team/learn" target="_blank" class="footer-link">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" clip-rule="evenodd"></path>
+</svg>
+                    </a>
+                    <a href="https://marimo.io" target="_blank" class="footer-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+</svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
