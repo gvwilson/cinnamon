@@ -2,7 +2,7 @@
 # requires-python = ">=3.13"
 # dependencies = [
 #     "marimo",
-#     "marimo-learn",
+#     "marimo-learn>=0.7.0",
 #     "polars==1.24.0",
 #     "sqlalchemy",
 # ]
@@ -23,6 +23,12 @@ def _():
     DATABASE_URL = f"sqlite:///{db_path}"
     engine = sqlalchemy.create_engine(DATABASE_URL)
     return engine, mo, mol
+
+
+@app.cell(hide_code=True)
+def _():
+    from marimo_learn import ConceptMapWidget, MatchingWidget
+    return ConceptMapWidget, MatchingWidget
 
 
 @app.cell(hide_code=True)
@@ -346,6 +352,44 @@ def _():
 
     ![concept map](/public/04_concepts.svg)
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(MatchingWidget, mo):
+    _widget = mo.ui.anywidget(
+        MatchingWidget(
+            question="Match each SQL expression involving null to its result.",
+            left=["1 + null", "null = null", "null is null", "null != 3"],
+            right=[
+                "null — arithmetic with an unknown is unknown",
+                "null — comparing unknowns yields unknown, not true",
+                "true — the only test that reliably works on null",
+                "null — even inequality checks return unknown for null",
+            ],
+            correct_matches={0: 0, 1: 1, 2: 2, 3: 3},
+        )
+    )
+    _widget
+    return
+
+
+@app.cell(hide_code=True)
+def _(ConceptMapWidget, mo):
+    _widget = mo.ui.anywidget(
+        ConceptMapWidget(
+            question="Connect these null-related concepts by selecting a relationship term and clicking two concepts.",
+            concepts=["null", "unknown value", "is null", "ternary logic", "aggregation functions"],
+            terms=["means", "tested with", "uses", "ignore"],
+            correct_edges=[
+                {"from": "null", "to": "unknown value", "label": "means"},
+                {"from": "null", "to": "is null", "label": "tested with"},
+                {"from": "ternary logic", "to": "null", "label": "uses"},
+                {"from": "aggregation functions", "to": "null", "label": "ignore"},
+            ],
+        )
+    )
+    _widget
     return
 
 

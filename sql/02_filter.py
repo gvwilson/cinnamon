@@ -2,7 +2,7 @@
 # requires-python = ">=3.13"
 # dependencies = [
 #     "marimo",
-#     "marimo-learn",
+#     "marimo-learn>=0.7.0",
 #     "polars==1.24.0",
 #     "sqlalchemy",
 # ]
@@ -23,6 +23,12 @@ def _():
     DATABASE_URL = f"sqlite:///{db_path}"
     engine = sqlalchemy.create_engine(DATABASE_URL)
     return engine, mo, mol
+
+
+@app.cell(hide_code=True)
+def _():
+    from marimo_learn import MatchingWidget, MultipleChoiceWidget
+    return MatchingWidget, MultipleChoiceWidget
 
 
 @app.cell(hide_code=True)
@@ -274,6 +280,39 @@ def _():
 
     ![concept map](/public/02_concepts.svg)
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(MatchingWidget, mo):
+    _widget = mo.ui.anywidget(
+        MatchingWidget(
+            question="Match each SQL comparison operator to its meaning.",
+            left=["<", "!=", ">=", "="],
+            right=["equal to", "not equal to", "less than", "greater than or equal to"],
+            correct_matches={0: 2, 1: 1, 2: 3, 3: 0},
+        )
+    )
+    _widget
+    return
+
+
+@app.cell(hide_code=True)
+def _(MultipleChoiceWidget, mo):
+    _widget = mo.ui.anywidget(
+        MultipleChoiceWidget(
+            question="A query uses `WHERE species = 'Adelie' OR island = 'Biscoe'`. Which rows does it return?",
+            options=[
+                "Only rows where both conditions are true (Adelie penguins on Biscoe)",
+                "Rows where either condition is true, or both",
+                "Rows where species is Adelie but island is not Biscoe",
+                "Rows where island is Biscoe but species is not Adelie",
+            ],
+            correct_answer=1,
+            explanation="In SQL, OR returns every row where at least one condition is true. This includes rows satisfying just the first condition, just the second, or both simultaneously.",
+        )
+    )
+    _widget
     return
 
 

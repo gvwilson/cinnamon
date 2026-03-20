@@ -2,7 +2,7 @@
 # requires-python = ">=3.13"
 # dependencies = [
 #     "marimo",
-#     "marimo-learn",
+#     "marimo-learn>=0.7.0",
 #     "polars==1.24.0",
 #     "sqlalchemy",
 # ]
@@ -23,6 +23,12 @@ def _():
     DATABASE_URL = f"sqlite:///{db_path}"
     engine = sqlalchemy.create_engine(DATABASE_URL)
     return engine, mo, mol
+
+
+@app.cell(hide_code=True)
+def _():
+    from marimo_learn import ConceptMapWidget, FlashcardWidget
+    return ConceptMapWidget, FlashcardWidget
 
 
 @app.cell(hide_code=True)
@@ -433,6 +439,43 @@ def _():
 
     ![concept map](/public/06_concepts.svg)
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(FlashcardWidget, mo):
+    _widget = mo.ui.anywidget(
+        FlashcardWidget(
+            question="Database Key and Relationship Concepts",
+            cards=[
+                {"front": "Primary key", "back": "A column (or set of columns) whose values are unique and non-null for every row, used to uniquely identify each row in a table"},
+                {"front": "Foreign key", "back": "A column in one table whose values reference the primary key of another table, establishing a link between the two tables"},
+                {"front": "One-to-many relationship", "back": "A relationship where one row in table A can be referenced by many rows in table B — e.g., one person can have many surveys"},
+                {"front": "Many-to-many relationship", "back": "A relationship where rows in table A can relate to many rows in table B and vice versa — requires a join table to represent"},
+                {"front": "Join table", "back": "An intermediate table storing pairs of foreign keys to represent a many-to-many relationship between two other tables"},
+                {"front": "Self-join", "back": "Joining a table to itself using two aliases, used when rows in a table relate to other rows in the same table (e.g., supervisors and employees)"},
+            ],
+        )
+    )
+    _widget
+    return
+
+
+@app.cell(hide_code=True)
+def _(ConceptMapWidget, mo):
+    _widget = mo.ui.anywidget(
+        ConceptMapWidget(
+            question="Connect these database design concepts by selecting a relationship term and clicking two concepts.",
+            concepts=["primary key", "foreign key", "one-to-many", "many-to-many", "join table"],
+            terms=["referenced by", "implemented with", "requires"],
+            correct_edges=[
+                {"from": "primary key", "to": "foreign key", "label": "referenced by"},
+                {"from": "many-to-many", "to": "join table", "label": "implemented with"},
+                {"from": "one-to-many", "to": "foreign key", "label": "requires"},
+            ],
+        )
+    )
+    _widget
     return
 
 

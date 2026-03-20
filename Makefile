@@ -1,5 +1,5 @@
 ROOT := .
-SITE := _site
+SITE := docs
 TMP := ./tmp
 LESSON_DATA := ${TMP}/lessons.json
 TEMPLATES := $(wildcard templates/*.html)

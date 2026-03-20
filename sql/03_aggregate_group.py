@@ -2,7 +2,7 @@
 # requires-python = ">=3.13"
 # dependencies = [
 #     "marimo",
-#     "marimo-learn",
+#     "marimo-learn>=0.7.0",
 #     "polars==1.24.0",
 #     "sqlalchemy",
 # ]
@@ -23,6 +23,12 @@ def _():
     DATABASE_URL = f"sqlite:///{db_path}"
     engine = sqlalchemy.create_engine(DATABASE_URL)
     return engine, mo, mol
+
+
+@app.cell(hide_code=True)
+def _():
+    from marimo_learn import FlashcardWidget, LabelingWidget
+    return FlashcardWidget, LabelingWidget
 
 
 @app.cell(hide_code=True)
@@ -368,6 +374,43 @@ def _():
 
     ![concept map](/public/03_concepts.svg)
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(FlashcardWidget, mo):
+    _widget = mo.ui.anywidget(
+        FlashcardWidget(
+            question="SQL Aggregation Functions",
+            cards=[
+                {"front": "avg(column)", "back": "Returns the average of all non-null values in the column"},
+                {"front": "count(*)", "back": "Counts the total number of rows, including rows with null values"},
+                {"front": "count(column)", "back": "Counts the number of non-null values in the column (rows with null are skipped)"},
+                {"front": "max(column)", "back": "Returns the largest non-null value in the column"},
+                {"front": "min(column)", "back": "Returns the smallest non-null value in the column"},
+                {"front": "sum(column)", "back": "Adds up all non-null values in the column"},
+            ],
+        )
+    )
+    _widget
+    return
+
+
+@app.cell(hide_code=True)
+def _(LabelingWidget, mo):
+    _widget = mo.ui.anywidget(
+        LabelingWidget(
+            question="Drag each label to the line of the query it best describes.",
+            labels=["aggregation function", "alias", "source table", "grouping column"],
+            text_lines=[
+                "select species, avg(body_mass_g) as avg_mass",
+                "from penguins",
+                "group by species;",
+            ],
+            correct_labels={0: [0, 1], 1: [2], 2: [3]},
+        )
+    )
+    _widget
     return
 
 

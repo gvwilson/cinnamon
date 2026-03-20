@@ -2,7 +2,7 @@
 # requires-python = ">=3.13"
 # dependencies = [
 #     "marimo",
-#     "marimo-learn",
+#     "marimo-learn>=0.7.0",
 #     "polars==1.24.0",
 #     "sqlalchemy",
 # ]
@@ -16,6 +16,7 @@ app = marimo.App(width="medium")
 with app.setup:
     import marimo as mo
     import marimo_learn as mol
+    from marimo_learn import MultipleChoiceWidget, OrderingWidget
     import sqlalchemy
 
     db_path = mol.localize_file("penguins.db")
@@ -343,6 +344,37 @@ def _():
 
     ![concept map](public/01_concepts.svg)
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _():
+    _widget = mo.ui.anywidget(
+        OrderingWidget(
+            question="Arrange these SQL clauses in the order they must appear in a query.",
+            items=["SELECT", "FROM", "ORDER BY", "LIMIT"],
+        )
+    )
+    _widget
+    return
+
+
+@app.cell(hide_code=True)
+def _():
+    _widget = mo.ui.anywidget(
+        MultipleChoiceWidget(
+            question="What does `SELECT *` mean in a SQL query?",
+            options=[
+                "Select only the first row of the table",
+                "Select all columns from the table",
+                "Select all rows but only the first column",
+                "Count the total number of rows",
+            ],
+            correct_answer=1,
+            explanation="`*` is shorthand for 'all columns'. `SELECT *` retrieves every column; the number of rows returned depends on whether you add WHERE, LIMIT, or other clauses.",
+        )
+    )
+    _widget
     return
 
 

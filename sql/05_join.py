@@ -2,7 +2,7 @@
 # requires-python = ">=3.13"
 # dependencies = [
 #     "marimo",
-#     "marimo-learn",
+#     "marimo-learn>=0.7.0",
 #     "polars==1.24.0",
 #     "sqlalchemy",
 # ]
@@ -23,6 +23,12 @@ def _():
     DATABASE_URL = f"sqlite:///{db_path}"
     engine = sqlalchemy.create_engine(DATABASE_URL)
     return engine, mo, mol
+
+
+@app.cell(hide_code=True)
+def _():
+    from marimo_learn import LabelingWidget, OrderingWidget
+    return LabelingWidget, OrderingWidget
 
 
 @app.cell(hide_code=True)
@@ -269,6 +275,41 @@ def _():
 
     ![concept map](/public/05_concepts.svg)
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(OrderingWidget, mo):
+    _widget = mo.ui.anywidget(
+        OrderingWidget(
+            question="Arrange the steps SQL follows when executing an INNER JOIN.",
+            items=[
+                "Combine every row from the left table with every row from the right table",
+                "Apply the ON condition to keep only matching row pairs",
+                "Apply any WHERE clause to filter the matched rows further",
+                "Apply SELECT to return only the requested columns",
+            ],
+        )
+    )
+    _widget
+    return
+
+
+@app.cell(hide_code=True)
+def _(LabelingWidget, mo):
+    _widget = mo.ui.anywidget(
+        LabelingWidget(
+            question="Drag each label to the line of the query it best describes.",
+            labels=["left table", "right table", "join condition", "fallback for null"],
+            text_lines=[
+                "from work left join job",
+                "on work.job = job.name",
+                "coalesce(sum(job.credits), 0) as total",
+            ],
+            correct_labels={0: [0, 1], 1: [2], 2: [3]},
+        )
+    )
+    _widget
     return
 
 
